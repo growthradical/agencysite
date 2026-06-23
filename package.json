@@ -1,0 +1,12 @@
+{
+  "name": "jugoslavija-1992-album",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Print-ready commemorative sticker album — Yugoslavia, Sweden 1992",
+  "scripts": {
+    "pdf": "node build-pdf.mjs"
+  },
+  "devDependencies": {
+    "puppeteer": "^23.0.0"
+  }
+}
