@@ -16,6 +16,7 @@ team (editor, designer, photo/AI-image lead, social manager) can execute it.
 
 | File | What it is |
 |------|------------|
+| [`magazine/index.html`](magazine/index.html) | **A designed, browser-renderable mockup of Issue 01** — fully in Macedonian Cyrillic, with cover, contents, feature spreads, the Ringov tribute and a back cover. Open it in a browser; Print → Save as PDF. See [`magazine/README.md`](magazine/README.md). |
 | [`issue-01/01-magazine-plan-page-by-page.md`](issue-01/01-magazine-plan-page-by-page.md) | The full ~84-page issue, page by page, with section briefs, word counts, layout notes, metadata and a GPT image prompt for every visual. |
 | [`issue-01/02-topic-list-july-2026.md`](issue-01/02-topic-list-july-2026.md) | The current, July-2026-accurate topic list — every story tied to what is actually happening in Macedonian football this month. |
 | [`issue-01/03-instagram-30-day-schedule.md`](issue-01/03-instagram-30-day-schedule.md) | A day-by-day, 30-post launch calendar (1–30 July 2026) with formats, captions, hashtags, posting times and a GPT image prompt per post. |
