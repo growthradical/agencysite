@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const htmlPath = "file://" + join(__dirname, "album.html");
+const htmlPath = "file://" + join(__dirname, "jugoslavija-1992", "index.html");
 const outPath = join(__dirname, "album.pdf");
 
 const browser = await puppeteer.launch({ args: ["--no-sandbox"] });

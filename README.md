@@ -7,20 +7,24 @@ Euro 92, travelled to Sweden, and was banned ten days before kickoff:
 - **Page 2** — Players II (9 sticker slots)
 - **Page 3** — Storyline ("The Team That Never Played")
 
+Lives at `jugoslavija-1992/` so it gets its own URL on GitHub Pages:
+`https://growthradical.github.io/agencysite/jugoslavija-1992/`
+
 ## How to use
 
-1. **Add your sticker scans** to the `assets/` folder using the exact filenames
-   listed in [`assets/README.md`](assets/README.md). Missing images show as
-   labelled placeholders, so the album always prints cleanly.
+1. **Add your sticker scans** to `jugoslavija-1992/assets/` using the exact
+   filenames listed in [`jugoslavija-1992/assets/README.md`](jugoslavija-1992/assets/README.md).
+   Missing images show as labelled placeholders, so the album always prints cleanly.
 2. **Adjust the roster** if needed: edit the `PAGE1` / `PAGE2` arrays at the top
-   of [`album.html`](album.html) (names, numbers, filenames).
-3. **Open `album.html`** in any browser to preview.
+   of [`jugoslavija-1992/index.html`](jugoslavija-1992/index.html) (names, numbers, filenames).
+3. **Open `jugoslavija-1992/index.html`** in any browser to preview.
 
 ## Export the print-ready PDF
 
 ### Option A — browser (no install, recommended)
-Open `album.html`, press **Cmd/Ctrl + P**, choose **Save as PDF**, set paper to
-**A4** and margins to **None/Default**. You get a clean 3-page PDF.
+Open `jugoslavija-1992/index.html`, press **Cmd/Ctrl + P**, choose **Save as
+PDF**, set paper to **A4** and margins to **None/Default**. You get a clean
+3-page PDF.
 
 ### Option B — one command (needs Node + internet to fetch Puppeteer once)
 ```bash
