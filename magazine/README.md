@@ -1,7 +1,27 @@
-# ПАС · Број 01 — designed magazine mockup
+# ПАС · Број 01 — designed magazine
 
-`index.html` is a **self-contained, browser-renderable design mockup** of PAS
-Issue 01 — fully in **Macedonian Cyrillic**, laid out like a real sports magazine.
+Two ways to view Issue 01, both fully in **Macedonian Cyrillic**:
+
+- **`flipbook.html` — a 3D page-flip magazine with real photographs.** Open it and
+  drag the page corners to turn pages (StPageFlip). Photos are real images from
+  **Wikimedia Commons (CC)** — Elmas, Pandev, Alioski, the Pančev Golden Boot, the
+  Skopje arena, a Vardar European-night crowd, club logos — loaded live in the
+  browser, with designed fallback art if any image is unavailable.
+- **`index.html`** — a flat, print-style mockup (one page per screen) with custom
+  vector artwork; good for Print → Save as PDF.
+
+## View the 3D magazine online (no download)
+If the repository is **public**, open the live render:
+
+> **https://raw.githack.com/growthradical/agencysite/claude/pas-magazine-first-issue-noswj3/magazine/flipbook.html**
+
+(That service renders the HTML straight from this branch.) If the repo is
+**private**, the link won't load — instead download `magazine/flipbook.html` and
+open it locally, or enable GitHub Pages for the branch.
+
+---
+
+## index.html — the flat mockup
 
 ## How to review it
 - **Open `magazine/index.html` in any web browser** (double-click, or drag into a
