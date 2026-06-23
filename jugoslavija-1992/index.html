@@ -84,21 +84,42 @@
     border:1px solid var(--gold);
     z-index:2;
   }
-  /* placeholder shown when the scan file is missing */
+  /* themed album slot shown when the scan file is missing —
+     styled after the source album: blue frame, tricolour band, gold trim */
   .sticker.missing{
     background:
-      repeating-linear-gradient(45deg, #efe6cf 0 12px, #e7dcc0 12px 24px);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; padding:8px;
+      linear-gradient(180deg, #1d3f8c 0%, #16357a 55%, #102a63 100%);
+    border-color:var(--gold);
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+    text-align:center; padding:0;
   }
   .sticker.missing img{ display:none; }
+  /* tricolour top band */
+  .sticker.missing::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:14%;
+    background:linear-gradient(180deg,#2a5bd0 0 33.3%, #f4ecd8 33.3% 66.6%, #d11 66.6% 100%);
+    border-bottom:2px solid var(--gold);
+  }
+  /* silhouette bust so the empty slot reads as a player card */
+  .sticker.missing::after{
+    content:""; position:absolute; left:50%; top:48%;
+    width:54%; aspect-ratio:1/1; transform:translate(-50%,-50%);
+    background:radial-gradient(circle at 50% 35%, rgba(255,255,255,.22) 0 38%, transparent 39%),
+               radial-gradient(ellipse 60% 45% at 50% 100%, rgba(255,255,255,.18) 0 70%, transparent 71%);
+    border-radius:50%;
+  }
   .sticker.missing .ph-name{
-    font-weight:800; color:var(--blue); font-size:13px; line-height:1.2;
-    text-transform:uppercase; letter-spacing:.03em;
+    position:relative; z-index:2;
+    width:100%; box-sizing:border-box;
+    background:var(--cream); color:var(--blue);
+    border-top:2px solid var(--gold);
+    font-weight:800; font-size:11.5px; line-height:1.15;
+    text-transform:uppercase; letter-spacing:.02em;
+    padding:5px 4px;
   }
-  .sticker.missing .ph-file{
-    margin-top:6px; font-size:9px; color:#8a6d2f; word-break:break-all;
-  }
+  .sticker.missing .ph-file{ display:none; }
+  /* number chip stays gold-on-blue and on top of everything */
+  .sticker.missing .num{ z-index:3; }
 
   /* ---------- Storyline page ---------- */
   .story{
@@ -122,8 +143,8 @@
     overflow:hidden; margin:0 0 18px;
     display:flex; align-items:center; justify-content:center;
   }
-  .story .hero img{ width:100%; height:100%; object-fit:cover; }
-  .story .hero.missing{ color:#8a6d2f; font-size:12px; font-style:italic; }
+  .story .hero img,
+  .story .hero svg{ width:100%; height:100%; object-fit:cover; display:block; }
   .story p{ line-height:1.55; font-size:13.5px; margin:0 0 12px; }
   .story .kicker{
     border-left:4px solid var(--blue); padding-left:12px;
@@ -200,7 +221,68 @@
     <h2>The Team That Never Played</h2>
     <p class="sub">Sweden · June 1992</p>
 
-    <div class="hero" id="hero">A storyline image goes here — drop <code>assets/storyline.jpg</code></div>
+    <div class="hero" id="hero">
+      <svg viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice"
+           role="img" aria-label="An empty stadium at dusk with a Yugoslavia tricolour — the team that never played">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1b2c63"/>
+            <stop offset="0.55" stop-color="#3a4f93"/>
+            <stop offset="1" stop-color="#9a6f86"/>
+          </linearGradient>
+          <linearGradient id="pitch" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2f7d3e"/>
+            <stop offset="1" stop-color="#1f5a2c"/>
+          </linearGradient>
+        </defs>
+        <!-- sky -->
+        <rect width="1600" height="430" fill="url(#sky)"/>
+        <!-- low sun -->
+        <circle cx="1180" cy="300" r="120" fill="#f3d27a" opacity="0.85"/>
+        <!-- distant stands -->
+        <rect x="0" y="300" width="1600" height="130" fill="#13224d" opacity="0.85"/>
+        <g fill="#0e1a3c" opacity="0.6">
+          <rect x="40"  y="316" width="1520" height="10"/>
+          <rect x="40"  y="338" width="1520" height="10"/>
+          <rect x="40"  y="360" width="1520" height="10"/>
+        </g>
+        <!-- floodlights -->
+        <g stroke="#0e1a3c" stroke-width="6" fill="#1a2a55">
+          <line x1="180" y1="300" x2="180" y2="150"/>
+          <rect x="120" y="120" width="120" height="34" rx="4"/>
+          <line x1="1420" y1="300" x2="1420" y2="150"/>
+          <rect x="1360" y="120" width="120" height="34" rx="4"/>
+        </g>
+        <!-- pitch -->
+        <rect y="430" width="1600" height="270" fill="url(#pitch)"/>
+        <g stroke="#dff3e2" stroke-width="4" fill="none" opacity="0.85">
+          <line x1="800" y1="430" x2="800" y2="700"/>
+          <circle cx="800" cy="560" r="78"/>
+          <rect x="610" y="430" width="380" height="0"/>
+        </g>
+        <!-- mowing stripes -->
+        <g fill="#ffffff" opacity="0.05">
+          <rect y="430" width="1600" height="34"/>
+          <rect y="498" width="1600" height="34"/>
+          <rect y="566" width="1600" height="34"/>
+          <rect y="634" width="1600" height="34"/>
+        </g>
+        <!-- lone ball on the centre spot -->
+        <circle cx="800" cy="560" r="17" fill="#fdfdfd" stroke="#16357a" stroke-width="2"/>
+        <path d="M800 549 l8 6 -3 10 -10 0 -3 -10 z" fill="#16357a"/>
+        <!-- waving tricolour on a pole -->
+        <g>
+          <line x1="300" y1="170" x2="300" y2="470" stroke="#caa84a" stroke-width="6"/>
+          <path d="M300 178 q70 -18 140 0 q70 18 140 0 l0 96 q-70 18 -140 0 q-70 -18 -140 0 z" fill="#2a5bd0"/>
+          <path d="M300 210 q70 -18 140 0 q70 18 140 0 l0 32 q-70 18 -140 0 q-70 -18 -140 0 z" fill="#f4ecd8"/>
+          <path d="M300 242 q70 -18 140 0 q70 18 140 0 l0 32 q-70 18 -140 0 q-70 -18 -140 0 z" fill="#d11"/>
+        </g>
+        <!-- caption -->
+        <text x="1540" y="660" text-anchor="end" font-family="Helvetica, Arial, sans-serif"
+              font-size="46" font-weight="800" fill="#ffffff" opacity="0.92"
+              letter-spacing="4">SWEDEN ’92</text>
+      </svg>
+    </div>
 
     <p class="kicker">By the moment the mighty Blues had already arrived in
     Sweden, the tournament they had earned was being taken away from them.</p>
@@ -243,12 +325,12 @@
   render("grid1", PAGE1);
   render("grid2", PAGE2);
 
+  // Keep the illustrated banner by default; swap in a real photo only if
+  // one is actually present at STORY_HERO (e.g. a freely-licensed image).
   (function(){
     const hero = document.getElementById("hero");
     const img = new Image();
-    img.onload  = () => { hero.classList.remove("missing");
-                          hero.innerHTML = ""; hero.appendChild(img); };
-    img.onerror = () => { hero.classList.add("missing"); };
+    img.onload  = () => { hero.innerHTML = ""; hero.appendChild(img); };
     img.alt = "Yugoslavia 1992 storyline";
     img.src = STORY_HERO;
   })();
