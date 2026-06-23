@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ПАС · Број 01 · Јули 2026 — 3D списание</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto+Condensed:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#D7141A; --red-deep:#A40E13; --gold:#F2B705;
+    --char:#16181D; --paper:#F4F1EA; --muted:#7a7a7a;
+    --display:'Oswald','Arial Narrow',sans-serif;
+    --cond:'Roboto Condensed','Arial Narrow',sans-serif;
+    --serif:'PT Serif','Times New Roman',serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{
+    background:radial-gradient(120% 120% at 50% 0%, #2c2f36, #15171c 70%);
+    font-family:var(--serif); color:#111; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center;
+    padding:18px 10px 30px;
+  }
+  .top{color:#e9e9e9; text-align:center; font-family:var(--cond); margin-bottom:12px;}
+  .top .brand{font-family:var(--display);font-weight:700;color:var(--gold);
+    font-size:26px;letter-spacing:.04em;}
+  .top .sub{font-size:13px;opacity:.8;letter-spacing:.06em;margin-top:2px;}
+  .controls{display:flex;gap:10px;align-items:center;margin:10px 0 4px;}
+  .controls button{
+    font-family:var(--cond);font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--red);color:#fff;border:0;padding:8px 16px;border-radius:4px;
+    cursor:pointer;font-size:13px;}
+  .controls button:hover{background:var(--red-deep);}
+  .controls .pg{color:#ddd;font-family:var(--cond);font-size:13px;min-width:90px;text-align:center;}
+  .hint{color:#aaa;font-family:var(--cond);font-size:12px;margin-top:4px;}
+
+  #book{ touch-action:pan-y; }
+  .flip-shadow{}
+
+  /* ===== PAGE BASE ===== */
+  .page{
+    background:var(--paper); overflow:hidden; position:relative;
+    box-shadow:inset 0 0 30px rgba(0,0,0,.06);
+  }
+  .page-content{position:absolute;inset:0;}
+  .page{ font-size:14px; }            /* scaled per page width below via JS-free clamp */
+  .dark{background:var(--char);color:var(--paper);}
+
+  .pad{position:absolute;inset:0;padding:30px 26px;}
+  .kicker{font-family:var(--cond);text-transform:uppercase;letter-spacing:.2em;
+    font-weight:700;color:var(--red);font-size:12px;}
+  .dark .kicker{color:var(--gold);}
+  h1,h2,h3{font-family:var(--display);font-weight:700;line-height:.95;margin:0;
+    text-transform:uppercase;letter-spacing:-.01em;}
+  .dek{font-family:var(--serif);font-style:italic;line-height:1.3;}
+  p{line-height:1.46;margin:0 0 .7em;font-size:12.5px;}
+  .col p{text-align:justify;}
+  .rule{height:3px;background:var(--red);border:0;margin:8px 0;}
+  .rule.gold{background:var(--gold);}
+  .folio{position:absolute;bottom:14px;font-family:var(--cond);font-size:11px;
+    letter-spacing:.1em;color:var(--muted);}
+  .folio.l{left:26px;}.folio.r{right:26px;}
+  .dark .folio{color:#8a8d96;}
+  .credit{position:absolute;bottom:14px;left:0;right:0;text-align:center;
+    font-family:var(--cond);font-size:9px;letter-spacing:.08em;color:#9a958a;}
+
+  /* photo block */
+  .photo{position:absolute;overflow:hidden;background:
+      linear-gradient(135deg,#2a2d34,#3a1d22 70%,#5a1216);}
+  .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .photo .gr{position:absolute;inset:0;background:
+      linear-gradient(to top, rgba(10,11,14,.92) 4%, rgba(10,11,14,.25) 45%, rgba(10,11,14,0) 75%);}
+  .grain:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
+    mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");}
+
+  /* COVER */
+  .cover-photo{position:absolute;inset:0;}
+  .masthead{position:absolute;top:18px;left:22px;z-index:5;}
+  .masthead .pas{font-family:var(--display);font-weight:700;color:var(--red);
+    font-size:64px;line-height:.8;text-shadow:0 3px 14px rgba(0,0,0,.55);}
+  .masthead .tag{font-family:var(--cond);color:#fff;letter-spacing:.13em;
+    text-transform:uppercase;font-size:9px;opacity:.92;margin-top:3px;}
+  .issueflag{position:absolute;top:22px;right:22px;z-index:5;text-align:right;
+    font-family:var(--cond);color:#fff;letter-spacing:.1em;font-size:10px;}
+  .issueflag b{display:block;color:var(--gold);font-size:13px;}
+  .cover-head{position:absolute;left:22px;right:22px;bottom:74px;z-index:5;}
+  .cover-head .kk{color:var(--gold);font-family:var(--cond);font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;font-size:11px;margin-bottom:6px;}
+  .cover-head h1{color:#fff;font-size:46px;text-shadow:0 5px 20px rgba(0,0,0,.5);}
+  .cover-head h1 .acc{color:var(--gold);}
+  .cover-sub{font-family:var(--serif);font-style:italic;color:#efe7d6;font-size:14px;
+    margin-top:8px;max-width:88%;line-height:1.3;}
+  .coverlines{position:absolute;left:22px;right:22px;bottom:20px;z-index:5;display:flex;gap:14px;}
+  .cl{font-family:var(--cond);color:#fff;font-size:9.5px;line-height:1.25;
+    border-left:2px solid var(--gold);padding-left:7px;flex:1;}
+  .cl b{display:block;color:var(--gold);text-transform:uppercase;letter-spacing:.04em;}
+
+  /* contents */
+  .toc-item{display:flex;gap:9px;align-items:baseline;padding:7px 0;border-bottom:1px solid #ddd6c6;}
+  .toc-item .no{font-family:var(--display);font-weight:700;color:var(--red);font-size:22px;min-width:34px;}
+  .toc-item .t{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:15px;line-height:1;}
+  .toc-item .d{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:11px;}
+  .sect{font-family:var(--cond);letter-spacing:.18em;color:var(--red);text-transform:uppercase;
+    font-weight:700;font-size:11px;margin:10px 0 2px;}
+
+  /* abroad cards */
+  .abroad{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .pcard{position:relative;height:118px;border-radius:3px;overflow:hidden;
+    background:linear-gradient(135deg,#2a2d34,#3a1d22);}
+  .pcard.tall{height:250px;grid-row:span 2;}
+  .pcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;}
+  .pcard .gr{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,9,12,.95),rgba(8,9,12,.05) 60%);}
+  .pcard .info{position:absolute;left:9px;right:9px;bottom:7px;z-index:2;color:#fff;}
+  .pcard .nm{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:15px;line-height:1;}
+  .pcard .cl2{font-family:var(--cond);color:var(--gold);font-size:10px;letter-spacing:.05em;text-transform:uppercase;}
+  .pcard .pos{font-family:var(--cond);color:#cfcabc;font-size:9px;}
+
+  /* stat chips */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .stat{background:var(--char);color:#fff;padding:9px;border-radius:3px;}
+  .stat .big{font-family:var(--display);font-weight:700;color:var(--gold);font-size:26px;line-height:.9;}
+  .stat .lab{font-family:var(--cond);text-transform:uppercase;letter-spacing:.05em;font-size:9px;margin-top:2px;color:#d8d4c8;}
+
+  .clubrow{display:flex;align-items:center;gap:10px;border-top:2px solid var(--char);padding:9px 0;}
+  .clubrow img.logo{width:34px;height:34px;object-fit:contain;}
+  .clubrow .cn{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:14px;}
+  .clubrow .cd{font-family:var(--cond);font-size:10.5px;color:#444;}
+  .badge{font-family:var(--cond);font-weight:700;font-size:9px;text-transform:uppercase;
+    letter-spacing:.06em;padding:2px 7px;border-radius:20px;color:#fff;background:var(--red);white-space:nowrap;}
+  .badge.gold{background:var(--gold);color:#3a2a00;}
+
+  .infobox{border:2px solid currentColor;padding:9px 11px;border-radius:3px;}
+  .infobox h4{font-family:var(--display);text-transform:uppercase;margin:0 0 4px;font-size:14px;}
+  .infobox .line{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed #c9c4b5;padding:3px 0;font-family:var(--cond);font-size:11px;}
+  .infobox .line b{font-family:var(--display);}
+
+  .match{display:grid;grid-template-columns:1fr auto;gap:2px 8px;border-top:2px solid var(--char);padding:7px 0;}
+  .teams{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:13px;}
+  .meta{font-family:var(--cond);color:var(--muted);font-size:9.5px;}
+  .score{font-family:var(--display);font-weight:700;font-size:18px;}
+  .stars{color:var(--gold);font-size:11px;}
+  .rep{font-family:var(--serif);font-size:10.5px;color:#333;line-height:1.35;}
+
+  .pull{font-family:var(--display);font-weight:600;color:var(--red);text-transform:uppercase;
+    line-height:1.05;font-size:19px;border-top:3px solid var(--red);border-bottom:3px solid var(--red);padding:7px 0;margin:6px 0;}
+
+  .back-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;color:#fff;padding:30px;}
+
+  @media (max-width:520px){ .cover-head h1{font-size:34px;} .masthead .pas{font-size:48px;} }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">ПАС</div>
+    <div class="sub">Број 01 · Јули 2026 · Целата приказна на македонскиот фудбал</div>
+  </div>
+
+  <div id="book"></div>
+
+  <div class="controls">
+    <button id="prev">‹ Претходна</button>
+    <span class="pg" id="pg">1</span>
+    <button id="next">Следна ›</button>
+  </div>
+  <div class="hint">Повлечи го аголот на страницата за да листаш · Drag a page corner to flip · фото: Wikimedia Commons (CC)</div>
+
+<!-- ============================ PAGES ============================ -->
+<div style="display:none" id="src">
+
+  <!-- 1. COVER -->
+  <div class="page dark grain" data-density="hard">
+   <div class="page-content">
+    <div class="cover-photo photo">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Elif%20Elmas%202021.jpg?width=1200" onerror="this.remove()" alt="">
+      <div class="gr"></div>
+    </div>
+    <div class="masthead"><div class="pas">ПАС</div><div class="tag">Целата приказна на македонскиот фудбал</div></div>
+    <div class="issueflag">БРОЈ 01<b>ЈУЛИ 2026</b>199 ден / digital</div>
+    <div class="cover-head">
+      <div class="kk">Генерација без граници · Македонија во светот</div>
+      <h1>ЗНАМЕ<span class="acc">НОСЦИ</span></h1>
+      <div class="cover-sub">Од Наполи до Рангерс — македонските фудбалери што го носат знамето низ Европа. И сѐ што следи дома во јули.</div>
+    </div>
+    <div class="coverlines">
+      <div class="cl"><b>Клубовите во Европа</b>Вардар, Струга и Шкендија тргнуваат во квалификации</div>
+      <div class="cl"><b>После Копенхаген</b>Репрезентацијата бара пат назад</div>
+      <div class="cl"><b>Збогум, легендо</b>Васил Рингов 1955–2025 · плус Панчев</div>
+    </div>
+   </div>
+  </div>
+
+  <!-- 2. CONTENTS -->
+  <div class="page grain">
+   <div class="page-content"><div class="pad">
+    <div class="kicker">ПАС · Број 01 · Јули 2026</div>
+    <h1 style="font-size:40px;margin:6px 0 4px">Содржина</h1>
+    <hr class="rule" style="width:32%">
+    <div class="sect">Главни теми</div>
+    <div class="toc-item"><span class="no">04</span><div><div class="t">Македонци во светот</div><div class="d">Каде играат носителите на репрезентацијата</div></div></div>
+    <div class="toc-item"><span class="no">06</span><div><div class="t">Клубовите во Европа</div><div class="d">Вардар, Струга и Шкендија во летните квалификации</div></div></div>
+    <div class="toc-item"><span class="no">08</span><div><div class="t">После Копенхаген</div><div class="d">Репрезентацијата по поразот од Данска</div></div></div>
+    <div class="toc-item"><span class="no">10</span><div><div class="t">Бумот</div><div class="d">Како расте интересот за фудбалот</div></div></div>
+    <div class="sect">Луѓе и историја</div>
+    <div class="toc-item"><span class="no">12</span><div><div class="t">Збогум, легендо</div><div class="d">Почит за Васил Рингов (1955–2025)</div></div></div>
+    <div class="toc-item"><span class="no">14</span><div><div class="t">Златното момче</div><div class="d">Дарко Панчев — европски шампион и Златна копачка</div></div></div>
+    <div class="toc-item"><span class="no">16</span><div><div class="t">На терен</div><div class="d">Извештаи од домашните мечеви</div></div></div>
+    <div class="credit">Фотографии: Wikimedia Commons (CC) · макета на изданието</div>
+   </div></div>
+  </div>
+
+  <!-- 3. EDITOR LETTER -->
+  <div class="page grain">
+   <div class="page-content"><div class="pad">
+    <div class="kicker">Уводник</div>
+    <h1 style="font-size:30px;margin:6px 0 2px;max-width:15ch">Знамето патува. Играта расте.</h1>
+    <hr class="rule" style="width:30%">
+    <div class="col">
+      <p><span style="float:left;font-family:var(--display);font-weight:700;font-size:42px;line-height:.7;padding:4px 6px 0 0;color:var(--red)">М</span>акедонскиот фудбал одамна ги нема границите на својата мала територија. Нашите играчи го носат знамето во Серија А, во Шкотска, во Швајцарија и Турција. Нашите клубови, колку и да се мали, секое лето тропаат на вратата на Европа.</p>
+      <p>Овој прв број на ПАС е токму за тоа — за целината на македонскиот фудбал. Не само за репрезентацијата и нејзините тешки денови по Копенхаген, туку и за клубовите што тргнуваат во квалификации во јули, за бумот на интересот дома и за луѓето што ја создаваа оваа приказна.</p>
+      <p>Се поклонуваме и пред еден од најголемите. Васил Рингов нѐ напушти во декември 2025. На него и на златните генерации им должиме сеќавање.</p>
+      <p style="font-family:var(--display);font-weight:600;text-transform:uppercase;color:var(--char)">Добредојдовте во ПАС.</p>
+      <p class="meta" style="font-style:italic">— Уредништвото</p>
+    </div>
+    <div class="folio l">ПАС · 03</div><div class="folio r">Уводник</div>
+   </div></div>
+  </div>
+
+  <!-- 4. MACEDONIANS ABROAD -->
+  <div class="page grain">
+   <div class="page-content"><div class="pad">
+    <div class="kicker">Голема тема · Македонија во светот</div>
+    <h1 style="font-size:26px;margin:5px 0 2px">Македонци во светот</h1>
+    <div class="dek" style="font-size:12px;margin-bottom:8px">Носителите на репрезентацијата и нивните клубови во сезоната 2025/26.</div>
+    <div class="abroad">
+      <div class="pcard tall">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Elif%20Elmas%202021.jpg?width=700" onerror="this.remove()" alt="">
+        <div class="gr"></div>
+        <div class="info"><div class="nm">Елјиф Елмас</div><div class="cl2">Наполи · Серија А</div><div class="pos">Везист · 75 натпревари / 13 гола за репрезентацијата</div></div>
+      </div>
+      <div class="pcard">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ezgjan%20Alioski%202014%20(cropped).jpg?width=600" onerror="this.remove()" alt="">
+        <div class="gr"></div>
+        <div class="info"><div class="nm">Е. Алиоски</div><div class="cl2">Лугано · Швајцарија</div></div>
+      </div>
+      <div class="pcard">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/340%20trajkovsky%20(21883895313).jpg?width=600" onerror="this.remove()" alt="">
+        <div class="gr"></div>
+        <div class="info"><div class="nm">А. Трајковски</div><div class="cl2">Локомотива Загреб</div><div class="pos">Херојот од Палермо 2022</div></div>
+      </div>
+      <div class="pcard">
+        <div class="gr"></div>
+        <div class="info"><div class="nm">Енис Барди</div><div class="cl2">Коњаспор · Турција</div><div class="pos">Капитен на репрезентацијата</div></div>
+      </div>
+      <div class="pcard">
+        <div class="gr"></div>
+        <div class="info"><div class="nm">Бојан Миовски</div><div class="cl2">Рангерс · Шкотска</div></div>
+      </div>
+    </div>
+    <div class="folio l">ПАС · 04</div><div class="folio r">Македонци во светот</div>
+   </div></div>
+  </div>
+
+  <!-- 5. ABROAD TEXT -->
+  <div class="page grain">
+   <div class="page-content"><div class="pad">
+    <div class="kicker">Македонија во светот</div>
+    <hr class="rule gold" style="width:100%">
+    <div class="col" style="column-count:2;column-gap:18px">
+      <p><span style="float:left;font-family:var(--display);font-weight:700;font-size:34px;line-height:.7;padding:3px 5px 0 0;color:var(--red)">Е</span>лјиф Елмас остана движечка сила на репрезентацијата по заминувањето на Гоце Пандев. Во сезоната 2025/26 игра во Серија А, на позајмица во Наполи од Лајпциг — доказ дека македонското име сѐ уште се почитува на највисоко ниво.</p>
+      <p>Капитенската лента ја носи Енис Барди од Коњаспор, додека Бојан Миовски се докажува во дресот на Рангерс. Алиоски е столб во Лугано, а Трајковски — човекот чиј гол нѐ однесе до плеј-офот против Италија во Палермо — продолжува во Хрватска.</p>
+      <p>Заедно тие сочинуваат генерација без граници. Предизвикот сега е јасен: новите имиња да го продолжат патот што овие го отворија.</p>
+    </div>
+    <div class="pull">„Генерација без граници — од Скопје до целиот свет.“</div>
+    <div class="stats">
+      <div class="stat"><div class="big">5</div><div class="lab">Земји во кои играат носителите</div></div>
+      <div class="stat"><div class="big">75</div><div class="lab">Натпревари на Елмас за МКД</div></div>
+      <div class="stat"><div class="big">2022</div><div class="lab">Палермо — голот на Трајковски</div></div>
+    </div>
+    <div class="folio l">ПАС · 05</div><div class="folio r">Македонци во светот</div>
+   </div></div>
+  </div>
+
+  <!-- 6. CLUBS IN EUROPE -->
+  <div class="page dark grain">
+   <div class="page-content">
+    <div class="photo" style="position:absolute;top:0;left:0;right:0;height:46%">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Fenerbah%C3%A7e%20vs%20Vardar%20Skopje%2024%20August%202017%20(5).jpg?width=1200" onerror="this.remove()" alt="">
+      <div class="gr"></div>
+    </div>
+    <div class="pad" style="top:38%">
+      <div class="kicker">Клубовите во Европа</div>
+      <h1 style="color:#fff;font-size:25px;margin:4px 0 8px">Европа повикува</h1>
+      <div class="clubrow" style="border-color:#3a3d44">
+        <img class="logo" src="https://commons.wikimedia.org/wiki/Special:FilePath/FK%20Vardar%20logo.png?width=120" onerror="this.style.visibility='hidden'" alt="">
+        <div style="flex:1"><div class="cn" style="color:#fff">Вардар</div><div class="cd" style="color:#cfcabc">Прв квалификациски круг · легови 7/8 и 14/15 јули</div></div>
+        <span class="badge gold">Лига на шампиони</span>
+      </div>
+      <div class="clubrow" style="border-color:#3a3d44">
+        <div class="logo" style="display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--display);font-weight:700;border:2px solid var(--gold);border-radius:50%;font-size:13px">С</div>
+        <div style="flex:1"><div class="cn" style="color:#fff">Струга</div><div class="cd" style="color:#cfcabc">Вицешампион · езерскиот клуб во Европа</div></div>
+        <span class="badge">Лига Европа</span>
+      </div>
+      <div class="clubrow" style="border-color:#3a3d44">
+        <img class="logo" src="https://commons.wikimedia.org/wiki/Special:FilePath/KF%20Shk%C3%ABndija%20Logo.svg?width=120" onerror="this.style.visibility='hidden'" alt="">
+        <div style="flex:1"><div class="cn" style="color:#fff">Шкендија</div><div class="cd" style="color:#cfcabc">Тетово · постојан европски учесник</div></div>
+        <span class="badge">Конференциска лига</span>
+      </div>
+      <p style="color:#cfcabc;font-size:11px;margin-top:10px">Од сезоната 2026/27, 1.МФЛ се намалува на десет клубови: шампионот оди во Лигата на шампиони, вицешампионот во Лигата Европа.</p>
+    </div>
+    <div class="folio l" style="color:#8a8d96">ПАС · 06</div><div class="folio r" style="color:#8a8d96">Европа повикува</div>
+   </div>
+  </div>
+
+  <!-- 7. NATIONAL TEAM -->
+  <div class="page grain">
+   <div class="page-content">
+    <div class="photo" style="position:absolute;top:0;left:0;right:0;height:42%;background:linear-gradient(135deg,#1c2a44,#0e1117)">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/To%C5%A1e%20Proeski%20Arena%201.jpg?width=1200" onerror="this.remove()" alt="">
+      <div class="gr"></div>
+    </div>
+    <div class="pad" style="top:34%">
+      <div class="kicker">Репрезентација</div>
+      <h1 style="font-size:30px;margin:4px 0 2px">После Копенхаген</h1>
+      <div class="dek" style="font-size:12px;margin-bottom:6px">Поразот од Данска (0:4) во плеј-офот го затвори патот кон Светското. Сега почнува потрагата по нов почеток.</div>
+      <div class="col" style="column-count:2;column-gap:16px">
+        <p>Летото 2026 ја затекна репрезентацијата без победа во последните пет натпревари — со само еден постигнат и петнаесет примени голови. Селекторот Гоце Седлоски, во двојна улога и со Вардар, бара решенија.</p>
+        <p>Следните испити доаѓаат во Лигата на нации: против Швајцарија (26 септември) и во гостите кај Шкотска (13 ноември). Дотогаш — обнова и враќање на самодовербата.</p>
+      </div>
+      <div class="stats" style="margin-top:6px">
+        <div class="stat"><div class="big">0:4</div><div class="lab">Данска · плеј-оф, март 2026</div></div>
+        <div class="stat"><div class="big">0/5</div><div class="lab">Победи во последните мечеви</div></div>
+        <div class="stat"><div class="big">26.9</div><div class="lab">Швајцарија · Лига на нации</div></div>
+      </div>
+    </div>
+    <div class="folio l">ПАС · 08</div><div class="folio r">После Копенхаген</div>
+   </div>
+  </div>
+
+  <!-- 8. THE BOOM -->
+  <div class="page grain">
+   <div class="page-content"><div class="pad">
+    <div class="kicker">Голема тема</div>
+    <h1 style="font-size:40px;margin:4px 0">БУМОТ</h1>
+    <div class="dek" style="font-size:12px;margin-bottom:6px">Како интересот за фудбалот во Македонија расте — на трибините, на екраните и во маалата.</div>
+    <hr class="rule" style="width:26%">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">
+      <div class="col">
+        <p>Стадионите повторно дишат. Помладата публика, израсната по Евро 2020, се враќа на трибините, а онлајн заедниците растат од месец во месец.</p>
+        <p>Враќањето на големите клубови и успесите во Европа го разгоруваат огнот, но бумот е поширок: грасрут лигите, малиот фудбал и женскиот фудбал растат заедно.</p>
+        <p class="meta" style="font-style:italic">*Бројките се илустративни за макетата.</p>
+      </div>
+      <div>
+        <div style="font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:var(--red);margin-bottom:3px">Гледаност на 1.МФЛ (индекс)</div>
+        <svg viewBox="0 0 300 180" style="width:100%;border:1px solid #ddd5c2;background:#fff;border-radius:3px">
+          <g font-family="Roboto Condensed" font-size="10">
+            <line x1="32" y1="8" x2="32" y2="150" stroke="#cfc9ba"/>
+            <line x1="32" y1="150" x2="292" y2="150" stroke="#cfc9ba"/>
+            <rect x="50"  y="116" width="32" height="34"  fill="#A40E13"/>
+            <rect x="98"  y="104" width="32" height="46"  fill="#C11218"/>
+            <rect x="146" y="86"  width="32" height="64"  fill="#D7141A"/>
+            <rect x="194" y="62"  width="32" height="88"  fill="#E8331B"/>
+            <rect x="242" y="30"  width="32" height="120" fill="#F2B705"/>
+            <g fill="#16181D" font-weight="700" text-anchor="middle" font-family="Oswald">
+              <text x="66" y="110">100</text><text x="114" y="98">118</text>
+              <text x="162" y="80">142</text><text x="210" y="56">176</text><text x="258" y="24">230</text>
+            </g>
+            <g fill="#6b6b6b" text-anchor="middle">
+              <text x="66" y="164">21/22</text><text x="114" y="164">22/23</text>
+              <text x="162" y="164">23/24</text><text x="210" y="164">24/25</text><text x="258" y="164">25/26</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="stats" style="margin-top:10px">
+      <div class="stat"><div class="big">+130%</div><div class="lab">Раст на гледаноста од 2021*</div></div>
+      <div class="stat"><div class="big">×3</div><div class="lab">Следбеници на клупските мрежи*</div></div>
+      <div class="stat"><div class="big">19.7</div><div class="lab">Финале на Светското — гледаме дома</div></div>
+    </div>
+    <div class="folio l">ПАС · 10</div><div class="folio r">Бумот</div>
+   </div></div>
+  </div>
+
+  <!-- 9. RINGOV TRIBUTE -->
+  <div class="page dark grain">
+   <div class="page-content"><div class="pad">
+    <div class="kicker">Почит</div>
+    <div style="display:grid;grid-template-columns:34% 1fr;gap:16px;align-items:center;margin-top:6px">
+      <div>
+        <svg viewBox="0 0 160 200" style="width:100%;border-radius:3px">
+          <defs><linearGradient id="sep" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a2f22"/><stop offset="100%" stop-color="#16100a"/></linearGradient></defs>
+          <rect width="160" height="200" fill="url(#sep)"/>
+          <g fill="#0d0a06"><circle cx="80" cy="76" r="28"/><path d="M30,200 q0,-60 50,-60 q50,0 50,60 Z"/></g>
+          <rect x="5" y="5" width="150" height="190" fill="none" stroke="#c79a3e" stroke-width="2"/>
+          <text x="80" y="186" fill="#e9d6a8" font-family="Oswald" font-weight="700" font-size="14" text-anchor="middle" letter-spacing="1">1955 — 2025</text>
+        </svg>
+      </div>
+      <div>
+        <h1 style="color:#fff;font-size:30px">Збогум,<br>легендо</h1>
+        <div class="dek" style="color:#ddd9cd;margin-top:6px;font-size:12px">Васил Рингов — рекордер на Вардар, партнер на Панчев, дел од вечната постава на македонскиот фудбал.</div>
+      </div>
+    </div>
+    <hr class="rule gold" style="margin:12px 0">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="col" style="color:#ddd9cd">
+        <p>Кога во декември 2025 нѐ напушти на 70 години, си замина еден од најголемите. Рингов е и денес рекордер на Вардар по голови во првенство — заедно со Дарко Панчев формираше напаѓачки тандем за паметење и беше дел од шампионската екипа во 1986/87.</p>
+        <p>По кариерата, своето знаење несебично го пренесуваше на младите. Овој број му е посветен.</p>
+      </div>
+      <div class="infobox" style="color:var(--gold)">
+        <h4>Во бројки</h4>
+        <div class="line" style="color:#eee"><span>Голови за Вардар (рекорд)</span><b>97</b></div>
+        <div class="line" style="color:#eee"><span>Шампионска титула</span><b>1986/87</b></div>
+        <div class="line" style="color:#eee"><span>Клубови</span><b>Тетекс · Вардар · Динамо</b></div>
+        <div class="line" style="color:#eee;border:0"><span>Вечна постава на МКД</span><b>★</b></div>
+      </div>
+    </div>
+    <div class="folio l" style="color:#8a8d96">ПАС · 12</div><div class="folio r" style="color:#8a8d96">Почит · Васил Рингов</div>
+   </div></div>
+  </div>
+
+  <!-- 10. PANCEV -->
+  <div class="page grain">
+   <div class="page-content">
+    <div class="photo" style="position:absolute;top:0;left:0;right:0;height:44%;background:linear-gradient(135deg,#2a2310,#16120a)">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/European%20Golden%20Shoe%20(Darko%20Pan%C4%8Dev%2C%20Red%20Star%20Belgrade%2C%201990-91).jpg?width=1000" onerror="this.remove()" alt="">
+      <div class="gr"></div>
+    </div>
+    <div class="pad" style="top:36%">
+      <div class="kicker">Историја · Легенди</div>
+      <h1 style="font-size:28px;margin:4px 0 2px">Златното момче</h1>
+      <div class="dek" style="font-size:12px;margin-bottom:6px">Дарко Панчев — европски шампион со Црвена Звезда и носител на Златната копачка.</div>
+      <div class="col" style="column-count:2;column-gap:16px">
+        <p>Скопјанецот Панчев го освои Купот на европски шампиони во 1991 година со Црвена Звезда, ја доби Златната копачка како најдобар стрелец на континентот и беше втор во изборот за Златна топка.</p>
+        <p>Неговата приказна е и приказна за „што можеше да биде“ — за генерација раздвоена од историјата, чиј талент засекогаш остана впишан во европскиот фудбал.</p>
+      </div>
+      <div class="stats" style="margin-top:6px">
+        <div class="stat"><div class="big">1991</div><div class="lab">Купот на европски шампиони</div></div>
+        <div class="stat"><div class="big">★</div><div class="lab">Златна копачка 1990/91</div></div>
+        <div class="stat"><div class="big">2.</div><div class="lab">Во изборот за Златна топка</div></div>
+      </div>
+    </div>
+    <div class="folio l">ПАС · 14</div><div class="folio r">Златното момче</div>
+   </div>
+  </div>
+
+  <!-- 11. LOCAL MATCHES -->
+  <div class="page grain">
+   <div class="page-content"><div class="pad">
+    <div class="kicker">Локален фудбал</div>
+    <h1 style="font-size:32px;margin:4px 0">На терен</h1>
+    <div class="dek" style="font-size:12px;margin-bottom:6px">Извештаи, оцени и моментот на натпреварот од домашните терени.</div>
+    <hr class="rule" style="width:24%">
+    <div class="match">
+      <div><div class="teams">Вардар <span style="color:#aaa">—</span> Шкендија</div>
+        <div class="meta">1.МФЛ · круг на одлуката · Скопје</div>
+        <div class="rep">Дерби достоинствено за титулата. Раниот гол ја смири екипата, одбраната издржа до крај. Момент: спасување од дузла во 78'.</div></div>
+      <div style="text-align:right"><div class="score">2:1</div><div class="stars">★★★★☆</div></div>
+    </div>
+    <div class="match">
+      <div><div class="teams">Струга <span style="color:#aaa">—</span> Работнички</div>
+        <div class="meta">1.МФЛ · езерски амбиент</div>
+        <div class="rep">Отворен меч со четири гола и преврти. Домаќините со повеќе енергија на крајот. Момент: волеј за изедначување.</div></div>
+      <div style="text-align:right"><div class="score">2:2</div><div class="stars">★★★★★</div></div>
+    </div>
+    <div class="match" style="border-bottom:2px solid var(--char)">
+      <div><div class="teams">Силекс <span style="color:#aaa">—</span> Брегалница</div>
+        <div class="meta">1.МФЛ · борба за среднината</div>
+        <div class="rep">Тактичка борба решена со прекин. Малку шанси, многу дисциплина. Момент: глава по корнер во 65'.</div></div>
+      <div style="text-align:right"><div class="score">1:0</div><div class="stars">★★★☆☆</div></div>
+    </div>
+    <div class="infobox" style="color:var(--char);margin-top:10px">
+      <h4>Тим на колото</h4>
+      <div class="rep" style="margin-top:2px;color:#333">Изборот на ПАС за најдобрата единаесетка од колото — со оцени, асистенции и моменти што ја решија секоја средба.</div>
+    </div>
+    <div class="folio l">ПАС · 16</div><div class="folio r">На терен</div>
+   </div></div>
+  </div>
+
+  <!-- 12. BACK COVER -->
+  <div class="page dark grain" data-density="hard">
+   <div class="page-content" style="background:var(--red)">
+    <div class="back-inner">
+      <div style="font-family:var(--display);font-weight:700;font-size:70px;line-height:.8">ПАС</div>
+      <div style="font-family:var(--serif);font-style:italic;font-size:15px;margin:18px 0;max-width:80%">„Целата приказна на македонскиот фудбал.“</div>
+      <div style="font-family:var(--cond);letter-spacing:.16em;text-transform:uppercase;font-size:11px;opacity:.95">@pas.magazine · pasmagazine.mk</div>
+      <div style="font-family:var(--cond);font-size:11px;opacity:.85;margin-top:24px">Број 02 · Август 2026 — старт на сезоната во 1.МФЛ + европските ноќи</div>
+    </div>
+   </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<script>
+  function sizeBook(){
+    var w = Math.min(window.innerWidth - 24, 520);
+    var h = Math.round(w * 300/230);
+    var maxH = window.innerHeight - 180;
+    if(h > maxH){ h = maxH; w = Math.round(h * 230/300); }
+    return {w:w,h:h};
+  }
+  var dims = sizeBook();
+  var book = document.getElementById('book');
+
+  function start(){
+    if(!window.St || !St.PageFlip){ // fallback: stack pages vertically
+      book.style.display='block';
+      document.getElementById('src').style.display='block';
+      document.querySelectorAll('#src .page').forEach(function(p){
+        p.style.width=dims.w+'px'; p.style.height=dims.h+'px';
+        p.style.margin='0 auto 16px'; p.style.boxShadow='0 14px 40px rgba(0,0,0,.45)';
+        book.appendChild(p);
+      });
+      document.querySelector('.controls').style.display='none';
+      document.querySelector('.hint').textContent='Листај надолу · фото: Wikimedia Commons (CC)';
+      return;
+    }
+    var pageFlip = new St.PageFlip(book, {
+      width: dims.w, height: dims.h, size: 'fixed',
+      showCover: true, maxShadowOpacity: 0.5, drawShadow:true,
+      flippingTime: 800, useMouseEvents: true, mobileScrollSupport: true,
+      usePortrait: true
+    });
+    pageFlip.loadFromHTML(document.querySelectorAll('#src .page'));
+    var total = pageFlip.getPageCount();
+    function upd(){ document.getElementById('pg').textContent =
+      (pageFlip.getCurrentPageIndex()+1) + ' / ' + total; }
+    upd();
+    pageFlip.on('flip', upd);
+    document.getElementById('next').onclick=function(){ pageFlip.flipNext(); };
+    document.getElementById('prev').onclick=function(){ pageFlip.flipPrev(); };
+    document.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight') pageFlip.flipNext();
+      if(e.key==='ArrowLeft') pageFlip.flipPrev();
+    });
+  }
+  // wait for the library
+  var tries=0;
+  (function wait(){
+    if(window.St && St.PageFlip){ start(); }
+    else if(tries++<40){ setTimeout(wait,100); }
+    else { start(); } // fallback
+  })();
+</script>
+</body>
+</html>

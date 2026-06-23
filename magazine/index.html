@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ПАС · Број 01 · Јули 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto+Condensed:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#D7141A;
+    --red-deep:#A40E13;
+    --gold:#F2B705;
+    --char:#16181D;
+    --char-2:#1f222a;
+    --paper:#F4F1EA;
+    --ink:#1a1a1a;
+    --muted:#6b6b6b;
+    --display:'Oswald','Arial Narrow',sans-serif;
+    --cond:'Roboto Condensed','Arial Narrow',sans-serif;
+    --serif:'PT Serif','Times New Roman',serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#3a3d44;
+    font-family:var(--serif);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    padding:28px 0 60px;
+  }
+  .wrap{max-width:230mm;margin:0 auto;padding:0 10px;}
+  .toolbar{
+    max-width:230mm;margin:0 auto 22px;color:#e7e7e7;font-family:var(--cond);
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    font-size:13px;letter-spacing:.04em;padding:0 12px;flex-wrap:wrap;
+  }
+  .toolbar b{color:var(--gold);}
+  .toolbar .hint{opacity:.7;}
+
+  /* ===== PAGE ===== */
+  .page{
+    position:relative;
+    width:min(230mm,96vw);
+    aspect-ratio:230/300;
+    margin:0 auto 24px;
+    background:var(--paper);
+    overflow:hidden;
+    box-shadow:0 18px 50px rgba(0,0,0,.45);
+    container-type:inline-size;
+  }
+  /* type scales with page width so layout holds at any zoom */
+  .page{font-size:2.7cqw;}
+  .dark{background:var(--char);color:var(--paper);}
+
+  /* grain overlay */
+  .grain:after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+    opacity:.05;mix-blend-mode:overlay;
+  }
+
+  /* ===== shared bits ===== */
+  .kicker{font-family:var(--cond);text-transform:uppercase;letter-spacing:.22em;
+    font-weight:700;color:var(--red);font-size:1.05em;}
+  .dark .kicker{color:var(--gold);}
+  h1,h2,h3{font-family:var(--display);font-weight:700;line-height:.96;margin:0;
+    text-transform:uppercase;letter-spacing:-.01em;}
+  .dek{font-family:var(--serif);font-style:italic;color:#333;line-height:1.35;}
+  .dark .dek{color:#d8d4c8;}
+  p{line-height:1.5;margin:0 0 .8em;}
+  .col p{text-align:justify;hyphens:auto;}
+  .pull{font-family:var(--display);font-weight:600;color:var(--red);
+    text-transform:uppercase;line-height:1.02;}
+  .folio{position:absolute;bottom:4%;font-family:var(--cond);font-size:.95em;
+    letter-spacing:.1em;color:var(--muted);}
+  .folio.l{left:7%;}.folio.r{right:7%;}
+  .dark .folio{color:#8a8d96;}
+  .rule{height:3px;background:var(--red);border:0;}
+  .rule.gold{background:var(--gold);}
+
+  /* sun motif */
+  .sun{display:inline-block;}
+
+  /* ============ COVER ============ */
+  .cover{padding:0;}
+  .cover .bg{position:absolute;inset:0;}
+  .cover-grad{position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 50% -10%, rgba(242,183,5,.22), transparent 55%),
+      radial-gradient(140% 120% at 50% 120%, rgba(215,20,26,.55), transparent 60%),
+      linear-gradient(160deg,#0e1014,#1c1f27 60%,#241016);
+  }
+  .masthead{position:absolute;top:3.2%;left:5.5%;z-index:6;}
+  .masthead .pas{font-family:var(--display);font-weight:700;color:var(--red);
+    font-size:13.5cqw;line-height:.8;letter-spacing:-.02em;
+    text-shadow:0 4px 18px rgba(0,0,0,.5);}
+  .masthead .tag{font-family:var(--cond);color:var(--paper);
+    letter-spacing:.16em;text-transform:uppercase;font-size:1.5cqw;
+    margin-top:.2em;opacity:.92;}
+  .issueflag{position:absolute;top:4.4%;right:5.5%;z-index:6;text-align:right;
+    font-family:var(--cond);color:var(--paper);letter-spacing:.12em;font-size:1.5cqw;}
+  .issueflag b{display:block;color:var(--gold);font-size:1.1em;}
+
+  .cover-head{position:absolute;left:5.5%;right:5.5%;bottom:15%;z-index:6;}
+  .cover-head h1{color:var(--paper);font-size:11.5cqw;
+    text-shadow:0 6px 24px rgba(0,0,0,.45);}
+  .cover-head h1 .acc{color:var(--gold);}
+  .cover-sub{font-family:var(--serif);font-style:italic;color:#f0ead9;
+    font-size:2.5cqw;max-width:78%;margin-top:.5em;line-height:1.3;}
+
+  .coverlines{position:absolute;left:5.5%;bottom:6%;z-index:6;
+    display:flex;gap:3%;flex-wrap:wrap;align-items:flex-end;}
+  .cl{font-family:var(--cond);color:var(--paper);font-size:1.7cqw;
+    line-height:1.2;max-width:30%;border-left:3px solid var(--gold);
+    padding-left:.7em;}
+  .cl b{color:var(--gold);text-transform:uppercase;letter-spacing:.04em;
+    display:block;font-size:.92em;}
+  .barcode{position:absolute;right:5.5%;bottom:5.5%;z-index:6;width:16%;}
+
+  /* ============ CONTENTS ============ */
+  .grid2{display:grid;grid-template-columns:38% 1fr;gap:7%;height:100%;}
+  .pad{padding:8% 7%;height:100%;}
+  .toc-art{background:var(--char);position:relative;overflow:hidden;border-radius:2px;}
+  .toc-item{display:flex;gap:.7em;align-items:baseline;
+    padding:.62em 0;border-bottom:1px solid #d8d3c4;}
+  .toc-item .no{font-family:var(--display);font-weight:700;color:var(--red);
+    font-size:1.7em;min-width:1.7em;}
+  .toc-item .t{font-family:var(--display);font-weight:600;text-transform:uppercase;
+    font-size:1.18em;line-height:1;}
+  .toc-item .d{font-family:var(--serif);font-style:italic;color:var(--muted);
+    font-size:.92em;}
+  .sect-label{font-family:var(--cond);letter-spacing:.2em;color:var(--red);
+    text-transform:uppercase;font-weight:700;margin:.4em 0 .1em;font-size:.95em;}
+
+  /* ============ generic feature ============ */
+  .feat{padding:7% 7% 9%;height:100%;display:flex;flex-direction:column;}
+  .hero{position:relative;border-radius:2px;overflow:hidden;}
+  .twocol{column-count:2;column-gap:6%;}
+  .boxlabel{font-family:var(--cond);text-transform:uppercase;letter-spacing:.16em;
+    font-weight:700;font-size:.85em;color:var(--red);}
+
+  /* stat row */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:4%;}
+  .stat{background:var(--char);color:var(--paper);padding:1.1em 1em;border-radius:2px;}
+  .stat .big{font-family:var(--display);font-weight:700;color:var(--gold);
+    font-size:3.1em;line-height:.9;}
+  .stat .lab{font-family:var(--cond);text-transform:uppercase;letter-spacing:.08em;
+    font-size:.92em;margin-top:.3em;color:#d8d4c8;}
+
+  /* tribute box */
+  .infobox{border:2px solid var(--char);padding:1.1em 1.2em;border-radius:2px;}
+  .infobox h4{font-family:var(--display);text-transform:uppercase;margin:0 0 .4em;
+    font-size:1.2em;letter-spacing:.02em;}
+  .infobox .line{display:flex;justify-content:space-between;gap:1em;
+    border-bottom:1px dashed #c9c4b5;padding:.32em 0;font-family:var(--cond);font-size:1em;}
+  .infobox .line b{font-family:var(--display);}
+
+  /* match cards */
+  .match{display:grid;grid-template-columns:1fr auto;gap:.4em 1em;
+    border-top:3px solid var(--char);padding:.8em 0;}
+  .score{font-family:var(--display);font-weight:700;font-size:1.7em;}
+  .teams{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:1.15em;}
+  .meta{font-family:var(--cond);color:var(--muted);font-size:.9em;}
+  .stars{color:var(--gold);letter-spacing:.1em;font-size:1.05em;}
+  .rep{font-family:var(--serif);font-size:.94em;color:#333;line-height:1.4;}
+
+  .back{padding:0;}
+  .back-c{position:absolute;inset:0;background:var(--red);}
+  .back-inner{position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;color:#fff;padding:10%;}
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar{display:none;}
+    .page{box-shadow:none;margin:0;width:230mm;height:300mm;aspect-ratio:auto;
+      page-break-after:always;break-after:page;font-size:6.2pt;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span><b>ПАС</b> · Број 01 · Јули 2026 — макетa на изданието (design mockup)</span>
+  <span class="hint">Совет: отвори во прелистувач · за PDF користи Print → Save as PDF (А-формат 230×300мм)</span>
+</div>
+
+<!-- ============================================================ COVER -->
+<section class="page cover grain dark">
+  <div class="cover-grad bg"></div>
+  <!-- sunburst + trophy artwork -->
+  <svg class="bg" viewBox="0 0 230 300" preserveAspectRatio="xMidYMid slice" style="z-index:2">
+    <defs>
+      <radialGradient id="halo" cx="50%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#F2B705" stop-opacity=".45"/>
+        <stop offset="55%" stop-color="#F2B705" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="trophy" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FCE08A"/>
+        <stop offset="50%" stop-color="#F2B705"/>
+        <stop offset="100%" stop-color="#B9860B"/>
+      </linearGradient>
+    </defs>
+    <!-- 16-ray sun -->
+    <g transform="translate(115,96)" opacity=".9">
+      <g fill="#F2B705" opacity=".30">
+        <!-- rays -->
+        <g id="rays"></g>
+      </g>
+    </g>
+    <rect x="0" y="0" width="230" height="300" fill="url(#halo)"/>
+    <!-- confetti -->
+    <g id="confetti"></g>
+    <!-- trophy -->
+    <g transform="translate(115,150)">
+      <g fill="url(#trophy)" stroke="#7a5a07" stroke-width=".5">
+        <path d="M-20,-44 H20 L18,-18 Q18,2 0,8 Q-18,2 -18,-18 Z"/>
+        <path d="M-20,-40 q-16,2 -16,16 q0,14 18,16 l0,-7 q-11,-2 -11,-10 q0,-7 9,-8 Z"/>
+        <path d="M20,-40 q16,2 16,16 q0,14 -18,16 l0,-7 q11,-2 11,-10 q0,-7 -9,-8 Z"/>
+        <rect x="-4" y="8" width="8" height="14"/>
+        <path d="M-14,22 H14 l3,9 H-17 Z"/>
+        <rect x="-20" y="31" width="40" height="6" rx="1"/>
+      </g>
+      <!-- star on cup -->
+      <path d="M0,-30 l3,7 7,.6 -5,5 1.5,7 -6.5,-3.6 -6.5,3.6 1.5,-7 -5,-5 7,-.6 Z" fill="#fff" opacity=".85"/>
+    </g>
+  </svg>
+  <div class="grain"></div>
+
+  <div class="masthead">
+    <div class="pas">ПАС</div>
+    <div class="tag">Целата приказна на македонскиот фудбал</div>
+  </div>
+  <div class="issueflag">БРОЈ 01<b>ЈУЛИ 2026</b>199 ден / digital</div>
+
+  <div class="cover-head">
+    <div class="kicker" style="margin-bottom:.4em">ФК Вардар · шампиони на Македонија</div>
+    <h1>ПОВТОРНО<br><span class="acc">ШАМПИОНИ</span></h1>
+    <div class="cover-sub">По девет години Вардар повторно е на тронот — и тргнува во Лигата на шампионите.</div>
+  </div>
+
+  <div class="coverlines">
+    <div class="cl"><b>Бумот</b>Трибините повторно се полни — фудбалот никогаш не бил поголем дома</div>
+    <div class="cl"><b>Збогум, легендо</b>Васил Рингов 1955–2025</div>
+    <div class="cl"><b>Плус</b>Локални мечеви · нова генерација · ноќта во Палермо</div>
+  </div>
+  <svg class="barcode" viewBox="0 0 100 40"><rect width="100" height="40" fill="#fff"/>
+    <g fill="#000"><rect x="6" y="5" width="2" height="26"/><rect x="10" y="5" width="1" height="26"/>
+    <rect x="13" y="5" width="3" height="26"/><rect x="18" y="5" width="1" height="26"/>
+    <rect x="21" y="5" width="2" height="26"/><rect x="25" y="5" width="3" height="26"/>
+    <rect x="30" y="5" width="1" height="26"/><rect x="33" y="5" width="2" height="26"/>
+    <rect x="37" y="5" width="3" height="26"/><rect x="42" y="5" width="1" height="26"/>
+    <rect x="45" y="5" width="2" height="26"/><rect x="49" y="5" width="1" height="26"/>
+    <rect x="52" y="5" width="3" height="26"/><rect x="57" y="5" width="2" height="26"/>
+    <rect x="61" y="5" width="1" height="26"/><rect x="64" y="5" width="3" height="26"/>
+    <rect x="69" y="5" width="1" height="26"/><rect x="72" y="5" width="2" height="26"/>
+    <rect x="76" y="5" width="3" height="26"/><rect x="81" y="5" width="1" height="26"/>
+    <rect x="84" y="5" width="2" height="26"/><rect x="88" y="5" width="3" height="26"/>
+    <rect x="93" y="5" width="1" height="26"/></g>
+    <text x="50" y="38" font-family="Roboto Condensed" font-size="6" text-anchor="middle">9 771234 567890</text>
+  </svg>
+</section>
+
+<!-- ============================================================ CONTENTS -->
+<section class="page grain">
+  <div class="grid2">
+    <div class="toc-art dark grain">
+      <svg viewBox="0 0 200 260" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%">
+        <rect width="200" height="260" fill="#16181D"/>
+        <circle cx="100" cy="95" r="120" fill="none" stroke="#D7141A" stroke-width="22" opacity=".18"/>
+        <g transform="translate(100,150)">
+          <g fill="#F2B705" opacity=".9">
+            <path d="M-14,-32 H14 L12,-13 Q12,1 0,6 Q-12,1 -12,-13 Z"/>
+            <rect x="-3" y="6" width="6" height="10"/>
+            <path d="M-10,16 H10 l2,7 H-12 Z"/>
+            <rect x="-15" y="23" width="30" height="5" rx="1"/>
+          </g>
+        </g>
+        <text x="100" y="208" fill="#F4F1EA" font-family="Oswald" font-weight="700" font-size="15" text-anchor="middle" letter-spacing="2">ВО ОВОЈ БРОЈ</text>
+      </svg>
+    </div>
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center;">
+      <div class="kicker">ПАС · Број 01 · Јули 2026</div>
+      <h1 style="font-size:3.1em;margin:.15em 0 .5em">Содржина</h1>
+
+      <div class="sect-label">Насловна приказна</div>
+      <div class="toc-item"><span class="no">12</span><div><div class="t">Кралот се врати</div><div class="d">Вардар — шампиони по девет години, и патот кон Европа</div></div></div>
+
+      <div class="sect-label">Главни теми</div>
+      <div class="toc-item"><span class="no">26</span><div><div class="t">Бумот</div><div class="d">Како интересот за фудбалот експлодира</div></div></div>
+      <div class="toc-item"><span class="no">33</span><div><div class="t">После Копенхаген</div><div class="d">Репрезентацијата по болниот пораз</div></div></div>
+      <div class="toc-item"><span class="no">43</span><div><div class="t">Збогум, легендо</div><div class="d">Почит за Васил Рингов (1955–2025)</div></div></div>
+
+      <div class="sect-label">Локален фудбал</div>
+      <div class="toc-item"><span class="no">08</span><div><div class="t">На терен</div><div class="d">Извештаи и оцени од домашните мечеви</div></div></div>
+      <div class="toc-item"><span class="no">47</span><div><div class="t">Денот на натпреварот</div><div class="d">Фото-есеј од еден град и неговиот клуб</div></div></div>
+    </div>
+  </div>
+  <div class="folio l">ПАС · 02</div>
+  <div class="folio r">pasmagazine.mk</div>
+</section>
+
+<!-- ============================================================ EDITOR LETTER -->
+<section class="page grain">
+  <div class="feat">
+    <div class="kicker">Уводник</div>
+    <h1 style="font-size:3.5em;margin:.18em 0 .12em;max-width:14ch">Кралот се врати. И играта расте.</h1>
+    <hr class="rule" style="width:32%;margin:.4em 0 1em">
+    <div class="twocol" style="font-size:1.05em">
+      <p><span style="float:left;font-family:var(--display);font-weight:700;font-size:3.1em;line-height:.7;padding:.06em .12em 0 0;color:var(--red)">В</span>о неделата кога Светското првенство почна без нас, во Скопје се случуваше нешто друго — нешто што многумина мислеа дека никогаш повторно нема да го видат. Вардар, клубот што пред неколку години беше на работ на исчезнување, повторно ја крена титулата. По девет години. По падот, по поделените сезони во пониските рангови, по сите оние вечери кога изгледаше дека приказната завршила.</p>
+      <p>Ова списание се раѓа токму во тој момент. ПАС не е тука само за репрезентацијата и за големите имиња во странство. ПАС е за клубовите, за локалните дербиа, за трибините што повторно се полнат, за момчето што удира топка од ѕид во маало и за навивачот што патува половина Европа за еден меч.</p>
+      <p>Нема да премолчуваме. Поразот од Данска (0:4) боли, а репрезентацијата влезе во летото без победа. За тоа пишуваме чесно, на страница 33. Но истовремено бројките се јасни: гледаноста расте, младите се враќаат на стадионите, а женскиот фудбал чука на вратата.</p>
+      <p>И на крај — се поклонуваме пред еден од најголемите. Васил Рингов нѐ напушти во декември. Фитно е што во сезоната по неговото заминување, неговиот Вардар е првак. Овој број му е посветен.</p>
+      <p style="font-family:var(--display);font-weight:600;text-transform:uppercase;color:var(--char);margin-top:.6em">Добредојдовте во ПАС.</p>
+      <p class="meta" style="font-style:italic">— Уредништвото</p>
+    </div>
+  </div>
+  <div class="folio l">ПАС · 03</div>
+  <div class="folio r">Уводник</div>
+</section>
+
+<!-- ============================================================ COVER STORY OPEN -->
+<section class="page dark grain" style="padding:0">
+  <svg class="bg" viewBox="0 0 230 300" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="cs" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#241016"/><stop offset="55%" stop-color="#16181D"/>
+        <stop offset="100%" stop-color="#0d0f13"/>
+      </linearGradient>
+      <radialGradient id="spot" cx="50%" cy="20%" r="55%">
+        <stop offset="0%" stop-color="#D7141A" stop-opacity=".5"/>
+        <stop offset="60%" stop-color="#D7141A" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="230" height="300" fill="url(#cs)"/>
+    <rect width="230" height="300" fill="url(#spot)"/>
+    <!-- confetti -->
+    <g id="confetti2"></g>
+    <!-- big number 11 watermark -->
+    <text x="200" y="250" font-family="Oswald" font-weight="700" font-size="200" fill="#D7141A" opacity=".10" text-anchor="end">11</text>
+  </svg>
+  <div class="grain"></div>
+  <div style="position:absolute;left:7%;right:7%;bottom:9%;">
+    <div class="kicker" style="margin-bottom:.5em">Насловна приказна · ФК Вардар</div>
+    <h1 style="font-size:9.5cqw;color:var(--paper)">КРАЛОТ<br>СЕ ВРАТИ</h1>
+    <div class="dek" style="font-size:2.4cqw;max-width:70%;margin-top:.6em">
+      Од раб на пропаст до врвот на Македонија. Приказната за враќањето на Вардар — и за ноќите во Лигата на шампионите што следат во јули.
+    </div>
+  </div>
+  <div class="folio l" style="color:#8a8d96">ПАС · 12</div>
+</section>
+
+<!-- ============================================================ COVER STORY TEXT -->
+<section class="page grain">
+  <div class="feat">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <div class="boxlabel">Насловна приказна</div>
+      <div class="meta">Текст: Уредништвото · Фото: архива (макета)</div>
+    </div>
+    <hr class="rule gold" style="margin:.4em 0 .9em">
+    <div class="twocol" style="font-size:1em">
+      <p><span style="float:left;font-family:var(--display);font-weight:700;font-size:3em;line-height:.7;padding:.06em .12em 0 0;color:var(--red)">К</span>ога последен пат Вардар беше првак — во сезоната 2016/17 — дел од денешните навивачи на трибините беа деца. Потоа дојде падот: финансиски колапс, заминувања, и клуб што се бореше за гол опстанок. Деветте години што следеа беа најтешките во модерната историја на црвените.</p>
+      <p>Затоа оваа титула не е само трофеј. Таа е враќање. Враќање на клуб, на град и на чувство дека големите приказни во македонскиот фудбал сè уште се можни.</p>
+      <p class="pull" style="font-size:1.9em;margin:.3em 0;border-top:3px solid var(--red);border-bottom:3px solid var(--red);padding:.4em 0">„Не славиме само трофеј — славиме враќање.“</p>
+      <p>Сезоната беше трка до последниот круг. Одбраната беше темел, а напаѓачката линија даваше голови кога беше најпотребно. Тренерот изгради екипа со карактер — екипа што знаеше да трпи и да чека.</p>
+      <p>Сега доаѓа најголемиот испит. Во <b>првото квалификациско коло на Лигата на шампионите</b>, Вардар игра две вечери што ќе се паметат — првиот меч на <b>7/8 јули</b>, реваншот на <b>14/15 јули</b>. Победникот продолжува во шампионскиот пат на вториот круг.</p>
+      <p>Пред Европа, клубот го засили кадарот. Летниот пазар донесе нови лица за длабочина и квалитет — деталите и оцените за секое засилување се на следните страници.</p>
+    </div>
+
+    <div style="margin-top:auto">
+      <div class="boxlabel" style="margin-bottom:.5em">Од пад до титула · хронологија</div>
+      <div class="stats">
+        <div class="stat"><div class="big">2016/17</div><div class="lab">Последна титула пред враќањето</div></div>
+        <div class="stat"><div class="big">9</div><div class="lab">Години чекање на тронот</div></div>
+        <div class="stat"><div class="big">11.</div><div class="lab">Шампионска титула на Вардар*</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="folio l">ПАС · 13</div>
+  <div class="folio r">Кралот се врати</div>
+</section>
+
+<!-- ============================================================ THE BOOM -->
+<section class="page grain">
+  <div class="feat">
+    <div class="kicker">Голема тема</div>
+    <h1 style="font-size:4.4em;margin:.12em 0">БУМОТ</h1>
+    <div class="dek" style="font-size:1.25em;max-width:80%;margin-bottom:.7em">Како интересот за фудбалот во Македонија експлодира — и зошто токму сега.</div>
+    <hr class="rule" style="width:28%;margin-bottom:1em">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6%">
+      <div class="col" style="font-size:.96em">
+        <p>Стадионите што до неодамна беа полупразни, повторно дишат. Помладата публика, израсната по Евро 2020, се враќа на трибините. Преносите и стриминзите бележат рекордни бројки, а онлајн заедниците на навивачите растат од месец во месец.</p>
+        <p>Враќањето на Вардар на врвот дополнително го разгоре огнот, но бумот е поширок од еден клуб: грасрут лигите, малиот фудбал и женскиот фудбал сите растат заедно. Дијаспората — од Мелбурн до Малме — повторно се поврзува со домашната игра.</p>
+        <p class="meta" style="font-style:italic">*Бројките се илустративни за макетата и подлежат на проверка пред печат.</p>
+      </div>
+      <!-- growth chart -->
+      <div>
+        <div class="boxlabel" style="margin-bottom:.4em">Просечна гледаност на 1.МФЛ (индекс)</div>
+        <svg viewBox="0 0 320 200" style="width:100%;border:1px solid #ddd5c2;background:#fff;border-radius:2px">
+          <g font-family="Roboto Condensed" font-size="11" fill="#6b6b6b">
+            <line x1="38" y1="10" x2="38" y2="168" stroke="#cfc9ba"/>
+            <line x1="38" y1="168" x2="312" y2="168" stroke="#cfc9ba"/>
+            <!-- bars -->
+            <g>
+              <rect x="58"  y="128" width="34" height="40"  fill="#A40E13"/>
+              <rect x="108" y="116" width="34" height="52"  fill="#C11218"/>
+              <rect x="158" y="96"  width="34" height="72"  fill="#D7141A"/>
+              <rect x="208" y="70"  width="34" height="98"  fill="#E8331B"/>
+              <rect x="258" y="34"  width="34" height="134" fill="#F2B705"/>
+            </g>
+            <g fill="#16181D" font-weight="700" text-anchor="middle" font-family="Oswald">
+              <text x="75"  y="122">100</text>
+              <text x="125" y="110">118</text>
+              <text x="175" y="90">142</text>
+              <text x="225" y="64">176</text>
+              <text x="275" y="28">230</text>
+            </g>
+            <g text-anchor="middle">
+              <text x="75"  y="182">21/22</text>
+              <text x="125" y="182">22/23</text>
+              <text x="175" y="182">23/24</text>
+              <text x="225" y="182">24/25</text>
+              <text x="275" y="182">25/26</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stats" style="margin-top:1.1em">
+      <div class="stat"><div class="big">+130%</div><div class="lab">Раст на гледаноста од 2021*</div></div>
+      <div class="stat"><div class="big">×3</div><div class="lab">Следбеници на клупските мрежи*</div></div>
+      <div class="stat"><div class="big">19 јул</div><div class="lab">Финале на Светското — гледаме дома</div></div>
+    </div>
+  </div>
+  <div class="folio l">ПАС · 26</div>
+  <div class="folio r">Бумот</div>
+</section>
+
+<!-- ============================================================ RINGOV TRIBUTE -->
+<section class="page dark grain">
+  <div class="feat">
+    <div class="kicker">Почит</div>
+    <div style="display:grid;grid-template-columns:34% 1fr;gap:7%;align-items:center;margin-top:.4em">
+      <!-- vintage framed portrait (vector) -->
+      <div>
+        <svg viewBox="0 0 200 240" style="width:100%;border-radius:2px">
+          <defs>
+            <linearGradient id="sepia" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3a2f22"/><stop offset="100%" stop-color="#1a140d"/>
+            </linearGradient>
+          </defs>
+          <rect width="200" height="240" fill="url(#sepia)"/>
+          <!-- silhouette -->
+          <g fill="#0d0a06" opacity=".9">
+            <circle cx="100" cy="92" r="34"/>
+            <path d="M40,240 q0,-72 60,-72 q60,0 60,72 Z"/>
+          </g>
+          <g fill="#c79a3e" opacity=".25">
+            <circle cx="100" cy="92" r="34"/>
+          </g>
+          <rect x="6" y="6" width="188" height="228" fill="none" stroke="#c79a3e" stroke-width="2"/>
+          <text x="100" y="224" fill="#e9d6a8" font-family="Oswald" font-weight="700" font-size="16" text-anchor="middle" letter-spacing="1">1955 — 2025</text>
+        </svg>
+      </div>
+      <div>
+        <h1 style="font-size:4.4cqw;color:var(--paper)">ЗБОГУМ,<br>ЛЕГЕНДО</h1>
+        <div class="dek" style="margin-top:.5em;font-size:1.6cqw">Васил Рингов — рекордер на Вардар, партнер на Панчев, дел од вечната постава на македонскиот фудбал.</div>
+      </div>
+    </div>
+
+    <hr class="rule gold" style="margin:1em 0">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7%">
+      <div class="col" style="font-size:.96em;color:#ddd9cd">
+        <p>Кога во декември 2025 нѐ напушти на 70 години, си замина еден од најголемите што некогаш ги имал македонскиот фудбал. Рингов е и денес рекордер на Вардар по постигнати голови во првенство — бројка што генерации напаѓачи не успеаја да ја достигнат.</p>
+        <p>Заедно со Дарко Панчев формираше напаѓачки тандем за паметење и беше дел од шампионската екипа во 1986/87. По кариерата, своето знаење несебично го пренесуваше на младите.</p>
+        <p>Фитно е што во сезоната по неговото заминување, неговиот Вардар повторно е првак. Овој број му е посветен.</p>
+      </div>
+      <div>
+        <div class="infobox" style="border-color:var(--gold);color:var(--paper)">
+          <h4 style="color:var(--gold)">Во бројки</h4>
+          <div class="line"><span>Голови за Вардар (рекорд)</span><b>97</b></div>
+          <div class="line"><span>Шампионска титула</span><b>1986/87</b></div>
+          <div class="line"><span>Клубови</span><b>Тетекс · Вардар · Динамо · Брауншвајг</b></div>
+          <div class="line" style="border:0"><span>Вечна постава на Македонија</span><b>★</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="folio l" style="color:#8a8d96">ПАС · 43</div>
+  <div class="folio r" style="color:#8a8d96">Почит · Васил Рингов</div>
+</section>
+
+<!-- ============================================================ LOCAL MATCHES -->
+<section class="page grain">
+  <div class="feat">
+    <div class="kicker">Локален фудбал</div>
+    <h1 style="font-size:3.8em;margin:.1em 0">НА ТЕРЕН</h1>
+    <div class="dek" style="font-size:1.15em;margin-bottom:.7em">Извештаи, оцени и моментот на натпреварот од домашните терени.</div>
+    <hr class="rule" style="width:26%;margin-bottom:.8em">
+
+    <div style="display:grid;grid-template-columns:1.15fr .85fr;gap:7%">
+      <div>
+        <div class="match">
+          <div><div class="teams">Вардар <span style="color:var(--muted)">—</span> Шкендија</div>
+            <div class="meta">1.МФЛ · круг на одлуката · Градски стадион</div>
+            <div class="rep">Дерби достоинствено за титулата. Раниот гол ја смири екипата, а одбраната издржа притисок до крај. Моментот: спасување од дузла во 78'.</div></div>
+          <div style="text-align:right"><div class="score">2:1</div><div class="stars">★★★★☆</div></div>
+        </div>
+        <div class="match">
+          <div><div class="teams">Струга <span style="color:var(--muted)">—</span> Работнички</div>
+            <div class="meta">1.МФЛ · езерски амбиент</div>
+            <div class="rep">Отворен меч со четири гола и преврти. Домаќините со повеќе енергија во последните минути. Моментот: волеј од дистанца за изедначување.</div></div>
+          <div style="text-align:right"><div class="score">2:2</div><div class="stars">★★★★★</div></div>
+        </div>
+        <div class="match" style="border-bottom:3px solid var(--char)">
+          <div><div class="teams">Силекс <span style="color:var(--muted)">—</span> Брегалница</div>
+            <div class="meta">1.МФЛ · борба за среднината</div>
+            <div class="rep">Тактичка борба решена со прекин. Малку шанси, многу дисциплина. Моментот: глава по корнер во 65'.</div></div>
+          <div style="text-align:right"><div class="score">1:0</div><div class="stars">★★★☆☆</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="boxlabel" style="margin-bottom:.4em">Мапа на голови · дерби</div>
+        <svg viewBox="0 0 200 130" style="width:100%;background:#176a2e;border-radius:3px">
+          <g stroke="#fff" stroke-width="1" fill="none" opacity=".9">
+            <rect x="4" y="4" width="192" height="122"/>
+            <line x1="100" y1="4" x2="100" y2="126"/>
+            <circle cx="100" cy="65" r="18"/>
+            <rect x="4" y="35" width="26" height="60"/>
+            <rect x="170" y="35" width="26" height="60"/>
+          </g>
+          <g>
+            <circle cx="150" cy="52" r="4" fill="#F2B705" stroke="#000" stroke-width=".5"/>
+            <circle cx="158" cy="78" r="4" fill="#F2B705" stroke="#000" stroke-width=".5"/>
+            <circle cx="44" cy="60" r="4" fill="#fff" stroke="#000" stroke-width=".5"/>
+          </g>
+          <text x="150" y="44" font-family="Oswald" font-size="8" fill="#fff" text-anchor="middle">23'</text>
+          <text x="158" y="92" font-family="Oswald" font-size="8" fill="#fff" text-anchor="middle">61'</text>
+          <text x="44"  y="52" font-family="Oswald" font-size="8" fill="#fff" text-anchor="middle">70'</text>
+        </svg>
+        <div class="meta" style="margin-top:.5em">
+          <span style="color:var(--gold)">●</span> Вардар &nbsp; <span>○</span> Шкендија
+        </div>
+        <div class="infobox" style="margin-top:.8em">
+          <h4>Тим на колото</h4>
+          <div class="rep" style="margin-top:.2em">Голман, тројца одбранбени, двојца на бек, тројца на средина, двајца напред — изборот и оцените на ПАС за најдобрата единаесетка од колото.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="folio l">ПАС · 08</div>
+  <div class="folio r">На терен</div>
+</section>
+
+<!-- ============================================================ BACK COVER -->
+<section class="page back grain dark">
+  <div class="back-c"></div>
+  <svg class="bg" viewBox="0 0 230 300" preserveAspectRatio="xMidYMid slice" style="opacity:.12">
+    <g id="raysback"></g>
+  </svg>
+  <div class="grain"></div>
+  <div class="back-inner">
+    <div style="font-family:var(--display);font-weight:700;font-size:14cqw;line-height:.8">ПАС</div>
+    <div style="font-family:var(--serif);font-style:italic;font-size:2.6cqw;margin:1.2em 0;max-width:80%">
+      „Целата приказна на македонскиот фудбал.“
+    </div>
+    <div style="font-family:var(--cond);letter-spacing:.18em;text-transform:uppercase;font-size:1.7cqw;opacity:.95">
+      @pas.magazine · pasmagazine.mk
+    </div>
+    <svg width="56" height="56" viewBox="0 0 56 56" style="margin-top:2em">
+      <rect width="56" height="56" rx="6" fill="#fff"/>
+      <g fill="#16181D">
+        <rect x="8" y="8" width="14" height="14"/><rect x="34" y="8" width="14" height="14"/>
+        <rect x="8" y="34" width="14" height="14"/><rect x="12" y="12" width="6" height="6" fill="#fff"/>
+        <rect x="38" y="12" width="6" height="6" fill="#fff"/><rect x="12" y="38" width="6" height="6" fill="#fff"/>
+        <rect x="34" y="34" width="6" height="6"/><rect x="44" y="34" width="4" height="6"/>
+        <rect x="34" y="44" width="14" height="4"/><rect x="40" y="40" width="4" height="4"/>
+      </g>
+    </svg>
+    <div style="font-family:var(--cond);font-size:1.4cqw;opacity:.85;margin-top:1.4em">Број 02 · Август 2026 — старт на сезоната во 1.МФЛ</div>
+  </div>
+</section>
+
+<script>
+// build 16-ray sun on cover
+(function(){
+  function rays(id,r1,r2){
+    var g=document.getElementById(id); if(!g) return;
+    var s="";
+    for(var i=0;i<16;i++){var a=i*22.5*Math.PI/180,w=4*Math.PI/180;
+      var x1=Math.cos(a-w)*r1,y1=Math.sin(a-w)*r1,x2=Math.cos(a)*r2,y2=Math.sin(a)*r2,
+          x3=Math.cos(a+w)*r1,y3=Math.sin(a+w)*r1;
+      s+='<path d="M'+x1.toFixed(1)+','+y1.toFixed(1)+' L'+x2.toFixed(1)+','+y2.toFixed(1)+' L'+x3.toFixed(1)+','+y3.toFixed(1)+' Z"/>';}
+    g.innerHTML=s;
+  }
+  rays('rays',40,150);
+  var rb=document.getElementById('raysback');
+  if(rb){rb.setAttribute('transform','translate(115,150)');rb.setAttribute('fill','#fff');rays('raysback',30,170);}
+  // confetti
+  function conf(id,n,colors){
+    var g=document.getElementById(id); if(!g) return; var s="";
+    for(var i=0;i<n;i++){var x=Math.random()*230,y=Math.random()*180,
+      c=colors[i%colors.length],r=Math.random()*360,w=2+Math.random()*3;
+      s+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+(w*1.8).toFixed(1)+'" fill="'+c+'" opacity="'+(0.5+Math.random()*0.5).toFixed(2)+'" transform="rotate('+r.toFixed(0)+' '+x.toFixed(1)+' '+y.toFixed(1)+')"/>';}
+    g.innerHTML=s;
+  }
+  conf('confetti',70,['#F2B705','#D7141A','#FCE08A','#fff']);
+  conf('confetti2',60,['#F2B705','#D7141A','#FCE08A','#fff']);
+})();
+</script>
+</body>
+</html>
