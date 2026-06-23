@@ -38,6 +38,7 @@ GPT-image / DALL·E-class models. Two rules make them work:
 
 - **Bilingual.** Macedonian first, English second — the diaspora (Australia,
   USA, Germany, Switzerland, Italy) is half the audience.
-- **Honest.** Issue 01 lands weeks after the World Cup play-off heartbreak. We
-  do not paper over it; we explain it and look forward.
+- **Celebratory, but honest.** Issue 01 leads with Vardar's title after nine
+  years and the boom in the local game — while still facing the national team's
+  hard summer squarely.
 - **Macedonian-made.** Local writers, local photographers, local design.

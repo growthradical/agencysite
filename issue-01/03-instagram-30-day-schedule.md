@@ -1,199 +1,199 @@
 # PAS — 30-Day Instagram Launch Schedule (1–30 July 2026)
 
-A day-by-day calendar to launch **@pas.magazine** and drive Issue 01. Every post
-has a format, bilingual caption, hashtags, posting time (CEST, UTC+2 — North
-Macedonia local) and a **GPT image prompt** built to produce text-free artwork
-(add headlines/handles in Canva/Figma after generating). Paste the **[HOUSE
-STYLE]** block from [`04-gpt-image-prompt-library.md`](04-gpt-image-prompt-library.md)
-ahead of each scene.
+Day-by-day calendar to launch **@pas.magazine** and drive Issue 01 — built around
+**Vardar's title and Champions League nights**, the **boom in the game**, **local
+match coverage**, and the **Vasil Ringov tribute**. Every post has a format,
+bilingual caption, hashtags, posting time (CEST, UTC+2) and a **GPT image prompt**
+for text-free artwork (add headlines/handles in Canva/Figma after). Paste the
+**[HOUSE STYLE]** block from
+[`04-gpt-image-prompt-library.md`](04-gpt-image-prompt-library.md) ahead of each
+scene.
 
 ## Campaign arc
-- **Week 1 (1–7 Jul) — Reveal & Mood.** Who PAS is; the "After Copenhagen" tone;
-  build the follow base.
-- **Week 2 (8–14 Jul) — Tease & Shkëndija in Europe.** Content drops; ride the
-  Conference League first leg (9 Jul); open pre-orders.
-- **Week 3 (15–21 Jul) — LAUNCH.** Issue 01 goes live (15 Jul); Shkëndija 2nd leg
-  (16 Jul); World Cup final (19 Jul) "the stage we missed."
-- **Week 4 (22–30 Jul) — Sustain & Convert.** Behind-the-scenes, subscriber push,
-  UGC, Issue 02 tease.
+- **Week 1 (1–7 Jul) — Reveal, the Boom & Champions mood.** Who PAS is; Vardar are
+  champions again; the game is growing; a farewell to Ringov.
+- **Week 2 (8–14 Jul) — Vardar in Europe & teasers.** Ride the **Champions League
+  Q1 first leg (7/8 Jul)**; content drops; open pre-orders.
+- **Week 3 (15–21 Jul) — LAUNCH.** Issue 01 live (15 Jul); **CL Q1 second leg
+  (14/15 Jul)**; World Cup final (19 Jul).
+- **Week 4 (22–30 Jul) — Sustain & convert.** Local matches, women's game,
+  subscriber push, UGC, Issue 02 tease.
 
 ## Standing conventions
 - **Formats:** carousels for depth, Reels for reach, single posts for impact,
-  Stories daily (not all listed). Aim **3–5 feed posts/week + daily Stories**.
-- **Aspect ratios:** feed portrait **4:5 (1080×1350)**; Reels **9:16
-  (1080×1920)**; Stories **9:16**.
+  Stories daily. Aim **3–5 feed posts/week + daily Stories**.
+- **Aspect ratios:** feed **4:5 (1080×1350)**; Reels/Stories **9:16 (1080×1920)**.
 - **Best slots (CEST):** weekdays **13:00** & **20:30**; weekends **11:00** &
-  **20:00**. Matchday: post within 30 min of final whistle.
-- **Core hashtag set (append to most posts):**
+  **20:00**. Matchday: within 30 min of full time.
+- **Core hashtags (append to most):**
   `#ПАС #PASmagazine #МакедонскиФудбал #MacedonianFootball #Македонија
   #NorthMacedonia #Фудбал #Football`
-- **Always:** Macedonian caption first, English below the divider line.
+- **Always:** Macedonian caption first, English below the divider.
 
 ---
 
-## WEEK 1 — REVEAL & MOOD
+## WEEK 1 — REVEAL, THE BOOM & CHAMPIONS MOOD
 
 ### Day 1 — Wed 1 Jul · Single post · Brand reveal
 - **Time:** 20:30
-- **Caption (MK):** Нешто ново доаѓа за македонскиот фудбал. Едно име: **ПАС.**
-  Целата приказна — на терен и зад него. Следи нѐ. 🔴🟡
-  **(EN):** Something new for Macedonian football. One name: **PAS.** The whole
-  story — on the pitch and beyond it. Follow us.
+- **Caption (MK):** Нешто ново за македонскиот фудбал. Едно име: **ПАС.** Целата
+  приказна — на терен и зад него. Следи нѐ. 🔴
+  **(EN):** Something new for Macedonian football. One name: **PAS.** Follow us.
 - **Hashtags:** core + `#NewMagazine #ComingSoon #Скопје`
-- **Image prompt:** [HOUSE STYLE] + A bold close-up of a deep-red football
-  being passed across a charcoal surface, slight motion blur, single gold rim
-  light, cinematic, mysterious, lots of dark negative space for a logo reveal.
-  No text, no logos.
+- **Image prompt:** [HOUSE STYLE] + Bold close-up of a deep-red football being
+  passed across a charcoal surface, slight motion blur, single gold rim light,
+  cinematic, mysterious, dark negative space for a logo reveal. No text, no logos.
 - **Asset:** `IG_d01_reveal`
 
-### Day 2 — Thu 2 Jul · Reel (15s) · Manifesto
+### Day 2 — Thu 2 Jul · Reel (15s) · Manifesto + the boom
 - **Time:** 20:30
-- **Caption (MK):** Не дојдовме до Америка. Но играта не запира. Ова е ПАС —
-  списание за македонскиот фудбал. 📖
-  **(EN):** We didn't reach America. But the game doesn't stop. This is PAS.
-- **Hashtags:** core + `#Manifesto #WorldCup2026 #Дијаспора`
-- **Reel notes:** Fast cuts of generic terrace, boots, scarf, the masthead;
-  voiceover of the manifesto line; ends on logo.
-- **Image prompt (cover frame):** [HOUSE STYLE] + Cinematic slow-motion-style
-  frame of a red-and-gold scarf being raised in a crowd at dusk, warm haze,
-  emotional, vertical composition with space top and bottom. No text, no logos.
+- **Caption (MK):** Стадионите се полнат. Интересот расте. Ова е најдоброто време за
+  македонскиот фудбал — и ние сме тука да го раскажеме. 📖
+  **(EN):** The stands are filling. Interest is rising. This is Macedonian
+  football's moment — and PAS is here to tell it.
+- **Hashtags:** core + `#TheBoom #Бум #FootballCulture`
+- **Reel notes:** Fast cuts of full terraces, kids playing, scarves, the masthead;
+  voiceover; end on logo.
+- **Image prompt (cover frame):** [HOUSE STYLE] + Cinematic vertical frame of a
+  young, growing crowd of football fans in red, scarves and phones up, daylight,
+  vibrant momentum, faces soft, space top and bottom. No text, no logos.
 - **Asset:** `IG_d02_manifesto_reel`
 
-### Day 3 — Fri 3 Jul · Carousel (5) · "Why PAS exists"
-- **Time:** 13:00
-- **Caption (MK):** 5 причини зошто го создаваме ПАС 👉 За приказните што никој не
-  ги раскажува. Сними го, сподели го.
-  **(EN):** 5 reasons we're building PAS — for the stories no one else tells.
-- **Hashtags:** core + `#Грасрут #FootballCulture`
-- **Image prompt (per slide, vary subject):** [HOUSE STYLE] + Minimalist
-  editorial photo illustrating one theme (the national team, a small-town club,
-  the diaspora, history, the next generation), each on a consistent charcoal
-  background with a red accent and wide empty space for one big number and a
-  line of text. No text, no logos.
-- **Asset:** `IG_d03_whypas_carousel`
+### Day 3 — Fri 3 Jul · Single post · Vardar champions tribute
+- **Time:** 20:30
+- **Caption (MK):** По девет години — **Вардар е повторно шампион.** 🔴 Од пад до
+  врв. Целата приказна е во Бр.1.
+  **(EN):** After nine years — **Vardar are champions again.** From collapse to the
+  crown. The full story in Issue 01.
+- **Hashtags:** core + `#Vardar #Вардар #Champions #Шампиони #1MFL`
+- **Image prompt:** [HOUSE STYLE] + Triumphant vertical image of a footballer in
+  plain red lifting a generic silver trophy overhead, gold confetti and floodlight
+  flares, blurred euphoric teammates, heroic low angle, space top. No text, no
+  logos, no numbers, no recognizable person.
+- **Asset:** `IG_d03_vardar_champions`
 
-### Day 4 — Sat 4 Jul · Single post · The mood ("After Copenhagen")
-- **Time:** 20:00
-- **Caption (MK):** Копенхаген сѐ уште боли. 0:4. Но од болка се раѓа нешто
-  чесно. Бр.1 наскоро.
-  **(EN):** Copenhagen still hurts. 0-4. But honest things are born from pain.
-  Issue 01 soon.
-- **Hashtags:** core + `#NMKfootball #Reflection`
-- **Image prompt:** [HOUSE STYLE] + A lone footballer in plain red sitting on the
-  turf at night, head bowed, blurred bright stadium far behind, cold light, rain
-  in the air, melancholic and dignified, vertical, space at top. No text, no
-  logos, no numbers.
-- **Asset:** `IG_d04_aftercopenhagen`
-
-### Day 5 — Sun 5 Jul · Carousel (4) · Meet the team
+### Day 4 — Sat 4 Jul · Carousel (5) · "Why PAS exists"
 - **Time:** 11:00
+- **Caption (MK):** 5 причини зошто го создаваме ПАС 👉 За приказните што никој не ги
+  раскажува — клубовите, локалните мечеви, луѓето.
+  **(EN):** 5 reasons we're building PAS — the clubs, the local games, the people.
+- **Hashtags:** core + `#Грасрут #LocalFootball`
+- **Image prompt (per slide):** [HOUSE STYLE] + Minimalist editorial photo of one
+  theme (a champion club, a local matchday, the growing crowd, history, the next
+  generation), consistent charcoal+red, wide empty space for one big number and a
+  line. No text, no logos.
+- **Asset:** `IG_d04_whypas_carousel`
+
+### Day 5 — Sun 5 Jul · Single post · Ringov tribute
+- **Time:** 20:00
+- **Caption (MK):** Збогум, легендо. **Васил Рингов (1955–2025)** — рекордер на
+  Вардар, партнер на Панчев, дел од вечната постава. Му оддаваме почит во Бр.1. 🕯️
+  **(EN):** Farewell, legend. **Vasil Ringov (1955–2025)** — Vardar's record scorer,
+  Pančev's partner. We pay tribute in Issue 01.
+- **Hashtags:** core + `#VasilRingov #ВасилРингов #Vardar #Legend #Легенда`
+- **Image prompt:** [HOUSE STYLE] + Nostalgic 1980s-style grainy portrait of a
+  moustached footballer in plain red, faded warm film tones, dignified and gentle,
+  period blur behind, like a commemorative page, vertical, space for dates. No
+  text, no logos, no numbers, no recognizable person.
+- **Asset:** `IG_d05_ringov`
+
+### Day 6 — Mon 6 Jul · Carousel (4) · Meet the team
+- **Time:** 13:00
 - **Caption (MK):** Запознајте ги луѓето зад ПАС — писатели, фотографи, навивачи.
   Сакаш да придонесеш? Пиши ни. ✍️
   **(EN):** Meet the people behind PAS. Want to contribute? DM us.
 - **Hashtags:** core + `#BehindTheScenes #Tim`
-- **Image prompt:** [HOUSE STYLE] + Warm candid-style photo of a small creative
-  team around a table covered in printed magazine layouts and coffee, soft
-  daylight, documentary, faces soft, space for name tags. No text, no logos.
-- **Asset:** `IG_d05_team`
+- **Image prompt:** [HOUSE STYLE] + Warm candid photo of a small creative team
+  around a table of printed magazine layouts and coffee, soft daylight, faces soft,
+  space for name tags. No text, no logos.
+- **Asset:** `IG_d06_team`
 
-### Day 6 — Mon 6 Jul · Reel (20s) · Diaspora call
+### Day 7 — Tue 7 Jul · Single post · Countdown to Vardar's European night
 - **Time:** 20:30
-- **Caption (MK):** Од Мелбурн до Малме — каде го гледаш фудбалот? Тагирај го твојот
-  град. 🌍
-  **(EN):** From Melbourne to Malmö — where do you watch? Tag your city.
-- **Hashtags:** core + `#Diaspora #Дијаспора #Melbourne #Toronto`
-- **Image prompt (cover frame):** [HOUSE STYLE] + Warm living-room scene abroad,
-  family watching football, a small red-and-gold flag on the wall, screen glow on
-  faces, vertical, documentary, space top. No text, no logos.
-- **Asset:** `IG_d06_diaspora_reel`
-
-### Day 7 — Tue 7 Jul · Single post · Countdown to Shkëndija night
-- **Time:** 20:30
-- **Caption (MK):** Европа повикува 🇪🇺 За 2 дена, Шкендија ја започнува
+- **Caption (MK):** Лигата на шампиони повикува ⭐️ Утре, Вардар ја започнува
   европската авантура. Ние сме таму со вас. #ЕвропскаНоќ
-  **(EN):** Europe calling. In 2 days, Shkëndija begin their European run. We're
-  with you.
-- **Hashtags:** core + `#Shkendija #Шкендија #ConferenceLeague #Тетово`
-- **Image prompt:** [HOUSE STYLE] + Evening shot of a small Balkan stadium below
-  green mountains, floodlights warming up, anticipation of a big European night,
-  warm sunset, vertical, sky space top. No text, no logos.
-- **Asset:** `IG_d07_shkendija_countdown`
+  **(EN):** The Champions League calls. Tomorrow, Vardar begin their European run.
+- **Hashtags:** core + `#Vardar #ChampionsLeague #UCL #ЕвропскаНоќ #Скопје`
+- **Image prompt:** [HOUSE STYLE] + Dramatic vertical image of floodlights warming
+  up over a stadium at dusk with abstract gold stars suggested in the sky (no
+  official logo), anticipation of a big European night, space top. No text, no
+  logos.
+- **Asset:** `IG_d07_vardar_countdown`
 
 ---
 
-## WEEK 2 — TEASE & SHKËNDIJA IN EUROPE
+## WEEK 2 — VARDAR IN EUROPE & TEASERS
 
-### Day 8 — Wed 8 Jul · Carousel (6) · Issue 01 contents tease
-- **Time:** 13:00
-- **Caption (MK):** Што има во Бр.1? Лизгај 👉 Корица, Шкендија во Европа,
-  Палермо повторно, Панчев, и повеќе. Претпродажба отворена. 🔗 во био.
-  **(EN):** What's in Issue 01? Swipe. Pre-orders now open — link in bio.
-- **Hashtags:** core + `#Issue01 #PreOrder #Претпродажба`
-- **Image prompt (per slide):** [HOUSE STYLE] + Stylized teaser plate for each
-  feature (a red boot, a stadium, a celebrating player silhouette, a vintage
-  treatment), consistent charcoal+red look, big empty space for a feature title.
-  No text, no logos.
-- **Asset:** `IG_d08_contents_tease`
-
-### Day 9 — Thu 9 Jul · MATCHDAY post + Story takeover · Shkëndija 1st leg
+### Day 8 — Wed 8 Jul · MATCHDAY post + Story takeover · Vardar CL Q1, 1st leg
 - **Time:** pre-match 18:00 + within 30 min of full time
-- **Caption (MK):** ⚽️ ЕВРОПСКА НОЌ! Шкендија — Европа ФК, прв меч. Резултат и
-  реакции во Stories. Ајде! 🔴⚫️
-  **(EN):** EUROPEAN NIGHT. Shkëndija v Europa FC, first leg. Reaction in Stories.
-- **Hashtags:** core + `#Shkendija #ConferenceLeague #UECL #Тетово #Matchday`
-- **Image prompt:** [HOUSE STYLE] + Dramatic vertical image of floodlights
-  blazing over a packed small stadium at night, red glow over the stands,
-  big-match energy, space at top for a scoreline graphic. No text, no logos.
-- **Asset:** `IG_d09_shkendija_leg1`
-- **Note:** Prepare 2 result templates (win / not-win) in advance; verify score
-  before posting.
+- **Caption (MK):** ⚽️⭐️ ЕВРОПСКА НОЌ! Вардар ја игра првата квалификација за Лигата
+  на шампионите. Резултат и реакции во Stories. Ајде, црвени! 🔴
+  **(EN):** EUROPEAN NIGHT. Vardar's Champions League Q1 first leg. Reaction in
+  Stories. Come on, reds!
+- **Hashtags:** core + `#Vardar #ChampionsLeague #UCL #Matchday #ЕвропскаНоќ`
+- **Image prompt:** [HOUSE STYLE] + Dramatic vertical shot of floodlights blazing
+  over a packed stadium at night, red glow over the stands, big-match energy, space
+  top for a scoreline graphic. No text, no logos.
+- **Asset:** `IG_d08_vardar_leg1`
+- **Note:** Pre-build win/draw/loss result templates; verify the score and the
+  exact date (legs are 7 **or** 8 July — confirm) before posting.
 
-### Day 10 — Fri 10 Jul · Single post · Reaction / analysis
+### Day 9 — Thu 9 Jul · Single post · Reaction / analysis
 - **Time:** 13:00
 - **Caption (MK):** Што научивме од синоќа? Нашата кратка анализа на европскиот
-  настап на Шкендија. Целосно во Бр.1. 📖
-  **(EN):** What we learned last night — our quick take. Full analysis in Issue 01.
-- **Hashtags:** core + `#Shkendija #TacticalAnalysis #Анализа`
+  настап на Вардар. Целосно во Бр.1. 📖
+  **(EN):** What we learned last night — our quick take on Vardar in Europe.
+- **Hashtags:** core + `#Vardar #TacticalAnalysis #Анализа`
 - **Image prompt:** [HOUSE STYLE] + Top-down night view of a green pitch under
-  floodlights with crisp white lines, clean, room for tactical arrow overlays,
-  vertical crop. No players, no text, no logos.
-- **Asset:** `IG_d10_shkendija_reaction`
+  floodlights, crisp white lines, clean, room for tactical arrow overlays, vertical.
+  No players, no text, no logos.
+- **Asset:** `IG_d09_vardar_reaction`
 
-### Day 11 — Sat 11 Jul · Reel (30s) · "Palermo, revisited"
-- **Time:** 20:00
-- **Caption (MK):** 24 март 2022. Палермо. Трајковски. Гол што не стивнува.
-  Целата приказна — во Бр.1. 🇲🇰
-  **(EN):** Palermo, 2022. Trajkovski. The goal that never fades. Full story in
-  Issue 01.
-- **Hashtags:** core + `#Palermo #Trajkovski #Throwback #ЗлатнаГенерација`
-- **Image prompt (cover frame):** [HOUSE STYLE] + Nostalgic warm-graded frame of
-  a footballer in red wheeling away in ecstasy after a goal, arms wide, blurred
-  stunned crowd, floodlight flare, freeze-frame joy, vertical. No text, no logos,
-  no numbers.
-- **Asset:** `IG_d11_palermo_reel`
+### Day 10 — Fri 10 Jul · Carousel (6) · Issue 01 contents tease
+- **Time:** 13:00
+- **Caption (MK):** Што има во Бр.1? Лизгај 👉 Вардар шампиони, Лигата на шампиони,
+  бумот во фудбалот, локални мечеви, Рингов, Панчев. Претпродажба отворена 🔗 во био.
+  **(EN):** What's in Issue 01? Swipe. Pre-orders now open — link in bio.
+- **Hashtags:** core + `#Issue01 #PreOrder #Претпродажба`
+- **Image prompt (per slide):** [HOUSE STYLE] + Stylized teaser plate per feature
+  (a trophy lift, abstract gold stars, a growing crowd, a local match, a vintage
+  portrait), consistent charcoal+red, big empty space for a title. No text, no
+  logos.
+- **Asset:** `IG_d10_contents_tease`
 
-### Day 12 — Sun 12 Jul · Carousel (5) · "Who's next" young talents
+### Day 11 — Sat 11 Jul · Carousel (5) · "The Boom" data
 - **Time:** 11:00
-- **Caption (MK):** Кој е следен по златната генерација? 5 млади имиња за гледање.
-  Лизгај 👉
-  **(EN):** Who's next after the golden generation? 5 young names to watch.
-- **Hashtags:** core + `#Wonderkids #U21 #Иднина #NextGen`
-- **Image prompt (per slide):** [HOUSE STYLE] + Cut-out-style photo of an
-  anonymous young footballer in generic red kit, isolated on charcoal with a red
-  glow, energetic, space for a name and stats. No text, no faces in sharp focus,
-  no logos.
-- **Asset:** `IG_d12_whosnext`
+- **Caption (MK):** Бројки што го кажуваат бумот: повеќе гледачи, повеќе млади,
+  повеќе страст. Лизгај 👉 Целосно во Бр.1.
+  **(EN):** The numbers behind the boom — more fans, more youth, more passion.
+- **Hashtags:** core + `#TheBoom #Бум #Grassroots #ПобројкиPAS`
+- **Image prompt (per slide):** [HOUSE STYLE] + Charcoal card with a single large
+  red upward arrow or rising bars motif in a corner and wide empty space for one
+  big stat. No text, no numbers, no logos.
+- **Asset:** `IG_d11_boom_data`
 
-### Day 13 — Mon 13 Jul · Single post · Pancev history teaser
+### Day 12 — Sun 12 Jul · Single post · New signings tease
+- **Time:** 20:00
+- **Caption (MK):** Вардар се засилува пред Европа 🔴 Кои се новите лица? Анализа на
+  летниот пазар во Бр.1.
+  **(EN):** Vardar reinforce for Europe — who are the new faces? Transfer analysis
+  in Issue 01.
+- **Hashtags:** core + `#Vardar #Transfers #Трансфери #Засилувања`
+- **Image prompt:** [HOUSE STYLE] + Clean composite of three anonymous footballers
+  in plain red kit against a charcoal backdrop with red rim light, evenly spaced for
+  name labels, vertical. No text, no faces in sharp focus, no logos.
+- **Asset:** `IG_d12_signings`
+
+### Day 13 — Mon 13 Jul · Single post · Pančev history teaser
 - **Time:** 20:30
 - **Caption (MK):** Скопското златно момче. Европски шампион '91. Златна копачка.
-  Приказната за Дарко Панчев — Бр.1.
-  **(EN):** Skopje's golden boy. European champion '91. The Darko Pancev story —
-  Issue 01.
-- **Hashtags:** core + `#DarkoPancev #History #Историја #RedStar`
-- **Image prompt:** [HOUSE STYLE] + Nostalgic early-90s-style grainy sports photo
-  of a moustached striker in plain red celebrating, faded warm film tones,
-  heroic low angle, vertical, space top. No text, no logos, no numbers.
+  Партнерот на Рингов. Приказната за Дарко Панчев — Бр.1.
+  **(EN):** Skopje's golden boy — European champion '91, Golden Boot, Ringov's
+  partner. The Darko Pančev story in Issue 01.
+- **Hashtags:** core + `#DarkoPancev #History #Историја #RedStar #Vardar`
+- **Image prompt:** [HOUSE STYLE] + Nostalgic early-90s grainy sports photo of a
+  moustached striker in plain red celebrating, faded warm tones, heroic low angle,
+  vertical, space top. No text, no logos, no numbers, no recognizable person.
 - **Asset:** `IG_d13_pancev`
 
 ### Day 14 — Tue 14 Jul · Reel (15s) · "Tomorrow we launch"
@@ -202,50 +202,52 @@ ahead of each scene.
   **(EN):** Tomorrow. Issue 01. Digital + print. Get ready.
 - **Hashtags:** core + `#LaunchDay #Issue01 #Бр1`
 - **Image prompt (cover frame):** [HOUSE STYLE] + Stadium floodlights switching on
-  against a dark dusk sky, lens flare, anticipation, mostly dark with bright
-  points, vertical, lots of negative space. No text, no logos.
+  against a dark dusk sky, lens flare, anticipation, mostly dark with bright points,
+  vertical, lots of negative space. No text, no logos.
 - **Asset:** `IG_d14_tomorrow`
 
 ---
 
 ## WEEK 3 — LAUNCH
 
-### Day 15 — Wed 15 Jul · LAUNCH single post + Reel · Issue 01 is live
-- **Time:** 10:00 (launch) + 20:30 (Reel)
-- **Caption (MK):** 🚨 БРОЈ 1 Е ТУКА. „ШТО СЕГА?" — Елмас на корица, Шкендија во
-  Европа, Палермо повторно, Панчев и многу повеќе. Земи го дигитално или во печат.
-  🔗 во био. Ова е ПАС.
-  **(EN):** ISSUE 01 IS LIVE. "What now?" — Elmas on the cover, Shkëndija in
-  Europe, Palermo revisited, Pancev and more. Get it digital or print. Link in bio.
-- **Hashtags:** core + `#Issue01 #OutNow #Elmas #LaunchDay`
+### Day 15 — Wed 15 Jul · LAUNCH single post + Reel · Issue 01 live (+ Vardar 2nd leg)
+- **Time:** 10:00 (launch) + 18:00 matchday Story + 20:30 (Reel)
+- **Caption (MK):** 🚨 БРОЈ 1 Е ТУКА. „ПОВТОРНО ШАМПИОНИ" — Вардар на корица, Лигата на
+  шампиони, бумот во фудбалот, локални мечеви, и почит за Васил Рингов. И вечерва —
+  Вардар го игра реваншот во Европа! Земи го Бр.1 дигитално или во печат. 🔗 во био.
+  **(EN):** ISSUE 01 IS LIVE. "Champions Again" — Vardar on the cover, the Champions
+  League, the boom, local matches, and a tribute to Vasil Ringov. And tonight —
+  Vardar's European return leg! Get it digital or print. Link in bio.
+- **Hashtags:** core + `#Issue01 #OutNow #Vardar #ChampionsLeague #LaunchDay`
 - **Image prompt:** [HOUSE STYLE] + A premium magazine held in two hands against a
-  charcoal background, dramatic studio light, the cover left blank/clean for the
-  real cover to be composited in, aspirational product shot, vertical. No text,
-  no logos.
+  charcoal background, dramatic studio light, the cover left clean for compositing,
+  aspirational product shot, vertical. No text, no logos.
 - **Asset:** `IG_d15_LAUNCH`
+- **Note:** Vardar's 2nd leg is 14 **or** 15 July — confirm; if 14th, post the
+  result reaction today and keep launch as the lead.
 
-### Day 16 — Thu 16 Jul · MATCHDAY · Shkëndija 2nd leg + launch sustain
-- **Time:** pre-match 18:00 + post-match within 30 min
-- **Caption (MK):** Реванш во Европа за Шкендија! 🔴⚫️ Резултат во Stories. И —
-  Бр.1 е надвор, прочитај ја целата приказна. 📖
-  **(EN):** Shkëndija's European return leg! Result in Stories. And Issue 01 is
-  out — read the full story.
-- **Hashtags:** core + `#Shkendija #UECL #ConferenceLeague #Issue01`
-- **Image prompt:** [HOUSE STYLE] + Vertical dramatic shot of a player's
-  silhouette walking toward floodlights in a tunnel mouth, big European night
-  energy, space for a scoreline. No text, no logos.
-- **Asset:** `IG_d16_shkendija_leg2`
+### Day 16 — Thu 16 Jul · MATCHDAY reaction · Vardar in Europe + launch sustain
+- **Time:** within 30 min of full time (or 13:00 if tie already decided)
+- **Caption (MK):** Реванш во Европа за Вардар! ⭐️🔴 Резултат и реакции во Stories. И
+  — Бр.1 е надвор, прочитај ја целата приказна. 📖
+  **(EN):** Vardar's European return leg! Result in Stories. And Issue 01 is out —
+  read the full story.
+- **Hashtags:** core + `#Vardar #ChampionsLeague #UCL #Issue01`
+- **Image prompt:** [HOUSE STYLE] + Vertical dramatic shot of a player's silhouette
+  walking toward floodlights in a tunnel mouth, big European night energy, space for
+  a scoreline. No text, no logos.
+- **Asset:** `IG_d16_vardar_leg2`
 
 ### Day 17 — Fri 17 Jul · Carousel (7) · Cover story excerpt
 - **Time:** 13:00
-- **Caption (MK):** Извадок од насловната приказна: „После Копенхаген." Седум
-  слајдови за тоа што тргна наопаку — и што следи. Целосно во Бр.1.
-  **(EN):** An excerpt from the cover story, "After Copenhagen." Full piece in
+- **Caption (MK):** Извадок од насловната приказна: „Кралот се врати." Од пад до
+  врв — седум слајдови. Целосно во Бр.1.
+  **(EN):** An excerpt from the cover story, "The King Returns." Full piece in
   Issue 01.
-- **Hashtags:** core + `#CoverStory #NMKfootball #Sedloski`
-- **Image prompt (per slide):** [HOUSE STYLE] + Editorial quote-card backgrounds
-  alternating a dark-red field and a charcoal field with a thin gold rule, lots
-  of empty space for a pull-quote. No text, no logos.
+- **Hashtags:** core + `#Vardar #CoverStory #Champions`
+- **Image prompt (per slide):** [HOUSE STYLE] + Quote-card backgrounds alternating a
+  deep-red field and a charcoal field with a thin gold rule, lots of empty space for
+  a pull-quote. No text, no logos.
 - **Asset:** `IG_d17_coverstory_excerpt`
 
 ### Day 18 — Sat 18 Jul · Single post · Reader love / first reactions
@@ -260,33 +262,32 @@ ahead of each scene.
 - **Asset:** `IG_d18_reader_love`
 
 ### Day 19 — Sun 19 Jul · WORLD CUP FINAL · "The stage we missed"
-- **Time:** post around the final, ~20:00
-- **Caption (MK):** Денес е финале на Светското. Без нас — овој пат. Но патот назад
-  почнува сега. Прочитај зошто, во Бр.1. 🌍🇲🇰
-  **(EN):** It's the World Cup final today. Without us — this time. The road back
-  starts now. Read why, in Issue 01.
+- **Time:** ~20:00
+- **Caption (MK):** Денес е финале на Светското. Без нас — овој пат. Но дома, играта
+  никогаш не била поголема. Патот назад почнува сега. 🌍🇲🇰
+  **(EN):** It's the World Cup final today. Without us — this time. But at home, the
+  game has never been bigger. The road back starts now.
 - **Hashtags:** core + `#WorldCupFinal #WorldCup2026 #TheRoadBack #Иднина`
 - **Image prompt:** [HOUSE STYLE] + Wide emotive image of an empty floodlit pitch
-  under a dramatic evening sky, a single red-and-gold scarf draped over an empty
-  seat in the foreground, longing and hope, vertical, space top. No text, no
-  logos.
+  under a dramatic evening sky, a single red scarf draped over an empty seat in the
+  foreground, longing and hope, vertical, space top. No text, no logos.
 - **Asset:** `IG_d19_wcfinal`
 
 ### Day 20 — Mon 20 Jul · Reel (20s) · Behind the design
 - **Time:** 20:30
-- **Caption (MK):** Како ја создадовме корицата на Бр.1 🎨 Од идеја до печат.
-  **(EN):** How we built the Issue 01 cover — idea to print.
+- **Caption (MK):** Како ја создадовме корицата на Бр.1 🎨 Од славењето на Вардар до
+  печат.
+  **(EN):** How we built the Issue 01 cover — from Vardar's celebration to print.
 - **Hashtags:** core + `#BehindTheScenes #Design #Дизајн #Print`
 - **Image prompt (cover frame):** [HOUSE STYLE] + Designer's desk with a tablet
-  showing a clean magazine layout grid, color swatches in red and gold, a printed
-  proof, warm overhead light, top-down, vertical. No text, no readable screen,
-  no logos.
+  showing a clean magazine layout grid, red and gold swatches, a printed proof,
+  warm overhead light, top-down, vertical. No text, no readable screen, no logos.
 - **Asset:** `IG_d20_design_reel`
 
 ### Day 21 — Tue 21 Jul · Single post · Print edition reveal
 - **Time:** 20:30
-- **Caption (MK):** Печатеното издание е тука 📦 Колекционерски примерок,
-  ограничен тираж. Нарачај го пред да снема. 🔗 во био.
+- **Caption (MK):** Печатеното издание е тука 📦 Колекционерски примерок, ограничен
+  тираж. Нарачај го пред да снема. 🔗 во био.
   **(EN):** The print edition has landed — limited collector's run. Order before
   it's gone.
 - **Hashtags:** core + `#PrintMagazine #Печат #Limited #Collectors`
@@ -299,112 +300,109 @@ ahead of each scene.
 
 ## WEEK 4 — SUSTAIN & CONVERT
 
-### Day 22 — Wed 22 Jul · Carousel (5) · Women's game excerpt
+### Day 22 — Wed 22 Jul · Carousel (5) · Local match coverage
 - **Time:** 13:00
-- **Caption (MK):** Целиот фудбал значи целиот фудбал. Поглед во женскиот фудбал во
-  Македонија — извадок од Бр.1.
-  **(EN):** The whole game means the whole game. A look at women's football in
-  North Macedonia — excerpt from Issue 01.
-- **Hashtags:** core + `#WomensFootball #ЖенскиФудбал #ŽFK`
-- **Image prompt (per slide):** [HOUSE STYLE] + Action shot of a female footballer
-  in plain red striking a ball, golden-hour backlight, determined, cinematic,
-  vertical, space for text. No text, no logos.
-- **Asset:** `IG_d22_womens`
+- **Caption (MK):** Локалниот фудбал заслужува внимание. Извештаи, оцени и моментот
+  на натпреварот — извадок од рубриката „Локални мечеви" во Бр.1. ⚽️
+  **(EN):** Local football deserves the spotlight. Reports, ratings and the moment
+  of the match — from our "On the Ground" section.
+- **Hashtags:** core + `#LocalFootball #ЛокалниМечеви #1MFL #MatchReport`
+- **Image prompt (per slide):** [HOUSE STYLE] + Dynamic action photo of two
+  footballers in generic red and blue kits contesting a header under floodlights at
+  a modest stadium, intense, vertical, space for a scoreline. No text, no logos, no
+  numbers.
+- **Asset:** `IG_d22_local_matches`
 
-### Day 23 — Thu 23 Jul · Reel (30s) · Terrace culture
+### Day 23 — Thu 23 Jul · Reel (30s) · Terrace culture / the boom
 - **Time:** 20:30
-- **Caption (MK):** Звукот на трибините. Тоа е дом. 🎶 Извадок од Бр.1 за
-  навивачката култура.
-  **(EN):** The sound of the terraces — that's home. From our fan-culture feature.
-- **Hashtags:** core + `#TerraceCulture #Навивачи #Atmosphere #Tifo`
+- **Caption (MK):** Звукот на трибините. Стадионите повторно се полнат. 🎶 Извадок од
+  Бр.1.
+  **(EN):** The sound of the terraces — the stands are filling again. From Issue 01.
+- **Hashtags:** core + `#TerraceCulture #Навивачи #TheBoom #Atmosphere`
 - **Image prompt (cover frame):** [HOUSE STYLE] + Wide vertical shot of a packed
-  terrace in red and gold, raised scarves, warm smoke haze, faces blurred,
-  euphoric, cinematic grain, space bottom. No readable text, no banners, no logos.
+  terrace in red, raised scarves, warm smoke haze, faces blurred, euphoric, cinematic
+  grain, space bottom. No readable text, no banners, no logos.
 - **Asset:** `IG_d23_terrace_reel`
 
 ### Day 24 — Fri 24 Jul · Single post · Quote card (the column)
 - **Time:** 13:00
-- **Caption (MK):** „Можеби ова не е крајот на златната генерација — туку почеток на
-  нешто чесно." — од колумната во Бр.1.
-  **(EN):** "Maybe this isn't the end of the golden generation — but the start of
-  something honest." — from the Issue 01 column.
+- **Caption (MK):** „Враќањето на Вардар докажува дека македонскиот фудбал расте —
+  сега да градиме на тоа." — од колумната во Бр.1.
+  **(EN):** "Vardar's revival proves the Macedonian game is rising — now let's build
+  on it." — from the Issue 01 column.
 - **Hashtags:** core + `#Column #Opinion #Колумна`
 - **Image prompt:** [HOUSE STYLE] + Deep-red field with a thin gold rule framing a
-  large empty center for a pull-quote, subtle sunburst emboss in a corner,
-  premium, vertical. No text, no logos.
+  large empty center for a pull-quote, subtle sunburst emboss in a corner, premium,
+  vertical. No text, no logos.
 - **Asset:** `IG_d24_quotecard`
 
-### Day 25 — Sat 25 Jul · Carousel (6) · "Where are they now" (Palermo heroes)
+### Day 25 — Sat 25 Jul · Carousel (6) · "From collapse to champions" (Vardar timeline)
 - **Time:** 11:00
-- **Caption (MK):** Каде се сега хероите од Палермо? Лизгај 👉 Целосно во Бр.1.
-  **(EN):** Where are the Palermo heroes now? Swipe. Full feature in Issue 01.
-- **Hashtags:** core + `#Palermo #ЗлатнаГенерација #WhereAreTheyNow`
-- **Image prompt (per slide):** [HOUSE STYLE] + Then-and-now split composition,
-  one side a nostalgic warm grainy frame, the other a clean present-day portrait
-  silhouette in plain clothing, consistent charcoal+red, space for a name. No
-  text, no faces in sharp focus, no logos.
-- **Asset:** `IG_d25_palermo_now`
+- **Caption (MK):** Од раб на пропаст до шампиони. Приказната за враќањето на Вардар,
+  слајд по слајд. 👉 Целосно во Бр.1.
+  **(EN):** From the brink to the title — Vardar's comeback, slide by slide.
+- **Hashtags:** core + `#Vardar #Вардар #Comeback #Champions`
+- **Image prompt (per slide):** [HOUSE STYLE] + Cinematic charcoal card with a
+  single red milestone marker on a faint rising timeline, dramatic, space for a year
+  and a line. No text, no numbers, no logos.
+- **Asset:** `IG_d25_vardar_timeline`
 
 ### Day 26 — Sun 26 Jul · Reel (15s) · Food & football
 - **Time:** 20:00
 - **Caption (MK):** Тавче гравче, скара и натпревар. Совршена недела. 🍲⚽️ Од
   културната рубрика во Бр.1.
-  **(EN):** Tavče gravče, the grill, and a match. The perfect Sunday. From our
-  culture pages.
+  **(EN):** Tavče gravče, the grill, and a match. The perfect Sunday.
 - **Hashtags:** core + `#FoodAndFootball #ТавчеГравче #Култура #Matchday`
 - **Image prompt (cover frame):** [HOUSE STYLE] + Appetizing top-down shot of a
-  traditional Macedonian baked bean clay pot with bread and peppers on a rustic
-  wood table, a red scarf at the edge, warm light, vertical. No text, no logos.
+  traditional Macedonian baked bean clay pot with bread and peppers on a rustic wood
+  table, a red scarf at the edge, warm light, vertical. No text, no logos.
 - **Asset:** `IG_d26_food_reel`
 
 ### Day 27 — Mon 27 Jul · Single post · Subscriber drive
 - **Time:** 20:30
-- **Caption (MK):** Стани оснивачки претплатник на ПАС 🔴 Дигитал, печат или Фаундер
-  пакет — поддржи го независниот македонски фудбалски новинаризам. 🔗 во био.
+- **Caption (MK):** Стани оснивачки претплатник на ПАС 🔴 Дигитал, печат или Фаундер —
+  поддржи независен македонски фудбалски новинаризам. 🔗 во био.
   **(EN):** Become a founding PAS subscriber — digital, print or Founder. Back
-  independent Macedonian football journalism. Link in bio.
+  independent Macedonian football journalism.
 - **Hashtags:** core + `#Subscribe #Претплата #IndependentMedia #Founder`
-- **Image prompt:** [HOUSE STYLE] + Premium subscription-style flat-lay: a
-  magazine, a membership card in red and gold, a phone showing a generic app, on
-  charcoal, soft light, vertical, space for tier cards. No text, no readable
-  screen, no logos.
+- **Image prompt:** [HOUSE STYLE] + Premium subscription flat-lay: a magazine, a
+  red-and-gold membership card, a phone showing a generic app, on charcoal, soft
+  light, vertical, space for tier cards. No text, no readable screen, no logos.
 - **Asset:** `IG_d27_subscribe`
 
-### Day 28 — Tue 28 Jul · Carousel (4) · Reader Q&A / FAQ
+### Day 28 — Tue 28 Jul · Carousel (5) · Women's game excerpt
 - **Time:** 13:00
-- **Caption (MK):** Ги прашавте — одговараме. Сѐ за ПАС: печат, испорака, дијаспора,
-  следен број. 👉
-  **(EN):** You asked — we answer. Everything about PAS: print, shipping, diaspora,
-  next issue.
-- **Hashtags:** core + `#FAQ #AskUs #ПрашајНѐ`
-- **Image prompt (per slide):** [HOUSE STYLE] + Clean charcoal card with a single
-  large red question-mark motif in a corner and wide empty space for a Q and A,
-  consistent, vertical. No text, no logos.
-- **Asset:** `IG_d28_faq`
+- **Caption (MK):** Целиот фудбал значи целиот фудбал. Поглед во женскиот фудбал во
+  Македонија — дел од бумот, извадок од Бр.1.
+  **(EN):** The whole game means the whole game — women's football in North
+  Macedonia, part of the boom.
+- **Hashtags:** core + `#WomensFootball #ЖенскиФудбал #ŽFK #TheBoom`
+- **Image prompt (per slide):** [HOUSE STYLE] + Action shot of a female footballer in
+  plain red striking a ball, golden-hour backlight, determined, cinematic, vertical,
+  space for text. No text, no logos.
+- **Asset:** `IG_d28_womens`
 
-### Day 29 — Wed 29 Jul · Reel (20s) · Best moments of the launch month
+### Day 29 — Wed 29 Jul · Reel (20s) · Launch-month recap
 - **Time:** 20:30
-- **Caption (MK):** Каков месец! 🔴🟡 Благодариме што бевте дел од почетокот на ПАС.
-  Ова е само бр.1.
-  **(EN):** What a month. Thank you for being part of the start of PAS. This is
-  only Issue 01.
+- **Caption (MK):** Каков месец! 🔴 Вардар шампиони, Европа, и почеток на ПАС.
+  Благодариме што бевте дел. Ова е само бр.1.
+  **(EN):** What a month — Vardar champions, Europe, and the start of PAS. Thank you.
+  This is only Issue 01.
 - **Hashtags:** core + `#ThankYou #Благодариме #Recap #Issue01`
 - **Image prompt (cover frame):** [HOUSE STYLE] + Energetic montage-style frame
-  blending a stadium, a magazine, a scarf and floodlights in a warm collage on
-  charcoal, celebratory, vertical, space center. No text, no logos.
+  blending a trophy lift, floodlights, a magazine and a red scarf in a warm collage
+  on charcoal, celebratory, vertical, space center. No text, no logos.
 - **Asset:** `IG_d29_recap_reel`
 
 ### Day 30 — Thu 30 Jul · Single post · Issue 02 tease
 - **Time:** 20:30
-- **Caption (MK):** Бр.2 доаѓа во август 📅 1.МФЛ старт, европски ноќи, нови
-  приказни. Останете со нас. 🔗 претплати се.
-  **(EN):** Issue 02 lands in August — 1.MFL kickoff, European nights, new
-  stories. Stay with us.
+- **Caption (MK):** Бр.2 доаѓа во август 📅 1.МФЛ старт, европски ноќи, нови приказни.
+  Останете со нас. 🔗 претплати се.
+  **(EN):** Issue 02 lands in August — 1.MFL kickoff, European nights, new stories.
 - **Hashtags:** core + `#Issue02 #ComingSoon #1MFL #Август`
 - **Image prompt:** [HOUSE STYLE] + Moody teaser of two floodlight towers glowing
-  against a dark sky with a faint "02" suggested only by negative space (no
-  actual digits), anticipation, vertical, mostly dark. No text, no numbers, no
-  logos.
+  against a dark sky, anticipation, vertical, mostly dark with bright points. No
+  text, no numbers, no logos.
 - **Asset:** `IG_d30_issue02_tease`
 
 ---
@@ -412,20 +410,19 @@ ahead of each scene.
 ## Posting cadence summary
 | Week | Feed posts | Reels | Carousels | Stories |
 |---|---|---|---|---|
-| 1 (1–7) | 4 | 2 | 2 | daily |
-| 2 (8–14) | 3 | 2 | 2 | daily + matchday takeover (9th) |
-| 3 (15–21) | 4 | 2 | 1 | daily + matchday (16th) + final (19th) |
-| 4 (22–30) | 4 | 3 | 3 | daily |
+| 1 (1–7) | 5 | 1 | 1 | daily |
+| 2 (8–14) | 3 | 1 | 3 | daily + matchday takeover (8th) |
+| 3 (15–21) | 4 | 2 | 1 | daily + matchday (15/16) + WC final (19th) |
+| 4 (22–30) | 3 | 3 | 3 | daily |
 
 ## Execution tips
-- **Batch-generate** all 30 image bases in one session using the house-style
-  block, then add typography in a single branded Canva/Figma kit (saves
-  consistency headaches).
-- **Pre-build matchday templates** (Days 9, 16, 19) in win/draw/loss variants;
-  never wait until full time to design.
-- **Stories daily** even when no feed post: polls ("Will Shkëndija progress?"),
-  countdowns, reposts of #PASreader, behind-the-scenes.
-- **Re-verify** scores, fixtures, the Conference League result and the World Cup
-  final outcome before posting matchday content.
-- **UTM-tag** every "link in bio" so you can see which posts convert to
-  pre-orders/subscriptions.
+- **Batch-generate** all 30 image bases with the house-style block, then add
+  typography in one branded Canva/Figma kit.
+- **Pre-build matchday templates** (Days 8, 15/16, 19) in win/draw/loss variants;
+  never design at full time.
+- **Confirm Vardar's exact CL Q1 dates** (legs fall on 7 **or** 8 July and 14 **or**
+  15 July) and shift the matchday posts to the real dates.
+- **Stories daily** even without a feed post: polls ("Will Vardar progress?"),
+  countdowns, #PASreader reposts, behind-the-scenes.
+- **Re-verify** scores, the CL result and the World Cup final outcome before posting.
+- **UTM-tag** every "link in bio" to track pre-orders/subscriptions.

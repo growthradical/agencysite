@@ -60,7 +60,9 @@ IG_d<NN>_<slug>                   e.g. IG_d09_shkendija_leg1
 ## 6. Pre-press / launch checklist
 - [ ] Reserve handles + `.mk` domain; set up IG `@pas.magazine`.
 - [ ] Lock contributor list & deadlines (copy due ~10 days before launch).
-- [ ] Commission real photography for cover, features, photo essay.
+- [ ] Commission real photography for cover, features, local match coverage and
+      photo essay; source **licensed archival** images of Ringov/Pančev (no AI
+      likeness of real people).
 - [ ] Generate AI plates with the house-style block; upscale to print res.
 - [ ] Fact-check pass #1 (content) and #2 (captions/numbers/dates) in press week.
 - [ ] Legal: image rights, AI-disclosure line in imprint, ISSN application.
@@ -73,16 +75,16 @@ IG_d<NN>_<slug>                   e.g. IG_d09_shkendija_leg1
 | Field | Value |
 |---|---|
 | Title | PAS — Issue 01 |
-| Cover line | ШТО СЕГА? / What Now? |
-| Theme | After Copenhagen — the rebuild begins |
-| Cover star | Eljif Elmas |
+| Cover line | ПОВТОРНО ШАМПИОНИ / Champions Again |
+| Theme | Vardar's title after nine years + the boom in the game |
+| Cover | Vardar — the title lift (Champions Again) |
 | Issue date | July 2026 |
 | Digital launch | 15 July 2026 |
 | Languages | Macedonian (primary), English (secondary + full EN PDF) |
 | Pages | 84 |
 | Price (suggested) | Digital €3.99 · Print €12.99 + shipping · Founder bundle €29.99 |
 | ISSN | TBA (apply) |
-| Keywords | Macedonian football, North Macedonia, 1.MFL, Shkëndija, Elmas, diaspora, World Cup 2026, Conference League, Darko Pancev, Goce Sedloski |
+| Keywords | Macedonian football, North Macedonia, FK Vardar, 1.MFL champions, Champions League qualifying, Vasil Ringov, Darko Pančev, local football, attendance boom, World Cup 2026 |
 
 ## 8. Revenue & growth (first 90 days)
 - **Subscriptions:** digital / print / founder tiers (see p.78 of the plan).
