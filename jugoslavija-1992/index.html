@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jugoslavija — Sweden 1992 · Sticker Album</title>
+<style>
+  /* ---------- Print setup ---------- */
+  @page { size: A4 portrait; margin: 12mm; }
+
+  :root{
+    --page-bg:   #d9591f;   /* album page orange, like the original */
+    --page-bg2:  #c44a16;
+    --ink:       #1b1b1b;
+    --cream:     #f4ecd8;
+    --blue:      #16357a;    /* Yugoslavia sticker blue */
+    --gold:      #d8b24a;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color:var(--ink);
+    background:#555;            /* screen only; ignored in print */
+  }
+
+  /* Each .page is one printed sheet */
+  .page{
+    width:210mm;
+    min-height:297mm;
+    margin:0 auto 16px;
+    padding:14mm 12mm;
+    background:var(--page-bg);
+    background-image:linear-gradient(180deg,var(--page-bg) 0%, var(--page-bg2) 100%);
+    page-break-after:always;
+    position:relative;
+    overflow:hidden;
+  }
+  .page:last-child{ page-break-after:auto; }
+
+  /* ---------- Page header band ---------- */
+  .band{
+    display:flex; align-items:center; gap:10px;
+    background:var(--blue);
+    color:#fff;
+    padding:8px 14px;
+    border-radius:6px;
+    border:2px solid var(--gold);
+    margin-bottom:10mm;
+  }
+  .band .flag{
+    width:34px;height:22px;flex:0 0 auto;border:1px solid rgba(255,255,255,.6);
+    background:
+      linear-gradient(180deg,#1f4fc4 0 33.3%, #fff 33.3% 66.6%, #d11 66.6% 100%);
+  }
+  .band h1{ font-size:22px; letter-spacing:.18em; margin:0; font-weight:800; }
+  .band .pg{ margin-left:auto; font-size:12px; opacity:.9; letter-spacing:.1em; }
+
+  /* ---------- Sticker grid ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:8mm 7mm;
+  }
+  .sticker{
+    position:relative;
+    aspect-ratio:5/7;
+    background:var(--cream);
+    border:2px solid rgba(0,0,0,.25);
+    border-radius:6px;
+    box-shadow:0 3px 6px rgba(0,0,0,.35);
+    overflow:hidden;
+  }
+  .sticker img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  /* number chip */
+  .sticker .num{
+    position:absolute; top:6px; left:6px;
+    background:var(--blue); color:#fff;
+    font-size:11px; font-weight:700;
+    padding:2px 7px; border-radius:10px;
+    border:1px solid var(--gold);
+    z-index:2;
+  }
+  /* placeholder shown when the scan file is missing */
+  .sticker.missing{
+    background:
+      repeating-linear-gradient(45deg, #efe6cf 0 12px, #e7dcc0 12px 24px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:8px;
+  }
+  .sticker.missing img{ display:none; }
+  .sticker.missing .ph-name{
+    font-weight:800; color:var(--blue); font-size:13px; line-height:1.2;
+    text-transform:uppercase; letter-spacing:.03em;
+  }
+  .sticker.missing .ph-file{
+    margin-top:6px; font-size:9px; color:#8a6d2f; word-break:break-all;
+  }
+
+  /* ---------- Storyline page ---------- */
+  .story{
+    background:var(--cream);
+    color:var(--ink);
+    border:2px solid var(--gold);
+    border-radius:8px;
+    padding:16mm 14mm;
+    min-height:240mm;
+  }
+  .story h2{
+    color:var(--blue); margin:0 0 2px; font-size:30px; letter-spacing:.06em;
+  }
+  .story .sub{
+    color:#9a3b12; font-weight:700; letter-spacing:.04em; margin:0 0 18px;
+    text-transform:uppercase; font-size:13px;
+  }
+  .story .hero{
+    width:100%; aspect-ratio:16/7; background:#ded3b6;
+    border:2px solid rgba(0,0,0,.2); border-radius:6px;
+    overflow:hidden; margin:0 0 18px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .story .hero img{ width:100%; height:100%; object-fit:cover; }
+  .story .hero.missing{ color:#8a6d2f; font-size:12px; font-style:italic; }
+  .story p{ line-height:1.55; font-size:13.5px; margin:0 0 12px; }
+  .story .kicker{
+    border-left:4px solid var(--blue); padding-left:12px;
+    font-style:italic; color:#333;
+  }
+  .story .credit{ margin-top:20px; font-size:10px; color:#7a6a45; }
+
+  @media print{
+    body{ background:#fff; }
+    .page{ margin:0; box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================================================================
+     EDIT THE ROSTER HERE.
+     - "n"    = sticker number (purely cosmetic, change freely)
+     - "name" = player name shown on the placeholder
+     - "file" = image filename expected in  assets/
+                Drop your scans in assets/ using exactly these names.
+     Pages 1 & 2 each hold up to 9 stickers (3 x 3).
+==================================================================== -->
+<script>
+  const PAGE1 = [
+    { n:"1",  name:"Tomislav Ivković",     file:"assets/01-ivkovic.jpg" },
+    { n:"2",  name:"Faruk Hadžibegić",     file:"assets/02-hadzibegic.jpg" },
+    { n:"3",  name:"Budimir Vujačić",      file:"assets/03-vujacic.jpg" },
+    { n:"4",  name:"Ilija Najdoski",       file:"assets/04-najdoski.jpg" },
+    { n:"5",  name:"Refik Šabanadžović",   file:"assets/05-sabanadzovic.jpg" },
+    { n:"6",  name:"Slaviša Jokanović",    file:"assets/06-jokanovic.jpg" },
+    { n:"7",  name:"Robert Prosinečki",    file:"assets/07-prosinecki.jpg" },
+    { n:"8",  name:"Vladimir Jugović",     file:"assets/08-jugovic.jpg" },
+    { n:"9",  name:"Dragan Stojković (C)", file:"assets/09-stojkovic.jpg" },
+  ];
+  const PAGE2 = [
+    { n:"10", name:"Dejan Savićević",      file:"assets/10-savicevic.jpg" },
+    { n:"11", name:"Darko Pančev",         file:"assets/11-pancev.jpg" },
+    { n:"12", name:"Predrag Mijatović",    file:"assets/12-mijatovic.jpg" },
+    { n:"13", name:"Davor Šuker",          file:"assets/13-suker.jpg" },
+    { n:"14", name:"Alen Bokšić",          file:"assets/14-boksic.jpg" },
+    { n:"15", name:"Siniša Mihajlović",    file:"assets/15-mihajlovic.jpg" },
+    { n:"16", name:"Mario Stanić",         file:"assets/16-stanic.jpg" },
+    { n:"17", name:"Branko Brnović",       file:"assets/17-brnovic.jpg" },
+    { n:"18", name:"Ivica Osim (manager)", file:"assets/18-osim.jpg" },
+  ];
+  // Storyline page hero image (optional). Drop a scan here to fill it.
+  const STORY_HERO = "assets/storyline.jpg";
+</script>
+
+<!-- ============ PAGE 1 — PLAYERS ============ -->
+<section class="page">
+  <div class="band">
+    <span class="flag"></span>
+    <h1>JUGOSLAVIJA</h1>
+    <span class="pg">SWEDEN 1992 · Players I</span>
+  </div>
+  <div class="grid" id="grid1"></div>
+</section>
+
+<!-- ============ PAGE 2 — PLAYERS ============ -->
+<section class="page">
+  <div class="band">
+    <span class="flag"></span>
+    <h1>JUGOSLAVIJA</h1>
+    <span class="pg">SWEDEN 1992 · Players II</span>
+  </div>
+  <div class="grid" id="grid2"></div>
+</section>
+
+<!-- ============ PAGE 3 — STORYLINE ============ -->
+<section class="page">
+  <div class="story">
+    <h2>The Team That Never Played</h2>
+    <p class="sub">Sweden · June 1992</p>
+
+    <div class="hero" id="hero">A storyline image goes here — drop <code>assets/storyline.jpg</code></div>
+
+    <p class="kicker">By the moment the mighty Blues had already arrived in
+    Sweden, the tournament they had earned was being taken away from them.</p>
+
+    <p>Yugoslavia did not stumble into Euro 92 — they marched in. Through
+    qualification they finished ahead of Denmark, with Darko Pančev top-scoring
+    across the whole of Europe. A golden generation — Stojković, Savićević,
+    Pančev, Prosinečki, Mijatović, Šuker, Bokšić, Mihajlović — was arguably the
+    most gifted side never to kick a ball at a major finals.</p>
+
+    <p>As the squad assembled and travelled north, the country behind the shirt
+    was coming apart. On 30 May 1992 the United Nations Security Council passed
+    Resolution 757, placing the Federal Republic of Yugoslavia under sanctions.
+    Ten days before the opening match, UEFA expelled the team. The players,
+    already in Sweden, packed their bags and went home.</p>
+
+    <p>Denmark, the side Yugoslavia had pipped in qualifying, were called up as
+    last-minute replacements — and went on to win the entire tournament. The
+    Yugoslavia stickers had already been printed, which is why this album exists
+    at all: a paper memorial to a team that qualified, arrived, and was never
+    allowed to play.</p>
+
+    <p class="credit">Source stickers: Panini / Decje Novine — UEFA Euro Sweden 1992.
+    Compiled as a personal commemorative album.</p>
+  </div>
+</section>
+
+<script>
+  function render(targetId, list){
+    const el = document.getElementById(targetId);
+    el.innerHTML = list.map(p => `
+      <figure class="sticker" data-file="${p.file}">
+        <span class="num">${p.n}</span>
+        <img src="${p.file}" alt="${p.name}"
+             onerror="this.closest('.sticker').classList.add('missing')">
+        <figcaption class="ph-name">${p.name}</figcaption>
+        <span class="ph-file">${p.file}</span>
+      </figure>`).join("");
+  }
+  render("grid1", PAGE1);
+  render("grid2", PAGE2);
+
+  (function(){
+    const hero = document.getElementById("hero");
+    const img = new Image();
+    img.onload  = () => { hero.classList.remove("missing");
+                          hero.innerHTML = ""; hero.appendChild(img); };
+    img.onerror = () => { hero.classList.add("missing"); };
+    img.alt = "Yugoslavia 1992 storyline";
+    img.src = STORY_HERO;
+  })();
+</script>
+</body>
+</html>
