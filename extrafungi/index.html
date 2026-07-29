@@ -3,249 +3,35 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Extra Fungi &mdash; Wild Forest Mushrooms from Macedonia, since 1988</title>
-<meta name="description" content="Extra Fungi is a family company from Ko&#269;ani, North Macedonia. Since 1988 we hand-harvest, process and export wild forest mushrooms, fruits and vegetables to kitchens across Europe." />
+<title>Extra Fungi &mdash; Wild Forest Mushrooms from Ko&#269;ani, since 1988</title>
+<meta name="description" content="Extra Fungi is a family company from Ko&#269;ani, North Macedonia. Since 1988 we hand-harvest, process and export organic-certified wild forest mushrooms, fruits and vegetables to kitchens across Europe." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --forest:#1f3226;        /* deep forest green */
-    --forest-2:#2c4634;
-    --moss:#5d7259;
-    --amber:#c9822f;         /* warm amber accent */
-    --amber-soft:#e0a765;
-    --cream:#f6f1e7;         /* warm paper */
-    --cream-2:#efe7d7;
-    --ink:#1b1b17;
-    --muted:#6c6a60;
-    --line:rgba(27,27,23,.12);
-    --maxw:1180px;
-    --ease:cubic-bezier(.22,.61,.36,1);
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;font-family:'Inter',system-ui,sans-serif;color:var(--ink);
-    background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;
-    font-weight:400;overflow-x:hidden;
-  }
-  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:400;line-height:1.05;letter-spacing:-.01em;margin:0}
-  p{margin:0}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-  .eyebrow{font-family:'Inter';font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
-  .btn{display:inline-flex;align-items:center;gap:.55em;font-weight:500;font-size:15px;padding:14px 26px;border-radius:100px;transition:.35s var(--ease)}
-  .btn-primary{background:var(--forest);color:var(--cream)}
-  .btn-primary:hover{background:var(--amber);transform:translateY(-2px)}
-  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
-  .btn-ghost:hover{border-color:var(--forest);background:var(--forest);color:var(--cream);transform:translateY(-2px)}
-
-  /* ---------- NAV ---------- */
-  header{position:fixed;inset:0 0 auto 0;z-index:50;transition:.4s var(--ease)}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
-  .brand{display:flex;align-items:center;gap:12px;font-family:'Fraunces';font-size:21px;letter-spacing:-.01em}
-  .brand .logo{width:34px;height:34px;flex:none}
-  .brand b{font-weight:500}
-  .brand span{color:var(--amber)}
-  nav ul{display:flex;gap:34px;list-style:none;margin:0;padding:0;font-size:14.5px;font-weight:500}
-  nav a{position:relative;padding:4px 0;color:inherit;opacity:.85;transition:.3s}
-  nav a::after{content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;background:currentColor;transition:.35s var(--ease)}
-  nav a:hover{opacity:1}
-  nav a:hover::after{width:100%}
-  .nav-cta{font-size:14px;padding:11px 22px}
-  header.scrolled{background:rgba(246,241,231,.82);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
-  header.on-dark:not(.scrolled){color:var(--cream)}
-  header.on-dark:not(.scrolled) .brand span{color:var(--amber-soft)}
-  header.on-dark:not(.scrolled) .nav-cta{border-color:rgba(246,241,231,.4);color:var(--cream)}
-  .menu-btn{display:none;background:none;border:0;cursor:pointer;color:inherit}
-
-  /* ---------- HERO ---------- */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;
-    color:var(--cream);overflow:hidden;padding-bottom:8vh}
-  .hero-bg{position:absolute;inset:0;z-index:-2;
-    background:
-      radial-gradient(120% 90% at 80% 10%, rgba(201,130,47,.25), transparent 55%),
-      linear-gradient(160deg,#26382b 0%, #1f3226 45%, #16241b 100%);}
-  .hero-photo{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:center;
-    opacity:.5;mix-blend-mode:luminosity;
-    background-image:url('https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1920&q=80');}
-  .hero::after{content:"";position:absolute;inset:0;z-index:-1;
-    background:linear-gradient(180deg,rgba(22,36,27,.35) 0%,rgba(22,36,27,.05) 40%,rgba(22,36,27,.7) 100%)}
-  .hero-inner{width:100%}
-  .hero h1{font-size:clamp(44px,7.4vw,104px);font-weight:300;max-width:15ch}
-  .hero h1 em{font-style:italic;color:var(--amber-soft)}
-  .hero-sub{margin-top:26px;max-width:46ch;font-size:clamp(16px,1.6vw,19px);opacity:.9;font-weight:300}
-  .hero-actions{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
-  .hero-actions .btn-ghost{border-color:rgba(246,241,231,.35);color:var(--cream)}
-  .hero-actions .btn-ghost:hover{background:var(--cream);color:var(--forest);border-color:var(--cream)}
-  .hero-meta{position:absolute;top:16vh;right:28px;text-align:right;max-width:230px;opacity:.9}
-  .hero-meta .yr{font-family:'Fraunces';font-size:64px;line-height:1;color:var(--amber-soft)}
-  .hero-meta p{font-size:13px;letter-spacing:.03em;margin-top:8px}
-  .scroll-hint{position:absolute;left:28px;bottom:26px;font-size:11px;letter-spacing:.25em;text-transform:uppercase;opacity:.7;display:flex;align-items:center;gap:10px}
-  .scroll-hint span{width:36px;height:1px;background:currentColor;display:inline-block;animation:line 2.4s var(--ease) infinite}
-  @keyframes line{0%,100%{transform:scaleX(.4);opacity:.4;transform-origin:left}50%{transform:scaleX(1);opacity:1;transform-origin:left}}
-
-  /* ---------- MARQUEE ---------- */
-  .marquee{background:var(--forest);color:var(--cream);overflow:hidden;padding:18px 0;border-top:1px solid rgba(255,255,255,.08)}
-  .marquee-track{display:flex;gap:56px;white-space:nowrap;width:max-content;animation:scroll 32s linear infinite;font-family:'Fraunces';font-size:20px;opacity:.9}
-  .marquee-track span{display:inline-flex;align-items:center;gap:56px}
-  .marquee-track i{color:var(--amber-soft);font-style:normal}
-  @keyframes scroll{to{transform:translateX(-50%)}}
-
-  /* ---------- SECTIONS ---------- */
-  section{position:relative}
-  .pad{padding:clamp(80px,11vh,140px) 0}
-  .lead{font-size:clamp(24px,3vw,38px);font-family:'Fraunces';font-weight:300;line-height:1.28;letter-spacing:-.01em;max-width:22ch}
-  .sec-head{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:end;margin-bottom:56px}
-  .sec-head p.body{color:var(--muted);max-width:52ch}
-  @media(max-width:820px){.sec-head{grid-template-columns:1fr;gap:20px}}
-
-  /* about */
-  .about{background:var(--cream-2)}
-  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
-  .about-copy p+p{margin-top:20px;color:var(--muted)}
-  .about-copy .lead{color:var(--ink);margin-bottom:28px}
-  .about-figure{position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;
-    background:linear-gradient(160deg,#2c4634,#16241b)}
-  .about-figure img{width:100%;height:100%;object-fit:cover;opacity:.92}
-  .about-badge{position:absolute;left:-22px;bottom:28px;background:var(--amber);color:#20140a;
-    padding:18px 22px;border-radius:4px;box-shadow:0 18px 40px -18px rgba(0,0,0,.5)}
-  .about-badge b{font-family:'Fraunces';font-size:30px;display:block;line-height:1}
-  .about-badge small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
-  @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:40px}.about-badge{left:16px}}
-
-  /* stats */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:64px;border-top:1px solid var(--line);padding-top:44px}
-  .stat b{font-family:'Fraunces';font-size:clamp(38px,4.6vw,58px);font-weight:400;display:block;line-height:1;letter-spacing:-.02em}
-  .stat b em{font-style:normal;color:var(--amber)}
-  .stat p{margin-top:10px;font-size:13.5px;color:var(--muted);max-width:20ch}
-  @media(max-width:720px){.stats{grid-template-columns:1fr 1fr;gap:36px 24px}}
-
-  /* products */
-  .products{background:var(--forest);color:var(--cream)}
-  .products .eyebrow{color:var(--amber-soft)}
-  .products .sec-head p.body{color:rgba(246,241,231,.7)}
-  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .card{position:relative;border-radius:6px;overflow:hidden;background:var(--forest-2);
-    border:1px solid rgba(255,255,255,.08);min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;
-    transition:.5s var(--ease)}
-  .card .ph{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;opacity:.55;transition:.7s var(--ease)}
-  .card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(20,32,24,.92));z-index:1}
-  .card:hover{transform:translateY(-6px);border-color:rgba(224,167,101,.5)}
-  .card:hover .ph{opacity:.7;transform:scale(1.06)}
-  .card .body{position:relative;z-index:2;padding:26px}
-  .card h3{font-size:24px;font-weight:400}
-  .card .lat{font-style:italic;color:var(--amber-soft);font-size:13.5px;font-family:'Fraunces';margin-top:2px}
-  .card p{font-size:14px;color:rgba(246,241,231,.72);margin-top:12px;max-width:34ch}
-  .card .tag{position:absolute;top:18px;left:18px;z-index:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    background:rgba(246,241,231,.12);backdrop-filter:blur(6px);padding:6px 12px;border-radius:100px}
-  @media(max-width:900px){.prod-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:620px){.prod-grid{grid-template-columns:1fr}}
-
-  /* process */
-  .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .step{background:var(--cream);padding:38px 30px;transition:.4s var(--ease)}
-  .step:hover{background:var(--cream-2)}
-  .step .n{font-family:'Fraunces';font-size:14px;color:var(--amber);letter-spacing:.1em}
-  .step h3{font-size:22px;margin:22px 0 12px}
-  .step p{font-size:14px;color:var(--muted)}
-  .step svg{width:30px;height:30px;stroke:var(--forest);margin-bottom:auto}
-  @media(max-width:860px){.proc-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.proc-grid{grid-template-columns:1fr}}
-
-  /* markets */
-  .markets{background:var(--cream-2)}
-  .markets-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-  .country-list{list-style:none;margin:28px 0 0;padding:0}
-  .country-list li{display:flex;align-items:baseline;justify-content:space-between;gap:20px;
-    padding:20px 0;border-bottom:1px solid var(--line);transition:.3s}
-  .country-list li:hover{padding-left:8px}
-  .country-list .c{font-family:'Fraunces';font-size:clamp(24px,2.6vw,32px);font-weight:400}
-  .country-list .d{font-size:13px;color:var(--muted);text-align:right;max-width:24ch}
-  .map-card{background:var(--forest);border-radius:8px;padding:44px;color:var(--cream);position:relative;overflow:hidden}
-  .map-card .eyebrow{color:var(--amber-soft)}
-  .map-card h3{font-size:30px;font-weight:300;margin:16px 0 14px;font-family:'Fraunces'}
-  .map-card p{color:rgba(246,241,231,.75);font-size:15px}
-  .map-card svg{position:absolute;right:-40px;bottom:-30px;width:260px;opacity:.14}
-  @media(max-width:820px){.markets-grid{grid-template-columns:1fr;gap:36px}}
-
-  /* values */
-  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:20px}
-  .value h3{font-size:22px;margin:16px 0 10px;font-weight:500;font-family:'Fraunces'}
-  .value p{font-size:14.5px;color:var(--muted)}
-  .value .ic{width:44px;height:44px;border-radius:100px;display:grid;place-items:center;background:var(--cream-2);color:var(--forest)}
-  .value .ic svg{width:22px;height:22px;stroke:currentColor}
-  @media(max-width:760px){.values-grid{grid-template-columns:1fr;gap:32px}}
-
-  /* CTA / contact */
-  .cta{background:var(--forest);color:var(--cream);text-align:center;position:relative;overflow:hidden}
-  .cta .glow{position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 0%,rgba(201,130,47,.28),transparent 70%)}
-  .cta-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
-  .cta h2{font-size:clamp(34px,5.4vw,68px);font-weight:300}
-  .cta h2 em{font-style:italic;color:var(--amber-soft)}
-  .cta p{margin:22px auto 0;max-width:48ch;color:rgba(246,241,231,.8)}
-  .cta-actions{margin-top:38px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .cta .btn-primary{background:var(--amber);color:#20140a}
-  .cta .btn-primary:hover{background:var(--cream);color:var(--forest)}
-  .cta .btn-ghost{border-color:rgba(246,241,231,.35);color:var(--cream)}
-  .cta .btn-ghost:hover{background:var(--cream);color:var(--forest);border-color:var(--cream)}
-
-  /* footer */
-  footer{background:#16241b;color:rgba(246,241,231,.72);padding:70px 0 34px}
-  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1)}
-  footer .brand{color:var(--cream);margin-bottom:18px}
-  footer h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(246,241,231,.5);margin-bottom:18px;font-family:'Inter';font-weight:600}
-  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:14.5px}
-  footer a:hover{color:var(--amber-soft)}
-  footer .about-foot{max-width:38ch;font-size:14.5px}
-  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:26px;font-size:13px;color:rgba(246,241,231,.5);flex-wrap:wrap}
-  @media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:34px}}
-
-  /* reveal animation */
-  .reveal{opacity:0;transform:translateY(26px);transition:.9s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee-track,.scroll-hint span{animation:none}}
-
-  @media(max-width:860px){
-    nav ul,.nav-cta{display:none}
-    .menu-btn{display:block}
-    .hero-meta{display:none}
-  }
-
-  /* designed motif behind product imagery (fallback + texture) */
-  .card{background-color:var(--forest-2);
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120' fill='none' stroke='%23e0a765' stroke-width='2'%3E%3Cpath d='M28 52c0-18 14-30 32-30s32 12 32 30c0 5-4 7-9 7H37c-5 0-9-2-9-7Z'/%3E%3Cpath d='M50 59c0 16 0 30-5 38c0 0 7 3 15 3s15-3 15-3c-5-8-5-22-5-38'/%3E%3Ccircle cx='45' cy='42' r='2.4' fill='%23e0a765' stroke='none'/%3E%3Ccircle cx='68' cy='38' r='1.8' fill='%23e0a765' stroke='none'/%3E%3Ccircle cx='74' cy='47' r='1.5' fill='%23e0a765' stroke='none'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:center 30%;background-size:88px;opacity:1}
-  .card .ph{mix-blend-mode:luminosity}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header id="hdr" class="on-dark">
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Extra Fungi home">
+    <a class="brand" href="index.html" aria-label="Extra Fungi home">
       <svg class="logo" viewBox="0 0 40 40" fill="none" aria-hidden="true">
         <path d="M20 4C11 4 4 11 4 19c0 1.6 1.2 2.6 3 2.6h26c1.8 0 3-1 3-2.6C36 11 29 4 20 4Z" fill="currentColor"/>
         <path d="M16 21c0 6 0 11-2 14 0 0 3 1 6 1s6-1 6-1c-2-3-2-8-2-14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
-        <circle cx="14" cy="14" r="1.7" fill="var(--cream)"/><circle cx="24" cy="12" r="1.4" fill="var(--cream)"/><circle cx="28" cy="17" r="1.2" fill="var(--cream)"/>
+        <circle cx="14" cy="14" r="1.7" fill="#16241b"/><circle cx="24" cy="12" r="1.4" fill="#16241b"/><circle cx="28" cy="17" r="1.2" fill="#16241b"/>
       </svg>
       <div><b>Extra</b> <span>Fungi</span></div>
     </a>
     <nav>
       <ul>
-        <li><a href="#story">Story</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#markets">Markets</a></li>
-        <li><a href="#values">Values</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="recipes.html">Recipes</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <a href="#contact" class="btn btn-ghost nav-cta">Get in touch</a>
-    <button class="menu-btn" aria-label="Menu" onclick="document.querySelector('nav').scrollIntoView()">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
+    <a href="contact.html" class="btn btn-ghost nav-cta">Get in touch</a>
+    <button class="menu-btn" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </header>
 
@@ -255,16 +41,16 @@
   <div class="hero-photo"></div>
   <div class="hero-meta reveal">
     <div class="yr">1988</div>
-    <p>Three generations of foraging the forests of eastern Macedonia.</p>
+    <p>Three generations foraging the forests of eastern Macedonia.</p>
   </div>
   <div class="wrap hero-inner">
     <div class="reveal">
       <p class="eyebrow" style="color:var(--amber-soft)">Ko&#269;ani &middot; North Macedonia</p>
       <h1 style="margin-top:22px">Wild forests, <em>naturally</em> delivered.</h1>
-      <p class="hero-sub">A family company that hand-harvests, cleans and processes the wild mushrooms, fruits and vegetables of the Balkan forests &mdash; and ships them, at their peak, to kitchens across Europe.</p>
+      <p class="hero-sub">A family company that hand-harvests, cleans and processes the wild mushrooms, fruits and vegetables of the Balkan forests &mdash; and ships them, organic-certified and at their peak, to kitchens across Europe.</p>
       <div class="hero-actions">
-        <a href="#products" class="btn btn-primary">Explore our harvest &rarr;</a>
-        <a href="#story" class="btn btn-ghost">Our story since 1988</a>
+        <a href="products.html" class="btn btn-primary">Explore our harvest &rarr;</a>
+        <a href="about.html" class="btn btn-ghost">Our story since 1988</a>
       </div>
     </div>
   </div>
@@ -274,27 +60,26 @@
 <!-- MARQUEE -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Porcini <i>&#9702;</i> Chanterelles <i>&#9702;</i> Morels <i>&#9702;</i> Black Trumpet <i>&#9702;</i> Wild Berries <i>&#9702;</i> Fresh Vegetables <i>&#9702;</i> Frozen &middot; Dried &middot; Fresh <i>&#9702;</i>&nbsp;</span>
-    <span>Porcini <i>&#9702;</i> Chanterelles <i>&#9702;</i> Morels <i>&#9702;</i> Black Trumpet <i>&#9702;</i> Wild Berries <i>&#9702;</i> Fresh Vegetables <i>&#9702;</i> Frozen &middot; Dried &middot; Fresh <i>&#9702;</i>&nbsp;</span>
+    <span>Porcini <i>&#9702;</i> Chanterelles <i>&#9702;</i> Saffron Milk Caps <i>&#9702;</i> St George&#39;s <i>&#9702;</i> Morels <i>&#9702;</i> Wild Berries <i>&#9702;</i> Fresh Vegetables <i>&#9702;</i> Fresh &middot; Dried &middot; Brined &middot; Frozen <i>&#9702;</i>&nbsp;</span>
+    <span>Porcini <i>&#9702;</i> Chanterelles <i>&#9702;</i> Saffron Milk Caps <i>&#9702;</i> St George&#39;s <i>&#9702;</i> Morels <i>&#9702;</i> Wild Berries <i>&#9702;</i> Fresh Vegetables <i>&#9702;</i> Fresh &middot; Dried &middot; Brined &middot; Frozen <i>&#9702;</i>&nbsp;</span>
   </div>
 </div>
 
 <!-- STORY -->
-<section class="about pad" id="story">
-  <div class="wrap about-grid">
-    <div class="about-copy reveal">
+<section class="about pad">
+  <div class="wrap split">
+    <div class="copy reveal">
       <p class="eyebrow">Our story</p>
-      <p class="lead" style="margin-top:18px">A trade that began with a single village, a cooling room, and a respect for the forest.</p>
-      <p>Extra Fungi started in 1988 as a small family enterprise &mdash; buying wild forest mushrooms from the pickers of the Ko&#269;ani region and processing them in our own facility. What began as a seasonal trade has grown into one of North Macedonia's trusted names in wild-food export.</p>
-      <p>Today we operate a modern cooling and processing facility built to European standards, and we have widened our baskets to include fresh fruits and vegetables from the same fertile valleys. The forest still sets our calendar &mdash; but our standards are set by the chefs and buyers who depend on us.</p>
-      <div style="margin-top:30px"><a href="#contact" class="btn btn-ghost">Partner with us &rarr;</a></div>
+      <p class="lead" style="margin-top:18px">A trade that began with one village, a cooling room, and a respect for the forest.</p>
+      <p>Extra Fungi started in 1988 as a small family enterprise &mdash; buying wild forest mushrooms from the pickers of the Ko&#269;ani region and processing them in our own facility. Under the family&#39;s leadership it has grown into one of North Macedonia&#39;s trusted names in wild-food export.</p>
+      <p>Today we run a modern, full-scale cooling and processing facility built to European standards, most of our range is organic-certified, and we have widened our baskets to include orchard fruit and fresh vegetables from the same fertile valleys.</p>
+      <div style="margin-top:30px"><a href="about.html" class="btn btn-ghost">More about us &rarr;</a></div>
     </div>
-    <div class="about-figure reveal">
+    <div class="figure reveal">
       <img loading="lazy" src="https://images.unsplash.com/photo-1607301405390-d831c242f59b?auto=format&fit=crop&w=1000&q=80" alt="Freshly foraged wild mushrooms" onerror="this.style.display='none'"/>
-      <div class="about-badge"><b>35+</b><small>Years foraging</small></div>
+      <div class="badge"><b>35+</b><small>Years foraging</small></div>
     </div>
   </div>
-
   <div class="wrap stats">
     <div class="stat reveal"><b>19<em>88</em></b><p>The year the family trade began</p></div>
     <div class="stat reveal"><b>4</b><p>Core export markets across the EU</p></div>
@@ -303,113 +88,62 @@
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section class="products pad" id="products">
+<!-- PRODUCTS PREVIEW -->
+<section class="products pad dark">
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
         <p class="eyebrow">The harvest</p>
-        <h2 style="font-size:clamp(32px,4.6vw,54px);font-weight:300;margin-top:16px">What we bring<br>out of the forest.</h2>
+        <h2>What we bring<br>out of the forest.</h2>
       </div>
-      <p class="body">Every basket is graded, cleaned and preserved the way each species deserves &mdash; fresh on ice, quick-frozen at peak, or slowly dried to concentrate the flavour. Available to importers, distributors and food manufacturers.</p>
+      <p class="body">Every basket is graded, cleaned and preserved the way each species deserves &mdash; fresh on ice, brined, quick-frozen at peak, or slowly dried to concentrate the flavour. Supplied to importers, distributors and food manufacturers.</p>
     </div>
     <div class="prod-grid">
       <article class="card reveal">
         <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=80')"></div>
         <span class="tag">Signature</span>
-        <div class="body">
-          <h3>Porcini</h3><div class="lat">Boletus edulis</div>
-          <p>The prize of the Balkan forest &mdash; firm, nutty and deeply aromatic. Fresh in season, IQF-frozen and sliced-and-dried year round.</p>
-        </div>
+        <div class="body"><h3>Porcini</h3><div class="lat">Vrgan&#39; &middot; Boletus edulis</div><p>The prize of the Balkan forest &mdash; firm, nutty and deeply aromatic. Fresh in season, IQF-frozen and sliced-and-dried year round.</p></div>
       </article>
       <article class="card reveal">
         <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1504545102780-26774c1bb073?auto=format&fit=crop&w=900&q=80')"></div>
         <span class="tag">Golden</span>
-        <div class="body">
-          <h3>Chanterelles</h3><div class="lat">Cantharellus cibarius</div>
-          <p>Bright, peppery and unmistakably golden. Hand-cleaned and graded by size for restaurant and retail buyers.</p>
-        </div>
+        <div class="body"><h3>Chanterelles</h3><div class="lat">Lisi&#269;arka &middot; Cantharellus cibarius</div><p>Bright, peppery and unmistakably golden. Hand-cleaned and graded by size for restaurant and retail buyers.</p></div>
       </article>
       <article class="card reveal">
         <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=80')"></div>
-        <span class="tag">Spring</span>
-        <div class="body">
-          <h3>Morels & Trumpets</h3><div class="lat">Morchella &middot; Craterellus</div>
-          <p>Seasonal wild specialities for discerning kitchens &mdash; dried to preserve their intense, smoky character.</p>
-        </div>
-      </article>
-      <article class="card reveal">
-        <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1425934398893-310a009a77f9?auto=format&fit=crop&w=900&q=80')"></div>
-        <span class="tag">Orchard</span>
-        <div class="body">
-          <h3>Fruits & Berries</h3><div class="lat">From the valley & the wild</div>
-          <p>Wild forest berries and orchard fruit from the Ko&#269;ani valley, frozen at harvest to lock in colour and sweetness.</p>
-        </div>
-      </article>
-      <article class="card reveal">
-        <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=80')"></div>
-        <span class="tag">Field</span>
-        <div class="body">
-          <h3>Fresh Vegetables</h3><div class="lat">Grown in the valley</div>
-          <p>Peppers, tomatoes and field vegetables from the same fertile land &mdash; handled through our modern cold chain.</p>
-        </div>
-      </article>
-      <article class="card reveal" style="background:linear-gradient(160deg,#c9822f,#a5641d);justify-content:center">
-        <div class="body" style="text-align:left">
-          <h3 style="color:#20140a">Looking for<br>something specific?</h3>
-          <p style="color:rgba(32,20,10,.8)">We supply to spec &mdash; grade, cut and format tailored to your market. Ask us for the current season sheet.</p>
-          <a href="#contact" class="btn" style="margin-top:18px;background:#20140a;color:var(--cream)">Request catalogue &rarr;</a>
-        </div>
+        <span class="tag">Seasonal</span>
+        <div class="body"><h3>Saffron Milk Caps</h3><div class="lat">Rujnica &middot; Lactarius deliciosus</div><p>Autumn&#39;s carrot-orange delicacy, prized across the Mediterranean. Offered fresh, brined and frozen.</p></div>
       </article>
     </div>
+    <div style="margin-top:34px" class="reveal"><a href="products.html" class="btn btn-primary">See the full range &rarr;</a></div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section class="pad" id="process">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <p class="eyebrow">Forest to table</p>
-        <h2 style="font-size:clamp(32px,4.6vw,54px);font-weight:300;margin-top:16px">How it reaches<br>your kitchen.</h2>
-      </div>
-      <p class="body">A short, honest chain that protects the flavour of wild food &mdash; from the pickers we've known for decades to the container that leaves for Europe.</p>
+<!-- VIDEO FEATURE (the recipe video from the site) -->
+<section class="pad">
+  <div class="wrap video-feature">
+    <div class="video-embed reveal">
+      <iframe src="https://www.youtube-nocookie.com/embed/qULxKFUD9s4" title="Risotto with porcini &mdash; Extra Fungi" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
-    <div class="proc-grid">
-      <div class="step reveal">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21c5-4 8-8 8-12a8 8 0 0 0-16 0c0 4 3 8 8 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
-        <div class="n">01</div><h3>Foraged</h3>
-        <p>Local pickers harvest by hand across the forests of eastern Macedonia, exactly in season.</p>
-      </div>
-      <div class="step reveal">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 7h16M6 7v11a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M9 7V5a3 3 0 0 1 6 0v2"/></svg>
-        <div class="n">02</div><h3>Bought & sorted</h3>
-        <p>Each delivery is weighed, inspected and graded at our buy-out station within hours of picking.</p>
-      </div>
-      <div class="step reveal">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
-        <div class="n">03</div><h3>Processed</h3>
-        <p>Cleaned, then chilled, quick-frozen or slowly dried in our facility, built to modern EU standards.</p>
-      </div>
-      <div class="step reveal">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 8h13l4 4v4h-2M3 8v8h2M9 16h6M7 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM19 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
-        <div class="n">04</div><h3>Exported</h3>
-        <p>Packed to spec and shipped in a controlled cold chain to buyers across the European Union.</p>
-      </div>
+    <div class="reveal">
+      <p class="eyebrow">From our kitchen</p>
+      <h2 style="font-size:clamp(30px,4vw,46px);font-weight:300;margin-top:16px">Cooking with<br>the wild harvest.</h2>
+      <p style="color:var(--muted);margin-top:18px;max-width:44ch">We work with chef Nikola Mishkovski on a series of quick, honest recipes that show what our mushrooms can do &mdash; starting with a classic <em>porcini risotto</em>. Simple ingredients, forest flavour.</p>
+      <div style="margin-top:26px"><a href="recipes.html" class="btn btn-ghost">Watch all recipes &rarr;</a></div>
     </div>
   </div>
 </section>
 
 <!-- MARKETS -->
-<section class="markets pad" id="markets">
+<section class="markets pad">
   <div class="wrap markets-grid">
     <div class="reveal">
       <p class="eyebrow">Where we ship</p>
       <h2 style="font-size:clamp(30px,4vw,46px);font-weight:300;margin-top:16px">Trusted across<br>European kitchens.</h2>
       <ul class="country-list">
-        <li><span class="c">France</span><span class="d">Wild mushroom specialists & distributors</span></li>
-        <li><span class="c">Italy</span><span class="d">Porcini for retail & food manufacture</span></li>
-        <li><span class="c">Spain</span><span class="d">Fresh & frozen seasonal programmes</span></li>
+        <li><span class="c">France</span><span class="d">Wild mushroom specialists &amp; distributors</span></li>
+        <li><span class="c">Italy</span><span class="d">Porcini for retail &amp; food manufacture</span></li>
+        <li><span class="c">Spain</span><span class="d">Fresh &amp; frozen seasonal programmes</span></li>
         <li><span class="c">Germany</span><span class="d">Dried and IQF wholesale supply</span></li>
       </ul>
     </div>
@@ -418,52 +152,22 @@
       <p class="eyebrow">From Ko&#269;ani, with care</p>
       <h3>One valley, four borders, countless kitchens.</h3>
       <p>Our location in eastern North Macedonia puts us within a short, reliable cold-chain reach of the whole EU &mdash; so wild food that was in the forest this week can be in a European kitchen the next.</p>
-      <div style="margin-top:26px"><a href="#contact" class="btn btn-primary" style="background:var(--amber);color:#20140a">Become a partner &rarr;</a></div>
+      <div style="margin-top:26px"><a href="contact.html" class="btn btn-primary" style="background:var(--amber);color:#20140a">Become a partner &rarr;</a></div>
     </div>
   </div>
 </section>
 
-<!-- VALUES -->
-<section class="pad" id="values">
-  <div class="wrap">
-    <div class="sec-head reveal" style="grid-template-columns:1fr">
-      <div>
-        <p class="eyebrow">What we stand for</p>
-        <h2 style="font-size:clamp(30px,4vw,48px);font-weight:300;margin-top:16px;max-width:16ch">Honest wild food, handled with respect.</h2>
-      </div>
-    </div>
-    <div class="values-grid">
-      <div class="value reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3c4 3 6 6 6 10a6 6 0 0 1-12 0c0-4 2-7 6-10Z"/></svg></div>
-        <h3>Of the forest</h3>
-        <p>We harvest what the season gives and take no more &mdash; protecting the woodlands that have fed three generations of our family.</p>
-      </div>
-      <div class="value reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h3>Graded, not guessed</h3>
-        <p>Every lot is inspected, cleaned and graded by hand and to standard, so buyers know exactly what arrives in the box.</p>
-      </div>
-      <div class="value reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20ZM2 12h20M12 2c3 3 3 17 0 20M12 2c-3 3-3 17 0 20"/></svg></div>
-        <h3>Built for Europe</h3>
-        <p>A modern cold chain and processing facility mean our wild food travels across borders without losing what makes it special.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT / CTA -->
-<section class="cta pad" id="contact">
+<!-- CTA -->
+<section class="cta pad">
   <div class="glow"></div>
   <div class="wrap cta-inner reveal">
-    <p class="eyebrow" style="color:var(--amber-soft)">Let's talk harvest</p>
+    <p class="eyebrow" style="color:var(--amber-soft)">Let&#39;s talk harvest</p>
     <h2 style="margin-top:18px">Bring the wild forest<br>to <em>your</em> shelves.</h2>
-    <p>Importers, distributors, chefs and manufacturers &mdash; reach out for our current season sheet, samples and export terms. We reply in the language of the harvest.</p>
+    <p>Importers, distributors, chefs and manufacturers &mdash; reach out for our current season sheet, samples and export terms.</p>
     <div class="cta-actions">
       <a href="mailto:info@extrafungi.com" class="btn btn-primary">info@extrafungi.com</a>
-      <a href="https://www.extrafungi.com" class="btn btn-ghost">Visit extrafungi.com &#8599;</a>
+      <a href="contact.html" class="btn btn-ghost">Contact us</a>
     </div>
-    <p style="margin-top:34px;font-size:13.5px;color:rgba(246,241,231,.6)">Extra Fungi &middot; Ko&#269;ani, North Macedonia &middot; Family-owned since 1988</p>
   </div>
 </section>
 
@@ -475,50 +179,17 @@
         <div class="brand"><b>Extra</b> <span style="color:var(--amber-soft)">Fungi</span></div>
         <p class="about-foot">A family company hand-harvesting and processing the wild mushrooms, fruits and vegetables of North Macedonia &mdash; and delivering them, at their peak, to Europe. Since 1988.</p>
       </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="#story">Our story</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#markets">Markets</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:info@extrafungi.com">info@extrafungi.com</a></li>
-          <li><a href="https://www.extrafungi.com">www.extrafungi.com</a></li>
-          <li>Ko&#269;ani, North Macedonia</li>
-          <li>Mon–Fri &middot; Harvest season</li>
-        </ul>
-      </div>
+      <div><h4>Explore</h4><ul><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="recipes.html">Recipes</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Range</h4><ul><li><a href="products.html">Wild mushrooms</a></li><li><a href="products.html">Fruits &amp; berries</a></li><li><a href="products.html">Fresh vegetables</a></li><li><a href="products.html">Extra Food retail</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="mailto:info@extrafungi.com">info@extrafungi.com</a></li><li><a href="https://www.extrafungi.com">www.extrafungi.com</a></li><li>Ko&#269;ani, North Macedonia</li></ul></div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="yr"></span> Extra Fungi. All rights reserved.</span>
-      <span>Wild-harvested &middot; Naturally processed &middot; European delivery</span>
+      <span>&copy; <span id="yr"></span> Extra Fungi. All rights reserved.</span>
+      <span>Wild-harvested &middot; Organic-certified &middot; European delivery</span>
     </div>
   </div>
 </footer>
 
-<script>
-  // header scroll state
-  const hdr=document.getElementById('hdr');
-  const hero=document.querySelector('.hero');
-  const onScroll=()=>{
-    hdr.classList.toggle('scrolled', window.scrollY>40);
-    const past = window.scrollY > (hero.offsetHeight - 90);
-    hdr.classList.toggle('on-dark', !past && window.scrollY < hero.offsetHeight - 90);
-  };
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-
-  // reveal on scroll
-  const io=new IntersectionObserver((es)=>{
-    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
-  },{threshold:.14});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  document.getElementById('yr').textContent=new Date().getFullYear();
-</script>
+<script src="script.js"></script>
 </body>
 </html>
