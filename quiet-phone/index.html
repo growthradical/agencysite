@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Green Grid, Silent Phone</title>
+<meta name="description" content="Why local visibility reports go green while the phone stays quiet — the 24 causes, how to measure each stage honestly, how to capture and analyse calls, and the operational dashboard that ties it together." />
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f7f7f5; --surface:#fcfcfb; --surface-2:#f0efec; --surface-3:#e6e5e1;
+  --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#84837d;
+  --line:#dedcd6; --line-2:#c9c7c0;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#4a3aa7;
+  --good:#1baf7a; --warn:#eda100; --crit:#e34948;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --r:10px; --maxw:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#141413; --surface:#1a1a19; --surface-2:#232322; --surface-3:#2e2e2c;
+    --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8f8e85;
+    --line:#33332f; --line-2:#45443f;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#9085e9;
+    --good:#199e70; --warn:#c98500; --crit:#e66767;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#141413; --surface:#1a1a19; --surface-2:#232322; --surface-3:#2e2e2c;
+  --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8f8e85;
+  --line:#33332f; --line-2:#45443f;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#9085e9;
+  --good:#199e70; --warn:#c98500; --crit:#e66767;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+a{color:var(--s1);}
+h1,h2,h3,h4{line-height:1.24;margin:0;font-weight:640;letter-spacing:-.015em;}
+code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);
+  padding:1px 5px;border-radius:4px;border:1px solid var(--line);}
+
+/* masthead */
+header.mast{border-bottom:1px solid var(--line);background:var(--surface);}
+.mast-in{max-width:var(--maxw);margin:0 auto;padding:38px 24px 30px;
+  display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;}
+.mast-l{flex:1 1 480px;min-width:280px;}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:11px;}
+h1{font-size:clamp(28px,3.8vw,40px);}
+.dek{color:var(--ink-2);margin-top:13px;max-width:64ch;font-size:16px;}
+.themebtn{background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);
+  border-radius:99px;padding:6px 14px;font-size:12px;font-family:var(--mono);cursor:pointer;}
+.themebtn:hover{border-color:var(--ink-3);color:var(--ink);}
+
+/* section scaffolding */
+section{padding:52px 0;border-bottom:1px solid var(--line);}
+section:last-of-type{border-bottom:none;}
+.snum{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:12px;}
+h2{font-size:clamp(21px,2.5vw,27px);}
+.lede{color:var(--ink-2);margin-top:12px;max-width:70ch;}
+h3{font-size:17px;margin-top:34px;}
+p{margin:12px 0;color:var(--ink-2);}
+p.tight{margin:8px 0;}
+
+/* pull */
+.pull{font-family:var(--serif);font-size:clamp(19px,2.3vw,24px);line-height:1.4;color:var(--ink);
+  border-left:3px solid var(--s3);padding:4px 0 4px 20px;margin:26px 0;max-width:60ch;}
+
+/* figures */
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px 22px 14px;margin:26px 0;}
+.fig svg{display:block;width:100%;height:auto;}
+.figcap{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);
+  margin-top:12px;letter-spacing:.04em;text-align:center;}
+.scroll{overflow-x:auto;}
+
+/* stage rail */
+.rail{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 10px;}
+.rbtn{background:var(--surface);border:1px solid var(--line-2);border-left:3px solid var(--c);
+  color:var(--ink-2);border-radius:7px;padding:9px 14px;cursor:pointer;font:inherit;
+  font-size:13px;text-align:left;min-width:150px;flex:1 1 150px;}
+.rbtn:hover{border-color:var(--ink-3);}
+.rbtn[aria-pressed="true"]{background:var(--surface-3);color:var(--ink);border-color:var(--c);}
+.rbtn b{display:block;font-size:13.5px;}
+.rbtn span{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.05em;}
+
+/* cause cards */
+.causes{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-top:22px;}
+.cause{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--c);
+  border-radius:9px;padding:17px 19px;}
+.cause[hidden]{display:none;}
+.cause-h{display:flex;gap:10px;align-items:baseline;}
+.cid{font-family:var(--mono);font-size:10.5px;color:var(--c);font-weight:700;letter-spacing:.08em;}
+.cause h4{font-size:15px;flex:1;}
+.cause .stage{font-family:var(--mono);font-size:9.5px;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.08em;}
+.cause dl{margin:13px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;}
+.cause dt{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--ink-3);padding-top:3px;}
+.cause dd{margin:0;font-size:13.6px;color:var(--ink-2);}
+.cause dd b{color:var(--ink);font-weight:620;}
+
+/* tables */
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:13.8px;min-width:560px;}
+th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);padding:9px 12px;border-bottom:1px solid var(--line-2);
+  font-weight:600;vertical-align:bottom;}
+td{padding:11px 12px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top;}
+td b,td strong{color:var(--ink);font-weight:620;}
+tr:last-child td{border-bottom:none;}
+td code{white-space:nowrap;}
+
+/* checklist */
+.check{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:6px 4px;margin-top:20px;}
+.citem{display:flex;gap:12px;align-items:flex-start;padding:11px 16px;border-bottom:1px solid var(--line);}
+.citem:last-child{border-bottom:none;}
+.citem input{margin-top:4px;width:16px;height:16px;accent-color:var(--s3);flex:0 0 auto;cursor:pointer;}
+.citem label{flex:1;cursor:pointer;font-size:14px;color:var(--ink-2);}
+.citem label b{color:var(--ink);font-weight:620;display:block;}
+.citem .who{font-family:var(--mono);font-size:10px;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;padding-top:3px;}
+.progress{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:12px;letter-spacing:.05em;}
+
+/* role switcher */
+.roles{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0 0;}
+.role{background:var(--surface);border:1px solid var(--line-2);color:var(--ink-2);
+  border-radius:99px;padding:8px 15px;font-family:var(--mono);font-size:12px;cursor:pointer;}
+.role:hover{border-color:var(--ink-3);color:var(--ink);}
+.role[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+.roleview{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px 24px;margin-top:16px;}
+.roleview[hidden]{display:none;}
+.roleview h4{font-size:16px;margin-bottom:4px;}
+.roleview .q{font-family:var(--serif);font-size:17px;color:var(--ink);margin:10px 0 16px;}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-top:14px;}
+.tile{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:13px 15px;}
+.tile .k{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--ink-3);margin-bottom:6px;}
+.tile .v{font-size:15px;color:var(--ink);font-weight:620;line-height:1.3;}
+.tile .n{font-size:12px;color:var(--ink-3);margin-top:5px;}
+
+/* callouts */
+.note{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--s4);
+  border-radius:var(--r);padding:16px 20px;margin:24px 0;font-size:14px;color:var(--ink-2);}
+.note.warn{border-left-color:var(--crit);}
+.note.ok{border-left-color:var(--good);}
+.note b{color:var(--ink);}
+.note h4{font-size:14px;margin-bottom:6px;}
+
+ul.clean{margin:12px 0;padding-left:18px;color:var(--ink-2);}
+ul.clean li{margin-bottom:8px;}
+ul.clean li::marker{color:var(--s3);}
+
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px 22px;margin:28px 0 0;}
+.toc ol{margin:8px 0 0;padding-left:20px;columns:2;column-gap:32px;}
+.toc li{margin-bottom:6px;font-size:14px;}
+.toc a{text-decoration:none;color:var(--ink-2);}
+.toc a:hover{color:var(--s1);text-decoration:underline;}
+
+footer{padding:30px 0 60px;color:var(--ink-3);font-size:12.5px;}
+@media (max-width:700px){ .toc ol{columns:1;} }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mast-in">
+    <div class="mast-l">
+      <div class="eyebrow">Growth Radical · Local growth diagnostics</div>
+      <h1>Green Grid, Silent Phone</h1>
+      <p class="dek">A local visibility report can be entirely green while the business takes fewer
+      calls than last year, and both things can be true at once. This is the full account of why:
+      the twenty-four causes, how to measure every stage instead of only the first one, how to
+      capture and read what actually happens on the phone, and the operational dashboard that puts
+      it in front of the people who can act on it.</p>
+    </div>
+    <button class="themebtn" id="themebtn" type="button">◐ theme</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="toc">
+    <div class="eyebrow" style="margin:0">Contents</div>
+    <ol>
+      <li><a href="#funnel">The eight stages, and the one that gets measured</a></li>
+      <li><a href="#causes">The twenty-four causes</a></li>
+      <li><a href="#local">Measuring local honestly</a></li>
+      <li><a href="#phone">Capturing and reading the phone</a></li>
+      <li><a href="#dashboard">One operational dashboard</a></li>
+      <li><a href="#rollout">Rollout, and what it costs</a></li>
+      <li><a href="#governance">Consent, privacy and the things that bite</a></li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section id="funnel">
+  <div class="snum">01</div>
+  <h2>The eight stages, and the one that gets measured</h2>
+  <p class="lede">Between a search happening and money arriving there are eight distinct stages.
+  Each one can fail independently. A geo-grid measures the first — whether a pin appears on a map
+  at a set of sampled coordinates — and reports it as the health of the whole chain.</p>
+
+  <div class="fig scroll" id="fig-funnel"></div>
+
+  <p>This is the structural problem. Not dishonesty — a leading indicator adopted because the
+  lagging ones were noisy, then quietly promoted to the only indicator. The grid is genuinely
+  useful in the band where it discriminates. Above roughly eighty per cent presence it has no
+  headroom left, so it cannot register a gain or a loss, and every subsequent report says the
+  same thing regardless of what the business experiences.</p>
+
+  <p class="pull">A metric that is already green cannot show you improvement. Most local reporting
+  is measuring the part that is already won.</p>
+
+  <div class="fig" id="fig-ceiling"></div>
+
+  <div class="note">
+    <h4>The field observation this comes from</h4>
+    A five-location service firm measured across all its markets sat at <b>80–95% local-pack
+    presence at average position 1.4–2.1</b> — a grid almost entirely green, in every office. In
+    the same audit it lost or tied on organic in four of those five markets, and one office had
+    <b>13 of 50 tracked queries with no top-three presence at all</b>, invisible inside a
+    healthy-looking average. The grid had no room left to show either the deficit or any fix.
+  </div>
+</section>
+
+<section id="causes">
+  <div class="snum">02</div>
+  <h2>The twenty-four causes</h2>
+  <p class="lede">Grouped by the stage they break. Filter by stage, or read straight through.
+  Each carries the tell that distinguishes it from the other twenty-three, how to confirm it,
+  and what it typically costs.</p>
+
+  <div class="rail" id="rail"></div>
+  <div class="causes" id="cause-list"></div>
+</section>
+
+<section id="local">
+  <div class="snum">03</div>
+  <h2>Measuring local honestly</h2>
+  <p class="lede">Keep the grid — it is a real instrument. Fix how it is parameterised, stop
+  reporting the average, and put three free data sources alongside it that measure demand
+  rather than presence.</p>
+
+  <h3>Fix the grid first</h3>
+  <p>A grid result is a function of parameters chosen by whoever ran it. Radius, point density,
+  keyword set and competitor set all move the number more than most optimisation work does.
+  Any grid used as evidence has to disclose them and hold them fixed.</p>
+
+  <table>
+    <thead><tr><th>Parameter</th><th>The flattering choice</th><th>The honest choice</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td><b>Radius</b></td><td>1–2 miles around the office</td><td>The real service radius, set once and frozen</td><td>A tight radius is green by construction; nobody drives past three competitors to reach you</td></tr>
+      <tr><td><b>Density</b></td><td>5×5, re-run until it looks good</td><td>7×7 or 9×9, fixed grid, fixed cadence</td><td>Sparse grids move a lot on resampling alone; that movement gets reported as progress</td></tr>
+      <tr><td><b>Keywords</b></td><td>Head terms already won</td><td>Money terms — service + modifier + intent</td><td><code>dentist near me</code> is not what a root-canal emergency types</td></tr>
+      <tr><td><b>Statistic</b></td><td>Average position, share of voice</td><td>Full distribution + % of points with no top-3</td><td>Avg 1.4 hid 13 blind queries in the case above</td></tr>
+      <tr><td><b>Band</b></td><td>Report all movement as gain</td><td>Only movement inside the discriminating band</td><td>Above ~80% presence the instrument has no resolution</td></tr>
+      <tr><td><b>Comparison</b></td><td>Your grid, alone, over time</td><td>Your grid against a fixed competitor set</td><td>Share is relative; everyone can rise in a shrinking market</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note ok">
+    <h4>The one metric to add immediately</h4>
+    <b>Headroom.</b> The percentage of grid points where you are <em>not</em> in the top three.
+    It is the only part of the grid that can still move, so it is the only part worth optimising
+    against — and unlike share of voice it goes to zero when the work is genuinely done, which
+    tells you to stop spending on it.
+  </div>
+
+  <h3>Then measure demand, not presence</h3>
+  <p>Three sources, all free, all closer to revenue than any rank measurement. These are what
+  turn a visibility report into a demand report.</p>
+
+  <table>
+    <thead><tr><th>Source</th><th>What it gives you</th><th>The metric that matters</th></tr></thead>
+    <tbody>
+      <tr><td><b>Business Profile performance</b></td><td>Impressions, calls, direction requests, website clicks, booking clicks — per location, per month, split by how people found you</td><td><b>Contact rate per 1,000 impressions.</b> The bridge from visibility to demand. If the grid improves and this stays flat, the grid gain was not real.</td></tr>
+      <tr><td><b>Discovery vs. branded split</b></td><td>Whether people searched your name or searched the service</td><td><b>Discovery search volume.</b> Branded search reflects reputation and other channels. Discovery is the only part local SEO can claim.</td></tr>
+      <tr><td><b>Search Console, per location page</b></td><td>Impressions, clicks and position for the organic listings the grid ignores entirely</td><td><b>Click-through on location and service pages.</b> The map pack is one of several ways to be found, and often not the biggest.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Add competitor review velocity to the same sheet — reviews gained per month across the fixed
+  competitor set. It is the single best predictor of whether a top-three pin gets chosen, and it
+  moves slowly enough to forecast.</p>
+
+  <div class="note">
+    <b>Report shape that survives scrutiny.</b> One line per location per month: headroom,
+    contact rate per 1,000 impressions, discovery share, review gap versus the competitor set, and
+    calls answered. Five numbers. If a stage moved, one of them moves and names itself. Nobody
+    has to interpret a heat map.
+  </div>
+</section>
+
+<section id="phone">
+  <div class="snum">04</div>
+  <h2>Capturing and reading the phone</h2>
+  <p class="lede">In most local service businesses the phone is where revenue is decided, and it is
+  the least instrumented surface in the company. Four layers: capture it, transcribe it, classify
+  it, close the loop to outcome.</p>
+
+  <h3>Layer 1 — Capture</h3>
+  <p>Tracking numbers by source, not one number everywhere. Dynamic insertion on the website so
+  the number swaps by referring channel; static numbers for the fixed surfaces.</p>
+
+  <table>
+    <thead><tr><th>Surface</th><th>Number type</th><th>Answers the question</th></tr></thead>
+    <tbody>
+      <tr><td>Business Profile, per location</td><td>Static tracking number, primary slot</td><td>How many calls the map listing actually produces</td></tr>
+      <tr><td>Local Services Ads / paid</td><td>Platform-native, reconciled</td><td>Whether paid is intercepting calls above the pin</td></tr>
+      <tr><td>Website, organic sessions</td><td>Dynamic insertion, pooled</td><td>Which page and which query group produced the call</td></tr>
+      <tr><td>Website, paid sessions</td><td>Dynamic insertion, separate pool</td><td>Keeps paid and organic from claiming the same call</td></tr>
+      <tr><td>Print, vehicle, signage, referral</td><td>Static, one per source</td><td>What offline is worth, which nobody otherwise knows</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note warn">
+    <h4>The mistake that costs rankings</h4>
+    Putting a tracking number on the Business Profile <b>in place of</b> the real one, and leaving
+    the real one on the website and every citation. Inconsistent primary numbers across the web is
+    a genuine local ranking risk. The supported pattern is tracking number as <b>primary</b>,
+    the business's real number as <b>additional</b> — Google accepts this and it keeps the
+    citation graph coherent. Verify it holds after every profile edit; it silently reverts.
+  </div>
+
+  <h3>Layer 2 — Transcribe</h3>
+  <p>Record and transcribe every inbound call, subject to the consent rules in section 07.
+  Transcription is the step that converts the phone from an opaque volume number into
+  analysable text. Everything downstream depends on it.</p>
+  <p>Redact before anything leaves your control: names, dates of birth, card numbers, medical
+  detail, case specifics. Redaction happens between transcription and classification, not after.</p>
+
+  <h3>Layer 3 — Classify</h3>
+  <p>This is where the value is, and where a language model earns its place. Every call gets
+  scored on the same schema, so calls become countable rather than anecdotal. Fourteen fields,
+  applied uniformly:</p>
+
+  <div class="fig scroll" id="fig-pipeline"></div>
+
+  <table>
+    <thead><tr><th>Field</th><th>Values</th><th>What it unlocks</th></tr></thead>
+    <tbody>
+      <tr><td><b>Is it a lead?</b></td><td>New inquiry · existing client · vendor · spam · wrong number · internal</td><td>The single biggest correction. Raw call volume routinely overstates real leads by 40–60%.</td></tr>
+      <tr><td><b>Service line</b></td><td>Per business taxonomy</td><td>Which service the marketing actually produced, versus which one it was aimed at</td></tr>
+      <tr><td><b>Qualified?</b></td><td>Geography · service fit · urgency · payer/insurance · capacity</td><td>Separates "the phone rang" from "the phone rang with someone we can serve"</td></tr>
+      <tr><td><b>Outcome</b></td><td>Booked · callback promised · declined by caller · declined by us · unresolved</td><td>The conversion denominator nobody usually has</td></tr>
+      <tr><td><b>Answer latency</b></td><td>Seconds to human</td><td>The strongest single lever in the whole chain</td></tr>
+      <tr><td><b>Hold and transfer count</b></td><td>Integer</td><td>Explains abandons that look like disinterest</td></tr>
+      <tr><td><b>Who answered</b></td><td>Agent / location / after-hours service</td><td>Coaching signal, and routing faults across locations</td></tr>
+      <tr><td><b>Script adherence</b></td><td>Per checkpoint</td><td>Turns intake training into something measurable</td></tr>
+      <tr><td><b>Failure reason</b></td><td>Free text → clustered taxonomy</td><td>The list of things to fix, ranked by how much they cost</td></tr>
+      <tr><td><b>Sentiment trajectory</b></td><td>Start → end</td><td>Finds calls that were winnable and were lost in handling</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note ok">
+    <h4>The derived numbers that change the conversation</h4>
+    <b>Qualified lead rate</b> (qualified ÷ total calls), <b>booked rate</b> (booked ÷ qualified),
+    <b>missed-call rate</b> and <b>after-hours share</b>, <b>speed-to-answer distribution</b> — the
+    distribution, never the average, because a 12-second mean can hide a fifth of calls waiting
+    over a minute. These four turn "we got 340 calls" into "we got 148 real leads, booked 61,
+    and lost 44 to a phone nobody picked up."
+  </div>
+
+  <h3>Layer 4 — Close the loop</h3>
+  <p>A booked appointment is not revenue. The chain only closes when the call record carries
+  through to the system of record — practice management, case management, CRM — and comes back
+  with what happened: showed, retained, completed, what it was worth.</p>
+  <p>Join on the tracking number plus timestamp, and where possible a lead ID written into the CRM
+  at creation. Expect to reconcile: some percentage will never join cleanly, and the honest thing
+  is to report matched and unmatched separately rather than quietly extrapolating.</p>
+
+  <p class="pull">Cost per signed case, by location, by service line, by source. Everything above
+  exists to produce that one number defensibly.</p>
+</section>
+
+<section id="dashboard">
+  <div class="snum">05</div>
+  <h2>One operational dashboard</h2>
+  <p class="lede">The point is not another reporting layer. It is that every stage of the chain
+  lands in one place, each metric names the stage it belongs to, and each role sees the part they
+  can actually change.</p>
+
+  <div class="fig scroll" id="fig-arch"></div>
+
+  <h3>What the AI layer does — six jobs, not a chat box</h3>
+  <p>"Ask your data anything" produces confident answers nobody can audit. Narrow, named jobs
+  with stated confidence produce work people act on.</p>
+
+  <table>
+    <thead><tr><th>Job</th><th>What it does</th><th>Guardrail</th></tr></thead>
+    <tbody>
+      <tr><td><b>1 · Classify</b></td><td>Scores every call, form and chat against the fixed schema</td><td>Human-labelled sample each month to measure drift; publish the agreement rate</td></tr>
+      <tr><td><b>2 · Attribute</b></td><td>Joins lead → source → outcome, with a confidence on each join</td><td>Unmatched stays unmatched. Never redistribute unknowns across known sources.</td></tr>
+      <tr><td><b>3 · Detect</b></td><td>Watches each stage for breaks — answer rate, booked rate, headroom, review gap</td><td>Alert on stage-level change, not on aggregate revenue, or everything is an alert</td></tr>
+      <tr><td><b>4 · Explain</b></td><td>When a number moves, names which stage moved and shows the calls or queries behind it</td><td>Every explanation links to the underlying records. No claim without a drill-down.</td></tr>
+      <tr><td><b>5 · Brief</b></td><td>Written summary per role, on the cadence that role operates at</td><td>Says "nothing changed" when nothing changed. A brief that always finds something is noise.</td></tr>
+      <tr><td><b>6 · Track experiments</b></td><td>Holds live tests with baseline, cadence, success and kill criteria</td><td>Kill criteria are set before launch and enforced automatically</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What each team actually sees</h3>
+  <p class="tight">Same data, five surfaces. Nobody gets a metric they cannot act on.</p>
+  <div class="roles" id="roles"></div>
+  <div id="roleviews"></div>
+
+  <div class="note">
+    <h4>The design rule that makes it work</h4>
+    <b>Every metric displays the stage it belongs to.</b> Visibility metrics are labelled
+    visibility. Capture metrics are labelled capture. It becomes structurally impossible to
+    answer a revenue question with a visibility number, which is the failure the whole system
+    exists to prevent.
+  </div>
+</section>
+
+<section id="rollout">
+  <div class="snum">06</div>
+  <h2>Rollout, and what it costs</h2>
+  <p class="lede">Sequenced so that each phase produces a usable answer on its own. If the
+  engagement stops after phase one, phase one still paid for itself.</p>
+
+  <h3>Phase 1 · Days 1–30 — Find out what is actually true</h3>
+  <p class="tight">No optimisation. Instrumentation and a baseline, because every argument after
+  this depends on having one.</p>
+  <div class="check" id="p1"></div>
+
+  <h3>Phase 2 · Days 31–60 — Fix capture before fixing visibility</h3>
+  <p class="tight">Capture failures are cheaper to fix and pay back faster than any ranking work.
+  A missed call is a lead you already paid for.</p>
+  <div class="check" id="p2"></div>
+
+  <h3>Phase 3 · Days 61–90 — Then spend on visibility, where there is headroom</h3>
+  <p class="tight">Only now, and only against the headroom number, so the spend goes where the
+  instrument can still register it.</p>
+  <div class="check" id="p3"></div>
+
+  <div class="note">
+    <h4>Rough cost shape</h4>
+    Call tracking runs per number plus per minute — for a five-location business with source-level
+    numbers, low hundreds a month. Transcription and classification are cents per call at these
+    volumes. Grid measurement is per scan, so it is a function of how many keywords and locations,
+    and the honest protocol above costs more than the flattering one because it runs more points.
+    The dominant cost is none of these — it is the integration into the system of record, which is
+    where the schedule risk sits and where a project that skips discovery goes wrong.
+  </div>
+</section>
+
+<section id="governance">
+  <div class="snum">07</div>
+  <h2>Consent, privacy and the things that bite</h2>
+  <p class="lede">Recording phone calls in service businesses is a regulated activity, and the
+  regulation varies by where the caller is, not where the business is. This section is the part
+  most vendors skip and most complaints come from.</p>
+
+  <ul class="clean">
+    <li><b>Two-party consent.</b> Several US states require every party to consent to a recording.
+    Where the caller's location is unknown or the business serves multiple states, the safe rule
+    is an announcement on every call and consent before recording begins. Verify current
+    requirements with counsel for the specific states involved — this is not a settled thing to
+    take from a web page, including this one.</li>
+    <li><b>Health information.</b> If callers can disclose health details, the recording, the
+    transcript and every downstream processor are handling protected information. That requires
+    appropriate agreements with each vendor in the chain, including the transcription and
+    classification services. Not every AI service will sign one.</li>
+    <li><b>Legal intake.</b> Calls to a law firm may carry privilege from the first sentence.
+    Recording, storage and third-party processing need to be cleared against the applicable
+    professional conduct rules before anything is switched on.</li>
+    <li><b>Redaction before processing.</b> Strip identifiers between transcription and
+    classification. The classification schema above is deliberately built so it can be scored
+    from a redacted transcript — none of the fourteen fields need a name.</li>
+    <li><b>Retention.</b> Set a deletion schedule and enforce it. Recordings accumulate silently
+    and become a liability rather than an asset once their analytical value has been extracted.</li>
+    <li><b>Staff.</b> People whose calls are scored need to know the scoring exists, what it
+    measures and what it is used for. Introduced as coaching it improves performance; discovered
+    as surveillance it destroys the front desk, and the front desk is the asset.</li>
+  </ul>
+
+  <div class="note warn">
+    <b>Not legal advice.</b> The above sets out where the risk sits so it can be raised early with
+    someone qualified to answer it. Consent, privilege and health-information rules change and are
+    jurisdiction-specific. Get them cleared before the first recording, not after.
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="padding:0">
+    Growth Radical · <code>agencysite/quiet-phone/</code> · figures are schematics of the mechanism,
+    not measured data. Field observations are anonymised to category level throughout.
+  </div>
+</footer>
+
+</div>
+
+<script>
+/* ---------------- stages ---------------- */
+const STAGES=[
+ {k:"M",n:"Measurement",c:"var(--s4)",d:"the instrument itself"},
+ {k:"V",n:"Visibility",c:"var(--s1)",d:"shown at all"},
+ {k:"S",n:"Selection",c:"var(--s6)",d:"seen, not chosen"},
+ {k:"C",n:"Capture",c:"var(--s2)",d:"reached out, not caught"},
+ {k:"I",n:"Intake",c:"var(--s3)",d:"caught, not converted"},
+ {k:"D",n:"Market",c:"var(--s5)",d:"the ground moved"}
+];
+
+/* ---------------- 24 causes ---------------- */
+const CAUSES=[
+{s:"M",t:"The grid is saturated",
+ w:"Presence above roughly 80% leaves no room for the metric to register a gain or a loss.",
+ f:"Month-over-month grid movement is under two points in either direction while other numbers swing.",
+ c:"Compute headroom — the share of points not in the top three. If it is under 20%, the grid is decoration.",
+ x:"Every report reads the same. Real losses elsewhere stay invisible for quarters."},
+{s:"M",t:"Radius and density chosen to flatter",
+ w:"A tight radius around the office is green by construction. Sparse grids also move on resampling alone.",
+ f:"Radius is well inside the actual service area, or the grid is 5×5 and jumps between runs.",
+ c:"Re-run at the true service radius and at 7×7. If the picture collapses, the original was a parameter choice.",
+ x:"Optimisation aimed at coordinates nobody searches from."},
+{s:"M",t:"Head terms instead of money terms",
+ w:"Grids run on broad category terms the business already wins, not the specific high-intent queries that produce revenue.",
+ f:"The tracked keyword list is short, generic, and has been unchanged for a year.",
+ c:"Pull the actual query set from Search Console and call transcripts, then compare to what is tracked.",
+ x:"Ranking first for a term with no commercial intent behind it."},
+{s:"M",t:"The average hides the distribution",
+ w:"A strong mean position conceals a tail of queries with no presence at all.",
+ f:"Only averages and share-of-voice appear in the report; no distribution, no count of blind points.",
+ c:"Count queries with zero top-three presence. In the field case this was 13 of 50 behind an average of 1.4.",
+ x:"Whole service lines invisible inside a healthy headline number."},
+{s:"M",t:"The grid only sees the map pack",
+ w:"Organic listings, ads, and AI-generated answers are all routes to the business, and none of them appear in a grid.",
+ f:"Grid is green, organic position for the same location pages is flat or falling.",
+ c:"Track map and organic separately per location, and capture what the results page actually looks like.",
+ x:"A whole channel declining underneath an unchanged headline."},
+
+{s:"V",t:"No pack shown for the money queries",
+ w:"Many high-intent queries return no local pack at all, so grid presence is irrelevant for them.",
+ f:"Grid strong, but the queries driving calls in the transcripts are not pack-triggering queries.",
+ c:"Capture live results for the top money terms and record which show a pack.",
+ x:"Budget aimed at a surface that does not appear where it matters."},
+{s:"V",t:"Paid sits above the pin",
+ w:"Local Services Ads and paid search intercept the click before the organic pin is reached.",
+ f:"Grid presence steady, call volume falling, a competitor recently appeared in ads for the same terms.",
+ c:"Record ad presence and ad advertiser for the money terms alongside each grid scan.",
+ x:"Winning a race that now starts below the finish line."},
+{s:"V",t:"Proximity ceiling",
+ w:"Local ranking is heavily distance-weighted. Beyond a certain radius no amount of optimisation produces presence.",
+ f:"Grid is strong near the office and falls off sharply and symmetrically with distance.",
+ c:"Plot presence against distance. A clean decay curve is geography, not a fixable deficit.",
+ x:"Months of spend against a constraint that optimisation cannot move."},
+{s:"V",t:"AI answers resolve the query first",
+ w:"The question gets answered above the results, and the visit never happens.",
+ f:"Impressions holding, clicks and calls falling, on informational and reference queries.",
+ c:"Check which money queries return an AI answer, and whether the business is cited in it.",
+ x:"Visibility that no longer converts into a visit."},
+
+{s:"S",t:"Review gap against the competitor set",
+ w:"Position on the map decides who is seen. Reviews largely decide who is chosen.",
+ f:"Top-three presence with a review count or rating well below the other two pins.",
+ c:"Track review count, rating and monthly velocity across the fixed competitor set.",
+ x:"Usually the largest single selection-stage loss, and the slowest to reverse."},
+{s:"S",t:"Thin or stale profile",
+ w:"Missing photos, wrong hours, unset attributes and a weak primary category all suppress the click.",
+ f:"High impressions, low action rate in the profile's own performance data.",
+ c:"Audit each location against a completeness checklist; compare action rate between locations.",
+ x:"Cheapest fix on this entire list, and routinely left undone."},
+{s:"S",t:"Zero-click resolution",
+ w:"The searcher gets hours, address or directions from the listing and never contacts anyone.",
+ f:"Direction requests and profile views rising while calls stay flat.",
+ c:"Split profile actions by type. A rising direction-request share with flat calls is this.",
+ x:"Often benign — walk-ins. Becomes a problem only when counted as a lost lead."},
+{s:"S",t:"Profile link goes to the wrong page",
+ w:"The website link points at a homepage rather than the location or service page that matches the query.",
+ f:"Website clicks from the profile arrive and bounce; the landing page names the wrong city.",
+ c:"Check the destination URL on every location profile and the bounce rate of profile traffic.",
+ x:"A qualified visitor discarded at the doorstep."},
+
+{s:"C",t:"Missed calls and after-hours",
+ w:"The phone rang and nobody answered. Usually the single largest recoverable loss in the chain.",
+ f:"Call volume healthy, booked volume not. Missed-call rate has never been measured.",
+ c:"Pull missed and abandoned call counts by hour and weekday. Look hard at lunch and after 5pm.",
+ x:"Direct. Each one is a lead already paid for and thrown away."},
+{s:"C",t:"No source-level call tracking",
+ w:"One number everywhere means no call can be attributed to any channel.",
+ f:"Reporting shows rankings and traffic but no calls by source.",
+ c:"Trivially confirmed — check whether distinct numbers exist per surface.",
+ x:"Every optimisation decision made blind for as long as it persists."},
+{s:"C",t:"Tracking numbers broke consistency",
+ w:"A tracking number replacing the real one across profiles and citations creates conflicting data about the business.",
+ f:"Tracking rolled out and local rankings softened shortly after.",
+ c:"Audit the primary number on every profile and major citation against the real line.",
+ x:"A self-inflicted visibility loss caused by the measurement itself."},
+{s:"C",t:"Forms and chat land nowhere",
+ w:"Submissions route to a shared inbox or a departed employee, with no owner and no response clock.",
+ f:"Form submissions recorded, no corresponding contact attempts in the system of record.",
+ c:"Submit test forms on every location page and time the response.",
+ x:"The highest-intent leads on the site, silently discarded."},
+{s:"C",t:"Multi-location routing faults",
+ w:"Calls for one location answered by another, or dropped into a queue nobody owns.",
+ f:"One location's booked rate is far below its peers with no other difference.",
+ c:"Test-call every published number for every location and follow where it lands.",
+ x:"Concentrated in a single market, so it looks like a local demand problem."},
+
+{s:"I",t:"Volume counted, quality not",
+ w:"Reported call totals include vendors, spam, wrong numbers and existing clients calling about billing.",
+ f:"Call volume that does not move with the calendar.",
+ c:"Classify a month of transcripts. Real-lead share is routinely 40–60% of raw volume.",
+ x:"Every downstream rate is computed on an inflated denominator and is therefore wrong."},
+{s:"I",t:"Intake does not qualify or convert",
+ w:"Calls are answered but not converted — no qualification, no ask for the appointment, no urgency.",
+ f:"Good answer rate, poor booked rate, wide variance between individual agents.",
+ c:"Score transcripts against script checkpoints and compare booked rate by agent.",
+ x:"Large and highly fixable. This is a coaching problem, not a marketing one."},
+{s:"I",t:"No follow-up on unbooked or missed",
+ w:"A caller who did not book and a caller nobody reached are both left alone permanently.",
+ f:"No callback attempts logged against missed calls.",
+ c:"Compare missed-call records to outbound attempts in the same window.",
+ x:"A recoverable share of already-purchased demand, recovered by nobody."},
+{s:"I",t:"Capacity is the real constraint",
+ w:"The calendar is full, so leads are turned away — and the turn-away is never recorded as demand.",
+ f:"Booked rate falls while qualified rate holds; intake mentions long waits.",
+ c:"Track declined-by-us as its own outcome, separate from declined-by-caller.",
+ x:"More marketing spend makes this worse, not better. Worth knowing before signing."},
+
+{s:"D",t:"Category demand contracted",
+ w:"Share is relative and volume is absolute. You can gain share in a shrinking market and take fewer calls.",
+ f:"Grid and share improving, absolute impressions and discovery searches falling.",
+ c:"Compare discovery search volume and category search trend against the same period last year.",
+ x:"Nothing is broken. Continuing to spend against it is the mistake."},
+{s:"D",t:"A competitor arrived or expanded",
+ w:"A new entrant, a new location, or an aggressive review push resets the competitive set.",
+ f:"Your metrics are unchanged and your share of the same queries fell.",
+ c:"Freeze a competitor set and track their presence, review velocity and paid activity alongside yours.",
+ x:"Real, and only visible if something other than your own numbers is being watched."}
+];
+
+/* ---------------- role surfaces ---------------- */
+const ROLES=[
+{n:"Owner / partner",cad:"Monthly",
+ q:"Is the money going somewhere that returns it?",
+ tiles:[["Cost per signed case","by location and service line","the only number that settles an argument"],
+        ["Revenue by source","matched vs unmatched, stated separately","no silent extrapolation"],
+        ["Stage that moved","named, with evidence","one sentence, not a dashboard tour"],
+        ["Capacity vs demand","turned-away volume","tells you whether to buy more leads at all"]],
+ not:"No rankings. No grid. Nothing this role cannot act on with a budget decision."},
+{n:"Marketing lead",cad:"Weekly",
+ q:"Which stage is leaking, and is the current bet working?",
+ tiles:[["Headroom by location","the part of the grid that can still move","stop optimising where it cannot"],
+        ["Contact rate / 1k impressions","visibility → demand bridge","catches fake visibility gains"],
+        ["Qualified lead rate by source","quality, not volume","kills channels that deliver noise"],
+        ["Live experiments","baseline, day count, kill criteria","enforced automatically"]],
+ not:"Revenue is visible but not owned here. The lever is stage-level."},
+{n:"Intake manager",cad:"Daily",
+ q:"Did we answer, and did we convert what we answered?",
+ tiles:[["Answer rate + speed","distribution, never the average","a good mean hides a bad tail"],
+        ["Missed-call recovery queue","live, worked down, with owners","the day's most valuable list"],
+        ["Booked rate by agent","with the transcript behind each","coaching, evidenced"],
+        ["Top failure reasons","clustered from this week's calls","this week's training topic"]],
+ not:"No marketing metrics. This role's whole world is capture and conversion."},
+{n:"Intake agent",cad:"Per shift",
+ q:"How am I doing, and what is the one thing to change?",
+ tiles:[["My booked rate","against team median, not a target","comparison people trust"],
+        ["My calls today","answered, missed, booked","immediate and legible"],
+        ["One clip to review","a call that was winnable","specific beats general"],
+        ["One thing to try","single behavioural change","never more than one"]],
+ not:"No ranking of individuals against each other. Introduced as surveillance, this destroys the front desk."},
+{n:"Agency / account",cad:"Weekly",
+ q:"What can I honestly claim, and what do I need to raise?",
+ tiles:[["Attributable movement","only inside the discriminating band","claims that survive scrutiny"],
+        ["Blocked-on-client list","access, decisions, capacity","surfaced early, not at renewal"],
+        ["Stage ownership split","ours vs theirs","ends the blame conversation"],
+        ["Next review's headline","drafted from evidence","no scrambling the night before"]],
+ not:"Nothing that lets a visibility number answer a revenue question."}
+];
+
+/* ---------------- rollout checklists ---------------- */
+const PHASES={
+p1:[["Freeze grid parameters and publish them","Analyst"],
+    ["Rebuild the tracked keyword set from Search Console and call transcripts","Analyst"],
+    ["Compute headroom per location — the baseline everything is judged against","Analyst"],
+    ["Connect Business Profile performance for every location","Analyst"],
+    ["Deploy source-level tracking numbers, primary/additional pattern verified","Ops"],
+    ["Clear recording consent for every state served","Owner + counsel"],
+    ["Record and transcribe 30 days with no changes to anything","Ops"],
+    ["Classify that month by hand to build the labelled set","Analyst"],
+    ["Publish the baseline: five numbers per location","Analyst"]],
+p2:[["Missed-call recovery workflow, with an owner and a response clock","Intake mgr"],
+    ["Extend answered hours, or route after-hours to a service that books","Owner"],
+    ["Fix form and chat routing; test every location page end to end","Ops"],
+    ["Test-call every published number and repair routing faults","Ops"],
+    ["Automate call classification; measure agreement against the labelled set","Analyst"],
+    ["Intake script checkpoints defined and scored","Intake mgr"],
+    ["Weekly coaching from real transcripts, framed as coaching","Intake mgr"],
+    ["Join call records to the system of record; report matched and unmatched","Analyst"],
+    ["Re-baseline: qualified lead rate and booked rate now measurable","Analyst"]],
+p3:[["Rank locations by headroom; spend only where the instrument resolves","Analyst"],
+    ["Close the review gap against the fixed competitor set","Ops"],
+    ["Complete every profile — photos, hours, attributes, categories","Ops"],
+    ["Point profile links at matching location and service pages","Ops"],
+    ["Run three experiments with baselines, cadence and kill criteria set first","Analyst"],
+    ["Stand up role surfaces; each role sees only what it can change","Analyst"],
+    ["Turn on stage-level anomaly detection with drill-down to records","Analyst"],
+    ["First cost-per-signed-case report, by location and service line","Analyst"],
+    ["Set retention and deletion schedule for recordings and transcripts","Owner"]]
+};
+
+/* ---------------- diagrams ---------------- */
+const AX='var(--ink-3)', LN='var(--line-2)', IN='var(--ink-2)', INK='var(--ink)';
+const mono='ui-monospace,monospace';
+const T=(x,y,t,o={})=>`<text x="${x}" y="${y}" fill="${o.f||AX}" font-size="${o.s||10}"
+  font-family="${o.ff||mono}" text-anchor="${o.a||'middle'}" letter-spacing=".04em"
+  font-weight="${o.w||400}">${t}</text>`;
+
+/* 8-stage funnel; the grid measures only the first */
+function funnel(){
+  const st=[["Impression","on the map"],["Selection","chosen"],
+            ["Contact","tap or call"],["Answer","we pick up"],
+            ["Qualify","we can serve"],["Book","slot taken"],
+            ["Show","they arrive"],["Sell","they retain"]];
+  const x0=40,w=112,gap=6,top=84,maxh=76, base=top+maxh;
+  let s='';
+  st.forEach((b,i)=>{
+    const h=maxh*(1-i*0.075), x=x0+i*(w+gap), y=base-h;
+    const first=i===0;
+    s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5"
+      fill="${first?'var(--s3)':'var(--surface-3)'}" fill-opacity="${first?'.20':'1'}"
+      stroke="${first?'var(--s3)':LN}" stroke-width="${first?2:1.2}"/>`;
+    s+=T(x+w/2,y+h/2+4,b[0],{f:INK,s:12.5,w:620});
+    s+=T(x+w/2,base+17,b[1],{s:9.5});
+  });
+  s+=`<path d="M 40 68 L 40 56 L 152 56 L 152 68" fill="none" stroke="var(--s3)" stroke-width="1.8"/>`;
+  s+=T(96,48,'the grid measures this',{f:'var(--s3)',s:11,w:600});
+  const rx=x0+(w+gap), rw=7*(w+gap)-gap;
+  s+=`<path d="M ${rx} 68 L ${rx} 56 L ${rx+rw} 56 L ${rx+rw} 68" fill="none"
+    stroke="${LN}" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  s+=T(rx+rw/2,48,'revenue is decided here, and is usually unmeasured',{s:11});
+  s+=T(40,206,'Each stage fails independently. A green stage 1 says nothing about stages 2\u20138.',{a:'start',s:11,f:IN});
+  return `<svg viewBox="0 0 1000 220" role="img" aria-label="Eight-stage funnel from impression to sale; a geo-grid measures only the first stage">${s}</svg>`;
+}
+
+/* saturation curve with the discriminating band */
+function ceiling(){
+  const a='var(--s3)';
+  let s=`<line x1="70" y1="180" x2="700" y2="180" stroke="${LN}" stroke-width="1.5"/>
+         <line x1="70" y1="24" x2="70" y2="180" stroke="${LN}" stroke-width="1.5"/>`;
+  let d='M 70 172';
+  for(let i=0;i<=63;i++){const x=70+i*10, t=i/63;
+    d+=` L ${x} ${(172-128*(1-Math.exp(-3.5*t))).toFixed(1)}`;}
+  s+=`<rect x="360" y="24" width="340" height="156" fill="${a}" opacity=".08"/>`;
+  s+=`<rect x="70" y="24" width="290" height="156" fill="var(--s1)" opacity=".07"/>`;
+  s+=`<path d="${d}" fill="none" stroke="${a}" stroke-width="2.5"/>`;
+  s+=`<line x1="360" y1="24" x2="360" y2="180" stroke="${a}" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+  s+=T(215,48,'discriminating band',{f:'var(--s1)',s:12,w:620});
+  s+=T(215,64,'movement here is real',{s:10.5});
+  s+=T(530,126,'saturated — no headroom',{f:a,s:12,w:620});
+  s+=T(530,144,'every report looks identical,',{s:10.5});
+  s+=T(530,160,'and the phone can go quiet here',{s:10.5});
+  s+=T(385,200,'effort and time  →',{a:'start',s:10.5});
+  s+=`<text x="30" y="102" fill="${AX}" font-size="10.5" font-family="${mono}"
+    transform="rotate(-90 30 102)" text-anchor="middle">grid presence →</text>`;
+  return `<svg viewBox="0 0 730 214" role="img" aria-label="Grid presence saturates, leaving a band where the metric no longer discriminates">${s}</svg>`;
+}
+
+/* call pipeline */
+function pipeline(){
+  const st=[["Call","every inbound"],["Record","consent cleared"],["Transcribe","speech to text"],
+            ["Redact","identifiers out"],["Classify","14 fields"],["Join","to the CRM"],
+            ["Outcome","revenue, or why not"]];
+  const w=124,gap=14,x0=24,y=56,h=58, base=y+h;
+  let s='';
+  st.forEach((b,i)=>{
+    const x=x0+i*(w+gap), hot=i===3||i===4;
+    s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="7"
+      fill="${hot?'var(--s2)':'var(--surface-3)'}" fill-opacity="${hot?'.16':'1'}"
+      stroke="${hot?'var(--s2)':LN}" stroke-width="${hot?2:1.2}"/>`;
+    s+=T(x+w/2,y+35,b[0],{f:INK,s:12.5,w:620});
+    s+=T(x+w/2,base+17,b[1],{s:9.5});
+    if(i<st.length-1){const mx=x+w;
+      s+=`<line x1="${mx+2}" y1="${y+h/2}" x2="${mx+gap-4}" y2="${y+h/2}" stroke="${LN}" stroke-width="1.5"/>
+          <polygon points="${mx+gap-2},${y+h/2} ${mx+gap-8},${y+h/2-4} ${mx+gap-8},${y+h/2+4}" fill="${LN}"/>`;}
+  });
+  const bx=x0+3*(w+gap), bw=2*w+gap;
+  s+=`<path d="M ${bx} 148 L ${bx} 158 L ${bx+bw} 158 L ${bx+bw} 148" fill="none"
+    stroke="var(--s2)" stroke-width="1.8"/>`;
+  s+=T(bx+bw/2,176,'redaction happens before classification, never after',{f:'var(--s2)',s:11,w:600});
+  s+=T(24,34,'Nothing downstream is possible without this chain. Volume alone answers no question.',{a:'start',s:11,f:IN});
+  return `<svg viewBox="0 0 990 190" role="img" aria-label="Call pipeline from inbound call through redaction and classification to outcome">${s}</svg>`;
+}
+
+/* ecosystem architecture */
+function arch(){
+  const col=(x,title,items,accent)=>{
+    let s=T(x+78,26,title,{f:accent,s:11,w:700});
+    items.forEach((it,i)=>{const y=42+i*33;
+      s+=`<rect x="${x}" y="${y}" width="156" height="26" rx="5" fill="var(--surface-3)"
+        stroke="${LN}" stroke-width="1"/>`;
+      s+=T(x+78,y+17,it,{f:IN,s:10.5});});
+    return s;
+  };
+  let s='';
+  s+=col(24,'SOURCES',['Grid / rank data','Business Profile','Search Console','Ads + LSA','Reviews','Calls + transcripts','Forms + chat','CRM / case system'],'var(--s1)');
+  // ingest
+  s+=`<rect x="220" y="42" width="112" height="290" rx="7" fill="var(--surface-2)"
+    stroke="${LN}" stroke-width="1.2"/>`;
+  s+=T(276,26,'INGEST',{f:'var(--s4)',s:11,w:700});
+  s+=T(276,178,'normalise',{f:INK,s:12,w:620});
+  s+=T(276,196,'dedupe',{f:INK,s:12,w:620});
+  s+=T(276,214,'stamp source',{f:INK,s:12,w:620});
+  // entity model
+  s+=`<rect x="352" y="42" width="130" height="290" rx="7" fill="var(--s3)" fill-opacity=".12"
+    stroke="var(--s3)" stroke-width="2"/>`;
+  s+=T(417,26,'ENTITY MODEL',{f:'var(--s3)',s:11,w:700});
+  ['location','service line','source','lead','interaction','outcome','revenue'].forEach((e,i)=>{
+    s+=T(417,74+i*30,e,{f:INK,s:12,w:620});});
+  s+=T(417,318,'one join key',{s:10});
+  // AI layer
+  s+=`<rect x="502" y="42" width="140" height="290" rx="7" fill="var(--s2)" fill-opacity=".12"
+    stroke="var(--s2)" stroke-width="2"/>`;
+  s+=T(572,26,'AI LAYER',{f:'var(--s2)',s:11,w:700});
+  ['1 classify','2 attribute','3 detect','4 explain','5 brief','6 track tests'].forEach((e,i)=>{
+    s+=T(572,76+i*34,e,{f:INK,s:12,w:620});});
+  s+=T(572,318,'all guard-railed',{s:10});
+  // surfaces
+  s+=col(662,'SURFACES',['Owner','Marketing lead','Intake manager','Intake agent','Agency / account'],'var(--s6)');
+  s+=T(740,222,'every metric',{s:10.5});
+  s+=T(740,238,'names its stage',{s:10.5});
+  // arrows
+  [[180,220],[332,352],[482,502],[642,662]].forEach(p=>{
+    s+=`<line x1="${p[0]}" y1="187" x2="${p[1]-8}" y2="187" stroke="${LN}" stroke-width="1.5"/>
+        <polygon points="${p[1]-2},187 ${p[1]-9},183 ${p[1]-9},191" fill="${LN}"/>`;});
+  return `<svg viewBox="0 0 830 340" role="img" aria-label="Architecture: sources into ingestion, a shared entity model, an AI layer of six jobs, and role-specific surfaces">${s}</svg>`;
+}
+
+document.getElementById('fig-funnel').innerHTML=funnel()+
+  '<div class="figcap">schematic — the mechanism, not measured data</div>';
+document.getElementById('fig-ceiling').innerHTML=ceiling()+
+  '<div class="figcap">schematic — why a saturated grid cannot register the thing you are paying it to detect</div>';
+document.getElementById('fig-pipeline').innerHTML=pipeline()+
+  '<div class="figcap">the call pipeline, end to end</div>';
+document.getElementById('fig-arch').innerHTML=arch()+
+  '<div class="figcap">one entity model underneath, role-specific surfaces on top</div>';
+
+/* ---------------- causes ---------------- */
+const rail=document.getElementById('rail'), cbox=document.getElementById('cause-list');
+const counts={}; CAUSES.forEach(c=>counts[c.s]=(counts[c.s]||0)+1);
+rail.innerHTML=`<button class="rbtn" data-s="all" aria-pressed="true" style="--c:var(--ink-3)">
+  <b>All causes</b><span>${CAUSES.length} across 6 stages</span></button>`+
+  STAGES.map(s=>`<button class="rbtn" data-s="${s.k}" aria-pressed="false" style="--c:${s.c}">
+    <b>${s.n}</b><span>${counts[s.k]} · ${s.d}</span></button>`).join('');
+
+cbox.innerHTML=CAUSES.map((c,i)=>{
+  const st=STAGES.find(s=>s.k===c.s);
+  return `<article class="cause" data-s="${c.s}" style="--c:${st.c}">
+    <div class="cause-h"><span class="cid">${c.s}${String(i+1).padStart(2,'0')}</span>
+      <h4>${c.t}</h4></div>
+    <div class="stage">${st.n}</div>
+    <dl>
+      <dt>What</dt><dd>${c.w}</dd>
+      <dt>Tell</dt><dd>${c.f}</dd>
+      <dt>Confirm</dt><dd>${c.c}</dd>
+      <dt>Cost</dt><dd><b>${c.x}</b></dd>
+    </dl></article>`;}).join('');
+
+rail.addEventListener('click',e=>{
+  const b=e.target.closest('.rbtn'); if(!b) return;
+  rail.querySelectorAll('.rbtn').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  const k=b.dataset.s;
+  cbox.querySelectorAll('.cause').forEach(c=>{c.hidden = k!=='all' && c.dataset.s!==k;});
+});
+
+/* ---------------- roles ---------------- */
+const rb=document.getElementById('roles'), rv=document.getElementById('roleviews');
+rb.innerHTML=ROLES.map((r,i)=>`<button class="role" data-i="${i}"
+  aria-pressed="${i===0}">${r.n}</button>`).join('');
+rv.innerHTML=ROLES.map((r,i)=>`<div class="roleview" data-i="${i}"${i?' hidden':''}>
+  <h4>${r.n} <span style="color:var(--ink-3);font-weight:400;font-family:var(--mono);font-size:11px">· ${r.cad}</span></h4>
+  <div class="q">“${r.q}”</div>
+  <div class="tiles">${r.tiles.map(t=>`<div class="tile">
+    <div class="k">${t[0]}</div><div class="v">${t[1]}</div><div class="n">${t[2]}</div></div>`).join('')}</div>
+  <p style="margin-top:16px;font-size:13.5px"><b style="color:var(--ink)">Deliberately absent —</b> ${r.not}</p>
+</div>`).join('');
+rb.addEventListener('click',e=>{
+  const b=e.target.closest('.role'); if(!b) return;
+  rb.querySelectorAll('.role').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  rv.querySelectorAll('.roleview').forEach(v=>{v.hidden = v.dataset.i!==b.dataset.i;});
+});
+
+/* ---------------- checklists ---------------- */
+Object.entries(PHASES).forEach(([id,items])=>{
+  const el=document.getElementById(id);
+  el.innerHTML=items.map((it,i)=>{
+    const key=`qp:${id}:${i}`; let on=false;
+    try{on=localStorage.getItem(key)==='1';}catch(e){}
+    return `<div class="citem">
+      <input type="checkbox" id="${key}" data-k="${key}"${on?' checked':''}>
+      <label for="${key}"><b>${it[0]}</b></label>
+      <span class="who">${it[1]}</span></div>`;}).join('')
+    +`<div class="progress" data-for="${id}"></div>`;
+  const upd=()=>{const t=el.querySelectorAll('input').length,
+    d=el.querySelectorAll('input:checked').length;
+    el.querySelector('.progress').textContent=`${d} of ${t} complete`;};
+  el.addEventListener('change',e=>{
+    const i=e.target.closest('input'); if(!i) return;
+    try{localStorage.setItem(i.dataset.k,i.checked?'1':'0');}catch(err){}
+    upd();});
+  upd();
+});
+
+/* theme */
+const tb=document.getElementById('themebtn');
+try{const t=localStorage.getItem('rb:theme'); if(t) document.documentElement.setAttribute('data-theme',t);}catch(e){}
+tb.addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const next = cur==='dark'?'light' : cur==='light'?'dark'
+    : (matchMedia('(prefers-color-scheme: dark)').matches?'light':'dark');
+  document.documentElement.setAttribute('data-theme',next);
+  try{localStorage.setItem('rb:theme',next);}catch(e){}
+});
+</script>
+</body>
+</html>
