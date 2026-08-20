@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Research Board — Growth Radical</title>
+<meta name="description" content="Six publishable research ideas built from anonymised client-audit fieldwork: thesis, evidence, target reader, and channel campaign plan for each." />
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f7f7f5; --surface:#fcfcfb; --surface-2:#f0efec; --surface-3:#e6e5e1;
+  --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#84837d;
+  --line:#dedcd6; --line-2:#c9c7c0;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#4a3aa7;
+  --good:#1baf7a; --warn:#eda100; --crit:#e34948;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --r:10px; --maxw:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#141413; --surface:#1a1a19; --surface-2:#232322; --surface-3:#2e2e2c;
+    --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8f8e85;
+    --line:#33332f; --line-2:#45443f;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#9085e9;
+    --good:#199e70; --warn:#c98500; --crit:#e66767;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#141413; --surface:#1a1a19; --surface-2:#232322; --surface-3:#2e2e2c;
+  --ink:#ffffff; --ink-2:#c3c2b7; --ink-3:#8f8e85;
+  --line:#33332f; --line-2:#45443f;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#9085e9;
+  --good:#199e70; --warn:#c98500; --crit:#e66767;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+a{color:var(--s1);}
+h1,h2,h3,h4{line-height:1.25;margin:0;font-weight:640;letter-spacing:-0.015em;}
+
+/* ---------- masthead ---------- */
+header.mast{border-bottom:1px solid var(--line);background:var(--surface);}
+.mast-in{max-width:var(--maxw);margin:0 auto;padding:34px 24px 26px;
+  display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;}
+.mast-l{flex:1 1 460px;min-width:280px;}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;}
+h1{font-size:clamp(26px,3.4vw,36px);}
+.dek{color:var(--ink-2);margin-top:12px;max-width:62ch;}
+.mast-r{flex:0 0 auto;display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
+.themebtn{background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink-2);
+  border-radius:99px;padding:6px 14px;font-size:12px;font-family:var(--mono);cursor:pointer;}
+.themebtn:hover{border-color:var(--ink-3);color:var(--ink);}
+.tally{display:flex;gap:18px;font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.08em;}
+.tally b{display:block;font-size:21px;color:var(--ink);letter-spacing:-.02em;
+  font-family:var(--sans);font-weight:640;}
+
+/* ---------- notice ---------- */
+.notice{background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--s4);
+  border-radius:var(--r);padding:14px 18px;margin:24px 0 0;font-size:13.5px;color:var(--ink-2);}
+.notice b{color:var(--ink);}
+
+/* ---------- controls ---------- */
+.controls{position:sticky;top:0;z-index:30;background:var(--bg);
+  border-bottom:1px solid var(--line);padding:14px 0;margin-top:26px;}
+.controls-in{max-width:var(--maxw);margin:0 auto;padding:0 24px;
+  display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+#q{flex:1 1 240px;min-width:180px;background:var(--surface);border:1px solid var(--line-2);
+  border-radius:99px;padding:9px 16px;font:inherit;font-size:13.5px;color:var(--ink);}
+#q:focus{outline:2px solid var(--s1);outline-offset:1px;border-color:transparent;}
+.chips{display:flex;gap:7px;flex-wrap:wrap;}
+.chip{background:var(--surface);border:1px solid var(--line-2);color:var(--ink-2);
+  border-radius:99px;padding:7px 14px;font-size:12.5px;cursor:pointer;white-space:nowrap;
+  font-family:var(--mono);letter-spacing:.02em;}
+.chip:hover{border-color:var(--ink-3);color:var(--ink);}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-left:auto;white-space:nowrap;}
+
+/* ---------- cards ---------- */
+.board{display:flex;flex-direction:column;gap:26px;padding:34px 0 10px;}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;border-top:3px solid var(--accent);}
+.card[hidden]{display:none;}
+.chead{padding:22px 26px 18px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;}
+.rank{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.14em;
+  text-transform:uppercase;font-weight:700;margin-bottom:8px;}
+.ctitle{font-size:21px;}
+.thesis{margin-top:10px;color:var(--ink-2);max-width:70ch;font-size:15px;}
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;}
+.badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 9px;border-radius:5px;background:var(--surface-2);color:var(--ink-2);
+  border:1px solid var(--line);}
+.badge.ready{color:var(--good);border-color:color-mix(in srgb,var(--good) 40%,var(--line));}
+.badge.data{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 40%,var(--line));}
+.badge.risk{color:var(--crit);border-color:color-mix(in srgb,var(--crit) 40%,var(--line));}
+.cstate{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
+select.state{background:var(--surface-2);border:1px solid var(--line-2);color:var(--ink);
+  border-radius:7px;padding:7px 10px;font:inherit;font-size:12.5px;font-family:var(--mono);cursor:pointer;}
+
+/* hook */
+.hook{margin:0 26px 20px;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:8px;padding:15px 18px;display:flex;gap:14px;align-items:flex-start;}
+.hook p{margin:0;font-family:var(--serif);font-size:17.5px;line-height:1.45;color:var(--ink);flex:1;}
+.copy{flex:0 0 auto;background:transparent;border:1px solid var(--line-2);color:var(--ink-3);
+  border-radius:6px;padding:5px 10px;font-family:var(--mono);font-size:10.5px;cursor:pointer;
+  text-transform:uppercase;letter-spacing:.06em;}
+.copy:hover{color:var(--ink);border-color:var(--ink-3);}
+
+/* schematic */
+.fig{margin:0 26px 20px;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:8px;padding:16px 18px 12px;}
+.fig svg{display:block;width:100%;height:auto;max-width:640px;margin:0 auto;}
+.figcap{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);text-align:center;
+  margin-top:10px;letter-spacing:.04em;}
+
+/* tabs */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin:0 26px;overflow-x:auto;}
+.tab{background:none;border:none;border-bottom:2px solid transparent;color:var(--ink-3);
+  padding:11px 16px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap;
+  font-family:var(--mono);letter-spacing:.03em;margin-bottom:-1px;}
+.tab:hover{color:var(--ink);}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+.panel{padding:22px 26px 26px;}
+.panel[hidden]{display:none;}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+.blk h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:9px;font-weight:600;}
+.blk p{margin:0 0 10px;color:var(--ink-2);font-size:14.2px;}
+.blk ul{margin:0;padding-left:17px;color:var(--ink-2);font-size:14.2px;}
+.blk li{margin-bottom:6px;}
+.blk li::marker{color:var(--accent);}
+.blk strong{color:var(--ink);font-weight:620;}
+
+/* channels */
+.chan{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:14px;}
+.chan-h{display:flex;gap:11px;align-items:center;padding:11px 15px;background:var(--surface-2);
+  border-bottom:1px solid var(--line);}
+.chan-h svg{flex:0 0 auto;}
+.chan-h b{font-size:13.5px;}
+.chan-h span{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-left:auto;
+  text-transform:uppercase;letter-spacing:.06em;}
+.chan-b{padding:14px 15px;}
+.chan-b ul{margin:0;padding-left:17px;font-size:14px;color:var(--ink-2);}
+.chan-b li{margin-bottom:7px;}
+.chan-b li::marker{color:var(--accent);}
+
+/* source links */
+.srcs{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.src{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);
+  border:1px solid var(--line);border-radius:7px;padding:7px 12px;font-size:12.5px;
+  color:var(--ink-2);text-decoration:none;font-family:var(--mono);}
+.src:hover{border-color:var(--accent);color:var(--ink);}
+.src.int{cursor:default;opacity:.85;}
+.src .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:0 0 auto;}
+.src.int .dot{background:var(--ink-3);}
+
+/* library */
+.lib{border-top:1px solid var(--line);margin-top:44px;padding:38px 0 60px;}
+.libgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;margin-top:22px;}
+.libcol h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:11px;}
+.libcol ul{margin:0;padding-left:0;list-style:none;}
+.libcol li{margin-bottom:8px;font-size:13.5px;color:var(--ink-2);}
+.libcol li a{text-decoration:none;}
+.libcol li a:hover{text-decoration:underline;}
+.libcol .note{font-size:12px;color:var(--ink-3);display:block;}
+
+footer{border-top:1px solid var(--line);padding:26px 0 50px;color:var(--ink-3);font-size:12.5px;}
+.empty{padding:60px 26px;text-align:center;color:var(--ink-3);font-family:var(--mono);font-size:13px;}
+@media (max-width:640px){
+  .chead{grid-template-columns:1fr;}
+  .cstate{align-items:flex-start;flex-direction:row;}
+  .hook{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mast-in">
+    <div class="mast-l">
+      <div class="eyebrow">Growth Radical · Research Programme</div>
+      <h1>Six papers hiding inside the audit work</h1>
+      <p class="dek">Every idea below came out of real diagnostic fieldwork on live businesses.
+      Client identities are stripped — each is described by category and shape only. What survives
+      anonymisation is the part that was always the valuable bit: the method, and the finding
+      that contradicts what the industry currently sells.</p>
+    </div>
+    <div class="mast-r">
+      <button class="themebtn" id="themebtn" type="button">◐ theme</button>
+      <div class="tally">
+        <div><b id="t-total">6</b>ideas</div>
+        <div><b id="t-ready">3</b>ready</div>
+        <div><b id="t-picked">0</b>shortlisted</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="notice">
+    <b>Anonymisation rule.</b> No client, employer, or prospect is named anywhere on this board or in
+    any paper produced from it. Field observations appear as category descriptions
+    ("a mental-health SaaS", "a five-location personal-injury firm"). Every dataset behind a published
+    paper is re-collected from public sources on a fresh sample, so no paper depends on data supplied
+    under an engagement. Figures on this board are <b>schematics of the hypothesis, not measured
+    results</b> — they show the shape each study would test.
+  </div>
+</div>
+
+<div class="controls">
+  <div class="controls-in">
+    <input id="q" type="search" placeholder="Search theses, readers, methods…" aria-label="Search ideas" />
+    <div class="chips" id="chips">
+      <button class="chip" data-f="all" aria-pressed="true">all</button>
+      <button class="chip" data-f="ready" aria-pressed="false">ready to run</button>
+      <button class="chip" data-f="data" aria-pressed="false">needs data</button>
+      <button class="chip" data-f="fast" aria-pressed="false">fastest to publish</button>
+      <button class="chip" data-f="ai" aria-pressed="false">AI search</button>
+      <button class="chip" data-f="local" aria-pressed="false">local / measurement</button>
+    </div>
+    <div class="count" id="count">6 of 6</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <main class="board" id="board"></main>
+  <div class="empty" id="empty" hidden>Nothing matches that filter.</div>
+
+  <section class="lib">
+    <h2>Source library</h2>
+    <p class="dek">Everything the six studies draw on. Public tools are linked; internal assets are
+    listed by description only — they stay unpublished and are used to design studies, never as
+    published evidence.</p>
+    <div class="libgrid" id="lib"></div>
+  </section>
+
+  <footer>
+    Growth Radical research board · maintained in
+    <code>agencysite/research-board/</code> · figures are schematics, not measured data.
+  </footer>
+</div>
+
+<script>
+/* ------------------------------------------------------------------ *
+ * DATA — edit here, the board re-renders itself. One object per idea. *
+ * ------------------------------------------------------------------ */
+const PAPERS = [
+{
+  id:"citation-paradox", rank:"Paper 01", accent:"var(--s1)", tags:["ready","ai","fast"],
+  title:"The Citation Paradox",
+  sub:"AI visibility and organic traffic have decoupled",
+  thesis:"Being the most-cited source in AI assistant answers does not protect organic traffic, and may be statistically unrelated to it. If that holds across a sample, the entire GEO/AEO retainer being sold right now is priced against an outcome nobody has shown it produces.",
+  hook:"The most-cited brand in its category lost organic traffic for twelve straight months.",
+  badges:[["Ready to run","ready"],["Harness exists",""],["3–4 weeks",""],["arXiv + industry",""]],
+  field:"A mental-health documentation SaaS came out of a citation audit as the <strong>#1 most-cited source across ChatGPT, Gemini and Perplexity</strong> for its category, with a stronger domain and faster link growth than every competitor tracked. It was simultaneously twelve months into a severe organic decline. Two newer, weaker competitors were taking share. Whatever AI citation share is measuring, it was not measuring commercial health.",
+  question:"Does share of citations in LLM answers correlate with organic traffic trajectory — and if not, what does it correlate with?",
+  method:[
+    "<strong>Sample:</strong> 100–150 domains across 4 verticals (health SaaS, legal services, fintech, e-commerce) with 12 months of publicly observable organic trajectory.",
+    "<strong>Query set:</strong> 40–60 fixed buyer-intent and reference queries per vertical, held constant across all domains in that vertical.",
+    "<strong>Citation extraction:</strong> repeated sampling per query per assistant (n set by Paper 04's variance curve), sources parsed out of each answer, share computed per domain.",
+    "<strong>Trajectory:</strong> 12-month organic visibility change per domain from a commercial rank index — never from anyone's private analytics.",
+    "<strong>Test:</strong> Spearman rank correlation between citation share and trajectory, plus partial correlations against domain authority, referring-domain growth, and category coverage %.",
+    "<strong>Falsifiable:</strong> if ρ > 0.5 the thesis is wrong and the paper says so — that result publishes too, and is arguably more useful."
+  ],
+  reader:{
+    who:"VP Growth / Head of SEO at B2B SaaS, roughly $5–50M ARR, who has an AEO or GEO proposal sitting in their inbox this quarter.",
+    pain:"They are about to sign a retainer against a metric nobody has validated, and they cannot tell their board why it will work.",
+    secondary:"Agency owners selling AI-visibility packages who privately suspect the correlation isn't there; analytics leads who will have to defend the number to a CFO.",
+    why:"It gives them one defensible sentence in a budget meeting. That is the whole product."
+  },
+  message:{
+    line:"AI visibility is a real thing you can measure. It is not the thing you think it protects.",
+    frame:"Not anti-AEO. Pro-measurement. The paper's posture is 'I built the tracker, ran it, and the correlation isn't there' — a practitioner reporting an inconvenient result, not a contrarian looking for reach.",
+    avoid:"Do not frame as 'AEO is dead.' That reads as bait, invites pile-on from vendors, and makes the finding easier to dismiss than the finding deserves."
+  },
+  channels:[
+    {n:"LinkedIn",k:"primary",icon:"li",items:[
+      "<strong>The reveal post.</strong> Scatter plot, one annotated outlier, one line: 'Each dot is a brand. X is how often AI assistants cite them. Y is what happened to their traffic. I expected a diagonal.' Full method in the first comment, not the post.",
+      "<strong>A 5-post serial</strong> over three weeks: (1) the anomaly that started it, (2) how citations were actually measured, (3) the correlation, (4) what still does predict trajectory, (5) what to do Monday. Serialising outperforms one long post and gives five entry points.",
+      "<strong>Named invitation.</strong> Tag three AI-visibility tool vendors and ask them to run the same test on their data. Disagreement in the comments is the distribution mechanism.",
+      "Cadence: Tue/Thu 08:00 ET. Document post for the scatter, text-only for the argument."
+    ]},
+    {n:"YouTube",k:"depth",icon:"yt",items:[
+      "<strong>18–24 min flagship:</strong> 'I tracked AI citations for 150 brands. Here's what it predicted.' Screen-record the actual extraction running — the pipeline is the credibility.",
+      "<strong>Chapters double as the paper's sections</strong>, so the video is the paper's abstract in motion and the description carries the PDF link.",
+      "<strong>Two 60s Shorts</strong> cut from it: the scatter reveal, and the single most-cited-yet-declining brand.",
+      "Pitch the same walkthrough to two established search podcasts — the study is the booking hook."
+    ]},
+    {n:"Instagram",k:"artifact",icon:"ig",items:[
+      "<strong>8-slide carousel:</strong> one chart per slide, one sentence per slide, final slide is the method link. Reels-first accounts under-use carousels for research; this is where they still work.",
+      "<strong>Reel:</strong> 30s screen-capture of asking three assistants the same question and getting three different source lists — visually obvious, no narration needed.",
+      "Stories: poll — 'Guess the correlation' — then reveal the next day. Cheap, and the guesses are audience research."
+    ]},
+    {n:"TikTok",k:"reach",icon:"tt",items:[
+      "<strong>Hook in 2 seconds:</strong> 'This brand is the #1 source ChatGPT cites in its industry. Its traffic fell for a year straight.' Then the chart.",
+      "<strong>Format:</strong> talking head over screen-record, 45–60s, no intro, no logo, caption burned in.",
+      "<strong>Series handle:</strong> 'Things the SEO industry sells that nobody has tested' — episode 1. A series title makes the follow worth it.",
+      "Expect the comments to be the research. Screenshot the best objection and answer it as the next video."
+    ]},
+    {n:"Newsletter / PR",k:"conversion",icon:"nl",items:[
+      "Gate nothing. Publish the PDF, the query sets, and the extraction code. Ungated is the whole positioning.",
+      "Pre-brief three search-trade journalists 72h ahead under embargo — a dataset with a counterintuitive result is exactly what they need.",
+      "One email to every past prospect: 'I built the thing your last proposal promised, and measured whether it works.' This is the client-acquisition step."
+    ]}
+  ],
+  sources:[
+    ["DataForSEO — rank & backlink index","https://dataforseo.com"],
+    ["DataForSEO metric definitions","https://docs.dataforseo.com"],
+    ["ChatGPT","https://chatgpt.com"],["Google Gemini","https://gemini.google.com"],
+    ["Perplexity","https://www.perplexity.ai"],
+    ["Keyword Planner (volume provenance)","https://ads.google.com/home/tools/keyword-planner/"],
+    ["arXiv cs.IR (venue)","https://arxiv.org/list/cs.IR/recent"],
+    ["INT · citation-extraction harness, built for a live audit",null],
+    ["INT · documented source-provenance appendix from that audit",null]
+  ],
+  fig:"scatter"
+},
+{
+  id:"decomposition", rank:"Paper 02", accent:"var(--s2)", tags:["ready","ai"],
+  title:"Four Ways to Lose",
+  sub:"Decomposing an organic decline without the owner's data",
+  thesis:"\"Traffic is down\" is four separable failures — rank loss, click cannibalisation by SERP features, demand contraction, and structural coverage loss — and they can be told apart using only publicly observable data. The industry treats them as one event and misprescribes accordingly.",
+  hook:"Nobody publishes a reproducible way to prove it wasn't a penalty.",
+  badges:[["Method drafted","ready"],["Needs validation set","data"],["5–6 weeks",""],["Industry report",""]],
+  field:"Built under a hard constraint: diagnose a year-long decline with <strong>no analytics and no Search Console access</strong>, from public data only. The decomposition returned a result that contradicted the client's own hypothesis. They believed AI features had destroyed category differentiation and that they had been penalised. The data said the domain still ranked, still out-authored every competitor, and had growing links — the losses were click cannibalisation on reference queries plus a coverage gap. Different diagnosis, completely different remedy.",
+  question:"Can a four-way attribution of organic decline be performed from public data alone, and does it agree with ground truth where Search Console data is available to check it?",
+  method:[
+    "<strong>Formalise</strong> the four components into a calculation with stated assumptions and error bars, not a narrative.",
+    "<strong>Apply</strong> to 60–80 domains with visible 12-month declines across several verticals.",
+    "<strong>Validate</strong> against a subset of 10–15 domains where an owner will share Search Console read-only for ground truth — recruited openly for the study, credited or anonymous, never repurposed engagement data.",
+    "<strong>Report</strong> the method's accuracy per component. Click cannibalisation will be the hardest to estimate without impression data; say so and quantify the uncertainty.",
+    "<strong>Ship the calculator</strong> alongside the paper. The tool is what gets used; the paper is what makes it trustworthy."
+  ],
+  reader:{
+    who:"The in-house SEO lead or agency strategist who inherited a decline and is being blamed for it.",
+    pain:"They are asked 'is this a penalty?' in a meeting and have no defensible way to answer. Guessing wrong costs them the account or the job.",
+    secondary:"Founders who have been told conflicting stories by two agencies and want a way to adjudicate.",
+    why:"It converts an argument into an audit. That is worth a retainer on its own."
+  },
+  message:{
+    line:"Before you fix a traffic drop, prove which of the four things actually happened.",
+    frame:"Diagnostic, calm, tool-shaped. This is the paper that reads as competence rather than provocation — it is the one that closes deals.",
+    avoid:"Don't let it become another 'AI Overviews are stealing your clicks' post. The point is precisely that you should stop assuming that and measure it."
+  },
+  channels:[
+    {n:"LinkedIn",k:"primary",icon:"li",items:[
+      "<strong>Anchor post:</strong> a decomposition waterfall for one anonymised decline — 'this drop was 4% rank, 61% clicks, 12% demand, 23% coverage. The client was about to fix the wrong one.'",
+      "<strong>Carousel:</strong> the four failure modes, one slide each, with the tell that distinguishes it from the other three.",
+      "<strong>Free tool drop</strong> as its own post two weeks later. Tools travel further than papers on LinkedIn and pull the paper along behind them."
+    ]},
+    {n:"YouTube",k:"depth",icon:"yt",items:[
+      "<strong>Live teardown format:</strong> take a viewer-submitted declining domain and run the full decomposition on camera in ~25 min. Repeatable as a series — this is a channel, not a video.",
+      "'Is it a penalty?' as a recurring title. High-intent search demand already exists for that exact question.",
+      "Shorts: one per failure mode, 40s each, each ending in the diagnostic tell."
+    ]},
+    {n:"Instagram",k:"artifact",icon:"ig",items:[
+      "<strong>Carousel:</strong> a decision tree as four swipes — 'your traffic dropped. Which one is it?'",
+      "Reel: the waterfall chart building bar by bar with a voiceover naming each cause. Under 30s.",
+      "Saveable-by-design: the decision tree is a reference card people bookmark, which is the algorithmic signal that matters here."
+    ]},
+    {n:"TikTok",k:"reach",icon:"tt",items:[
+      "<strong>'Your agency said it was the algorithm. Here's how to check.'</strong> — adversarial framing works here and the audience is receptive to it.",
+      "Four-part series, one failure mode per video, each 45s, posted daily.",
+      "Duet/stitch bait: invite people to post their own drop chart and diagnose the best ones as follow-ups. Free content, real demand capture."
+    ]},
+    {n:"Newsletter / PR",k:"conversion",icon:"nl",items:[
+      "The calculator is the lead magnet — and unlike a checklist, it produces a result the user wants explained, which is the natural consult trigger.",
+      "Recruit the validation cohort publicly. The recruitment post is itself distribution.",
+      "Offer the teardown free to 5 businesses in exchange for permission to publish anonymised. That is the paper's sample and the sales pipeline at once."
+    ]}
+  ],
+  sources:[
+    ["DataForSEO — historical rank data","https://dataforseo.com"],
+    ["Google Search Console (validation cohort only)","https://search.google.com/search-console/about"],
+    ["Google Search Status Dashboard — update dates","https://status.search.google.com/summary"],
+    ["INT · four-way decomposition as run on a live no-access audit",null],
+    ["INT · methodology appendix: per-claim source, tool, and pull date",null]
+  ],
+  fig:"waterfall"
+},
+{
+  id:"geogrid", rank:"Paper 03", accent:"var(--s3)", tags:["data","local"],
+  title:"Green Grid, Quiet Phone",
+  sub:"Does geo-grid share of voice predict anything that pays?",
+  thesis:"The local-SEO industry's primary proof-of-work metric saturates near the top of its range and stops discriminating exactly where agencies claim their wins. A grid can go fully green while the business loses the market.",
+  hook:"The grid goes green before the phone rings.",
+  badges:[["Highest impact",""],["Needs partner data","data"],["Industry blowback","risk"],["8–10 weeks",""]],
+  field:"A five-location service firm was measured across its markets and sat at <strong>80–95% local-pack presence at average position 1.4–2.1</strong> — a grid almost entirely green, in every office. In the same audit it lost or tied on organic in four of those five markets, and one office had 13 of 50 tracked queries with no top-three presence at all. The grid had no headroom left to register either the deficit or any fix. Notably, the agency's own stated reason for preferring the grid was that leads and signed cases are too noisy month to month — which is an argument for a lagging metric, not a leading one.",
+  question:"Across multi-location businesses, what is the correlation between geo-grid share of local voice and downstream conversions — and above what grid score does the metric stop discriminating?",
+  method:[
+    "<strong>Sample:</strong> 40+ locations across legal, dental and home services, recruited through agency partners, with 6+ months of paired grid history and lead data.",
+    "<strong>Primary test:</strong> correlation between grid share and qualified leads per location-month, with market size and seasonality controlled.",
+    "<strong>Ceiling test:</strong> segment by grid score band and measure whether correlation collapses above ~80% — the specific claim.",
+    "<strong>Discriminating range:</strong> report the band where grid movement actually tracks lead movement, so the metric can be used honestly rather than discarded.",
+    "<strong>Constructive close:</strong> propose the composite that outperforms it. A paper that only takes a tool away will be ignored by the people holding it."
+  ],
+  reader:{
+    who:"The multi-location owner — managing partner, practice owner, franchise operator — paying monthly and receiving grid screenshots as evidence.",
+    pain:"They are shown a green map and a flat bank account and cannot articulate why both are true.",
+    secondary:"Agency owners who already suspect this and want cover to change how they report. Frame the paper so they are the hero of the fix, not the villain of the finding.",
+    why:"It is the only paper here that changes what someone stops paying for."
+  },
+  message:{
+    line:"A metric that is already green cannot show you improvement. Most local reporting is measuring the part that is already won.",
+    frame:"Ceiling effect, not fraud. The agencies using grids are not lying — they adopted a leading indicator that stops leading at the top of its range. Say that clearly and the industry can hear it.",
+    avoid:"Any framing that reads as 'local SEO agencies are scamming you.' It is untrue, it forecloses the partner data you need, and the real finding is more interesting than the accusation."
+  },
+  channels:[
+    {n:"LinkedIn",k:"primary",icon:"li",items:[
+      "<strong>Lead with the anonymised case</strong> before the study exists: green grid across five markets, losing four of them on organic. That post recruits the data partners.",
+      "<strong>Recruitment post</strong> is a deliberate campaign step: 'I need 40 locations with grid history and lead data. Co-authorship or anonymity, your choice.'",
+      "Target agency owners, not just business owners — they hold the data and they are the distribution."
+    ]},
+    {n:"YouTube",k:"depth",icon:"yt",items:[
+      "<strong>Visually the strongest of the six.</strong> Animate a grid going green over months, side by side with a flat lead chart. That single animation is the whole argument.",
+      "Long-form: 'What your local SEO report isn't showing you' — 15 min, aimed at owners rather than practitioners.",
+      "Second video for practitioners on how to report honestly at saturation, which is where the goodwill gets rebuilt."
+    ]},
+    {n:"Instagram",k:"artifact",icon:"ig",items:[
+      "Reel: split screen, green grid filling in on the left, flat lead line on the right, 15s, no talking.",
+      "Carousel aimed at owners: 'five questions to ask your agency about that map.' Highly shareable inside owner communities.",
+      "This audience genuinely lives on Instagram — dental and home services especially. Weight it higher here than for Papers 01/04."
+    ]},
+    {n:"TikTok",k:"reach",icon:"tt",items:[
+      "<strong>Strongest TikTok fit of the six.</strong> 'Your SEO guy shows you this map every month. Here's what it isn't telling you.' Owner-facing, immediately legible, mildly conspiratorial in the right way.",
+      "45s, screen-record of a real grid, point at the saturation, cut to the lead chart.",
+      "Expect agency pushback in comments. Answer with the ceiling-effect explanation on video — that exchange is the best content the campaign will produce."
+    ]},
+    {n:"Newsletter / PR",k:"conversion",icon:"nl",items:[
+      "Pitch to legal- and dental-marketing trade press, where the owner audience concentrates.",
+      "Offer participating agencies an embargoed preview. Bringing them inside converts opponents into co-authors.",
+      "The consulting offer writes itself: a reporting audit — 'are you measuring the part that is still winnable?'"
+    ]}
+  ],
+  sources:[
+    ["Local Falcon — geo-grid measurement","https://www.localfalcon.com"],
+    ["Google Business Profile","https://business.google.com"],
+    ["DataForSEO — local pack & SERP data","https://dataforseo.com"],
+    ["INT · five-market comparison design, one DMA, controls specified",null],
+    ["INT · experiment tracking sheet with baselines, cadence, kill criteria",null]
+  ],
+  fig:"ceiling"
+},
+{
+  id:"nondeterminism", rank:"Paper 04", accent:"var(--s4)", tags:["ready","ai","fast"],
+  title:"One Draw From a Distribution",
+  sub:"Nondeterminism in AI-visibility measurement",
+  thesis:"Every AI-visibility figure currently sold is a single sample from a stochastic process, reported as a fact. No vendor states a sample size, because most sample once. The measurement is not wrong so much as undefined.",
+  hook:"Ask the same question twice, get a different answer. So what exactly is your AI visibility score?",
+  badges:[["Cheapest to run","ready"],["Fastest to publish","ready"],["2 weeks",""],["Most citable",""]],
+  field:"Running citation extraction across three assistants for a live audit made the instability impossible to ignore: the same prompt, re-run, returns a different source list. Every downstream number — share of citations, rank among cited sources, presence at all — moves with it. The audit handled this by sampling repeatedly. Nothing in the commercial tooling appears to.",
+  question:"How many samples per query per assistant are required before a citation-share estimate stabilises within ±5 percentage points, and how much does a single-sample measurement mislead?",
+  method:[
+    "<strong>Design:</strong> 50 queries × 3 assistants × k repeated samples, k from 1 to 50, held over a fixed window to separate sampling variance from model drift.",
+    "<strong>Output 1:</strong> a variance curve — the n needed for stability at several confidence bands. This becomes the standard everyone else has to cite.",
+    "<strong>Output 2:</strong> the misclassification rate of single-sample measurement. How often does one draw put a brand in the top 3 when its true mean is outside it?",
+    "<strong>Output 3:</strong> re-run the identical protocol 30 days later to separate stochastic noise from genuine model change — the two are routinely conflated as 'your AI visibility improved'.",
+    "<strong>Deliverable:</strong> a stated sampling protocol other researchers and vendors can adopt. This is the paper's real product."
+  ],
+  reader:{
+    who:"Two audiences at once. Practitioners who have to defend an AI-visibility number, and the tool vendors producing those numbers.",
+    pain:"Practitioners are quoting a figure they cannot reproduce. Vendors know their number is noisy and have no published standard to point at.",
+    secondary:"Academic IR researchers — this is the most conventionally citable thing on the board and the natural arXiv submission.",
+    why:"It is infrastructure. Papers 01 and 05 both depend on it, and so does every future study anyone else runs."
+  },
+  message:{
+    line:"Before you can improve your AI visibility, someone has to define how many times you measured it.",
+    frame:"Rigorous and generous. Not 'the tools are junk' but 'here is the sampling standard the category never established, take it.' This is the paper that earns respect from people who are hard to impress.",
+    avoid:"Over-claiming model drift. Distinguishing sampling noise from real change is precisely the hard part; if the 30-day re-run is underpowered, report that honestly."
+  },
+  channels:[
+    {n:"LinkedIn",k:"primary",icon:"li",items:[
+      "<strong>The demo post:</strong> same prompt, five runs, five different source lists, one screenshot. It argues itself before anyone reads a word.",
+      "<strong>The variance curve</strong> as a standalone post with a single instruction: 'if your tool samples once, this is your error bar.'",
+      "Direct, courteous outreach to vendors offering the protocol pre-publication. Adoption beats criticism, and a vendor who adopts it becomes a distributor."
+    ]},
+    {n:"YouTube",k:"depth",icon:"yt",items:[
+      "<strong>Short and technical, 10–12 min:</strong> screen-record 50 runs, plot the variance live. The audience for this is small and exactly the one worth having.",
+      "Best podcast asset on the board — a clean, quotable, defensible finding that makes a host look smart for booking it.",
+      "One Short: the five-runs-five-answers clip, no commentary needed."
+    ]},
+    {n:"Instagram",k:"artifact",icon:"ig",items:[
+      "Lowest priority of the six here — the finding is statistical and the audience is not.",
+      "If posting: the variance curve as a single graphic with one sentence. Do not build a carousel for this one.",
+      "Better use of the effort is repackaging Paper 01, which shares the underlying data."
+    ]},
+    {n:"TikTok",k:"reach",icon:"tt",items:[
+      "<strong>One video, done well:</strong> 'I asked ChatGPT the same question 50 times. Watch the sources change.' Fast cuts of the answer list changing. This premise travels far beyond a marketing audience.",
+      "Do not attempt the statistics on TikTok. The demo is the content; the paper link is the payoff.",
+      "Genuine crossover potential into general AI-curious audiences, which none of the other five have."
+    ]},
+    {n:"Newsletter / PR",k:"conversion",icon:"nl",items:[
+      "arXiv preprint first, then the industry write-up. Publication order matters for how this gets cited.",
+      "Send the protocol to every AI-visibility vendor before publishing, with an offer to list adopters in the paper.",
+      "This is the credential paper. It is what makes the other five hard to wave away."
+    ]}
+  ],
+  sources:[
+    ["ChatGPT","https://chatgpt.com"],["Google Gemini","https://gemini.google.com"],
+    ["Perplexity","https://www.perplexity.ai"],
+    ["arXiv cs.IR — target venue","https://arxiv.org/list/cs.IR/recent"],
+    ["INT · repeated-sampling extraction across three assistants",null]
+  ],
+  fig:"variance"
+},
+{
+  id:"coverage", rank:"Paper 05", accent:"var(--s5)", tags:["data","ai"],
+  title:"Structure Beats Authority",
+  sub:"How weaker challengers take reference-heavy categories",
+  thesis:"In categories organised around a finite entity set — clinical codes, templates, glossaries, specifications, comparisons — challengers with materially lower authority take share by covering the entity space the incumbent left empty. Coverage completeness predicts share change better than domain strength does.",
+  hook:"The category leader ranked on 11% of its biggest cluster. The challengers built the other 89%.",
+  badges:[["Strong finding",""],["Needs multi-category sample","data"],["6 weeks",""],["Industry report",""]],
+  field:"In one category the entity cluster was worth roughly <strong>133,000 searches a month</strong> and the incumbent — the strongest domain in the category by every authority measure available — ranked on about <strong>11%</strong> of it. Two challengers with weaker domains and shorter histories were systematically building it out, alongside comparison and exact-match buyer pages. The incumbent's authority advantage was real and completely irrelevant to the outcome, because it was not applied to any surface the challengers were contesting.",
+  question:"Across entity-set categories, does coverage completeness predict organic share change better than domain authority — and at what coverage threshold does the incumbent's authority advantage reassert itself?",
+  method:[
+    "<strong>Identify</strong> 8–12 categories built on enumerable entity sets across health, legal, finance and developer tooling.",
+    "<strong>Map the entity space</strong> per category — the full addressable set, not the keyword list — and compute coverage % for the incumbent and the top three challengers.",
+    "<strong>Model</strong> 12-month share change against coverage %, authority, and their interaction. The interaction term is the actual finding.",
+    "<strong>Threshold:</strong> find the coverage level at which authority starts to win again, which is the number an incumbent can act on.",
+    "<strong>Quality control:</strong> separate genuine coverage from thin programmatic output, or the paper accidentally endorses spam. Include a quality gate and report it."
+  ],
+  reader:{
+    who:"Content and SEO leads at category incumbents who believe their domain protects them.",
+    pain:"They are losing to sites they do not consider competitors and have no framework for why. Their authority metrics all look fine.",
+    secondary:"Programmatic SEO practitioners who want evidence for the approach; challenger-brand founders looking for the wedge.",
+    why:"It reframes an existential worry as a countable gap with a number attached."
+  },
+  message:{
+    line:"Your domain authority is not a moat. It is an unused advantage if you have not built the surface it applies to.",
+    frame:"Strategic, not tactical. This is the paper that gets read by people who buy strategy rather than execution — which is the higher-value client.",
+    avoid:"Do not let it read as 'publish thousands of pages.' The quality gate is central; without it the paper becomes a spam manual and the reputational cost is real."
+  },
+  channels:[
+    {n:"LinkedIn",k:"primary",icon:"li",items:[
+      "<strong>The 11% post.</strong> Coverage bar for incumbent versus challengers, one line: 'the strongest domain in the category was competing for a ninth of it.'",
+      "<strong>Coverage teardowns</strong> as a recurring format — pick a public category, map the entity space, publish the gap. Endlessly repeatable and each one is a pitch to that incumbent.",
+      "This is the highest-value post on the board for inbound. The people it stings are the people with budget."
+    ]},
+    {n:"YouTube",k:"depth",icon:"yt",items:[
+      "'How a weaker site is beating you' — 20 min, structural, aimed at directors rather than executors.",
+      "Show the entity-space mapping as a live process. The method is more valuable than the example and demonstrating it builds trust fast.",
+      "Shorts: the coverage-gap bar chart per category, one per video, high volume, low effort."
+    ]},
+    {n:"Instagram",k:"artifact",icon:"ig",items:[
+      "Carousel: 'the category was worth 133k searches a month. The leader ranked on 11%.' Numbers this stark carry the format.",
+      "Reel: coverage bars filling for challengers while the incumbent's stays short. 20s, silent, self-explanatory.",
+      "Medium priority — the audience skews practitioner and lives more on LinkedIn."
+    ]},
+    {n:"TikTok",k:"reach",icon:"tt",items:[
+      "'Big brands are losing to sites you've never heard of. Here's the exact gap.' Works because it is a David-and-Goliath structure with a real number in it.",
+      "Series by vertical — one per category mapped, sustainable for months.",
+      "Lower priority than Papers 01 and 03; the concept needs about 20 seconds of setup before it lands."
+    ]},
+    {n:"Newsletter / PR",k:"conversion",icon:"nl",items:[
+      "Each category teardown is a cold-outreach asset aimed at that category's incumbent. This is the most directly commercial paper of the six.",
+      "Offer the mapping as a paid diagnostic — it is a well-defined, scoped, repeatable engagement.",
+      "Publish the entity-space maps openly. They are useful, hard to reproduce, and they make the method concrete."
+    ]}
+  ],
+  sources:[
+    ["DataForSEO — keyword & ranking data","https://dataforseo.com"],
+    ["Keyword Planner — volume provenance","https://ads.google.com/home/tools/keyword-planner/"],
+    ["ICD-10 (example public entity set)","https://www.cdc.gov/nchs/icd/icd-10-cm.htm"],
+    ["INT · entity-cluster coverage analysis from a live category audit",null]
+  ],
+  fig:"coverage"
+},
+{
+  id:"provenance", rank:"Paper 06", accent:"var(--s6)", tags:["fast"],
+  title:"The Provenance Gap",
+  sub:"Why AI-accelerated analysis fails review",
+  thesis:"AI-assisted analytical work fails review on evidentiary chain, not on correctness. The tooling produces defensible conclusions far faster than it produces defensible sourcing, and reviewers reject on the second regardless of the first. The gap is structural, and it is getting wider as the analysis gets faster.",
+  hook:"The analysis was right. It lost anyway.",
+  badges:[["Essay-ready now","ready"],["Personal exposure","risk"],["1 week",""],["Practitioner note",""]],
+  field:"A fast, polished, AI-assisted diagnostic — fourteen sections, interactive, with a working assistant over the findings — was rejected with a specific reason: it lacked sources, so it was unclear what the assumptions rested on. The reviewer's later note said the winning submissions went deeper on analysis and methodology. The conclusions themselves were never contested. A full provenance appendix (every claim, its source, the tool, the pull date) was produced on request afterwards and was entirely satisfactory — but it arrived after the decision. The failure was not analytical. It was that speed and polish arrived before the evidentiary chain did, and reviewers read polish without provenance as a warning sign rather than a strength.",
+  question:"Does supplying a provenance appendix change reviewer assessment of an identical analysis — and does polish without provenance actively reduce perceived credibility?",
+  method:[
+    "<strong>Practitioner note first</strong> — publishable immediately, no data collection, argues the structural case and proposes the standard.",
+    "<strong>Proposed standard:</strong> per-claim source, retrieval tool, query, date, and a stated confidence. Small enough that people will actually use it.",
+    "<strong>Testable version:</strong> paired deliverables — the same analysis with and without a provenance appendix — reviewed blind by 20–30 practitioners scoring credibility and hire/no-hire.",
+    "<strong>Second condition worth including:</strong> high polish + no provenance versus low polish + full provenance. The suspicion is that polish without sourcing scores <em>worse</em> than plain work, which would be the paper's sharpest finding.",
+    "<strong>Caveat to state plainly:</strong> the originating observation is a single personal case. The essay must argue the general structure, not generalise from one rejection."
+  ],
+  reader:{
+    who:"Consultants, analysts and agencies shipping AI-assisted work into review right now, who have not yet had this happen to them.",
+    pain:"They are producing more, faster, and losing on trust — and misreading it as a quality problem when it is an evidence problem.",
+    secondary:"Hiring managers designing case-study rounds, who are currently unable to distinguish depth from fluency and know it.",
+    why:"It is the most immediately actionable thing on the board. The fix is a template, and everyone reading it can apply it this week."
+  },
+  message:{
+    line:"AI made the analysis fast. It did not make the evidence, and reviewers are marking the difference.",
+    frame:"Owned, specific, unsentimental. Write it as a practitioner reporting a mechanism, with the personal case as the opening illustration and the argument standing without it.",
+    avoid:"Self-pity, and any identifying detail about the reviewing organisation. The essay works only if the reader's attention lands on the mechanism rather than the grievance."
+  },
+  channels:[
+    {n:"LinkedIn",k:"primary",icon:"li",items:[
+      "<strong>Native long-form post, first person, no chart.</strong> This is the one that should be written as prose — 'I lost it on sources' — and it will outperform every data post on the board for engagement.",
+      "<strong>Publish the provenance template</strong> as a follow-up. Immediately usable, immediately shared.",
+      "Second post aimed at hiring managers: what to actually ask for in a case-study round. Different audience, same finding."
+    ]},
+    {n:"YouTube",k:"depth",icon:"yt",items:[
+      "12 min, talking head, minimal production. The format should match the honesty of the content.",
+      "Alternative framing with broader reach: 'how to make AI-assisted work survive review' — same argument, forward-looking, less exposure.",
+      "Lower priority than the written version. This idea is native to text."
+    ]},
+    {n:"Instagram",k:"artifact",icon:"ig",items:[
+      "Carousel of the provenance template itself — a genuinely useful reference card, saved and re-shared.",
+      "Skip the personal story here; the format flattens it into a motivational post, which is the wrong register entirely.",
+      "Low priority overall."
+    ]},
+    {n:"TikTok",k:"reach",icon:"tt",items:[
+      "<strong>Real crossover potential:</strong> 'I used AI to build a client report in two days. It was rejected for one reason.' The AI-at-work audience is enormous and this is a true, specific story.",
+      "45s, straight to camera, no chart, no jargon.",
+      "Risk to weigh: this is the most personally exposing content on the board. Decide once whether that trade is worth it, then commit — a hedged version of this video is worse than not posting it."
+    ]},
+    {n:"Newsletter / PR",k:"conversion",icon:"nl",items:[
+      "Ship this one first. It needs no data collection and it buys attention for Papers 01 and 04 while they are still being run.",
+      "Pitch to consulting and analyst publications rather than search trade press — the audience is broader than SEO.",
+      "Attach the provenance standard to every future deliverable. Practising the paper is the proof of the paper."
+    ]}
+  ],
+  sources:[
+    ["INT · the rejected interactive audit (14 sections, deployment now offline)",null],
+    ["INT · the provenance appendix produced afterwards, per claim and pull date",null],
+    ["INT · reviewer correspondence, to remain unpublished and unquoted",null]
+  ],
+  fig:"provenance"
+}
+];
+
+const LIBRARY = [
+  {h:"Rank, keyword & link data", items:[
+    ["DataForSEO","https://dataforseo.com","API behind rankings, volumes, backlinks, competitor overlap"],
+    ["DataForSEO docs","https://docs.dataforseo.com","metric definitions — cite these, not the marketing pages"],
+    ["Keyword Planner","https://ads.google.com/home/tools/keyword-planner/","origin of volume estimates; a volume is not traffic"]
+  ]},
+  {h:"AI assistants", items:[
+    ["ChatGPT","https://chatgpt.com","citation extraction target"],
+    ["Google Gemini","https://gemini.google.com","citation extraction target"],
+    ["Perplexity","https://www.perplexity.ai","citation extraction target"]
+  ]},
+  {h:"Local & ground truth", items:[
+    ["Local Falcon","https://www.localfalcon.com","geo-grid share of local voice"],
+    ["Google Business Profile","https://business.google.com","local entity data"],
+    ["Search Console","https://search.google.com/search-console/about","validation cohort only, never engagement data"],
+    ["Search Status Dashboard","https://status.search.google.com/summary","update dates for decline attribution"]
+  ]},
+  {h:"Venues", items:[
+    ["arXiv cs.IR","https://arxiv.org/list/cs.IR/recent","Papers 04, then 01"],
+    ["growthradical.com","https://growthradical.com","canonical home for all six"],
+    ["Trade press",null,"search, legal-marketing and dental-marketing outlets per paper"]
+  ]},
+  {h:"Internal assets — design input only", items:[
+    [null,null,"Citation-extraction harness across three assistants, with repeated sampling"],
+    [null,null,"Four-way decline decomposition run under a no-analytics-access constraint"],
+    [null,null,"Documented source-provenance appendix: per claim, tool, query, pull date"],
+    [null,null,"Five-market comparison design in one DMA, with controls and kill criteria"],
+    [null,null,"Experiment tracking sheet: baselines, 3/7/14/28-day cadence, success and kill thresholds"],
+    [null,null,"Entity-cluster coverage analysis for a ~133k/mo category"],
+    [null,null,"Owned affiliate property with full GSC and revenue history — the one dataset with no permission constraint at all"]
+  ]}
+];
+
+/* ---------------- schematic figures (hypothesis shapes, not data) ---------------- */
+const AX='var(--ink-3)', LN='var(--line-2)', IN='var(--ink-2)';
+function fig(kind, a){
+  const g=(s)=>`<svg viewBox="0 0 620 210" role="img" aria-label="schematic diagram">${s}</svg>`;
+  const axes=(x0,y0,x1,y1)=>`<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}" stroke="${LN}" stroke-width="1.5"/>
+    <line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1}" stroke="${LN}" stroke-width="1.5"/>`;
+  const lab=(x,y,t,anc='middle',sz=10)=>`<text x="${x}" y="${y}" fill="${AX}" font-size="${sz}"
+    font-family="ui-monospace,monospace" text-anchor="${anc}" letter-spacing=".04em">${t}</text>`;
+
+  if(kind==='scatter'){
+    const pts=[[95,60],[150,140],[190,55],[240,120],[285,155],[320,70],[360,130],[400,95],
+               [440,150],[470,65],[500,125],[135,105],[215,90],[300,110],[380,60],[425,140],[520,95],[260,50]];
+    const dots=pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="${a}" opacity=".62"/>`).join('');
+    return g(`${axes(70,20,560,175)}
+      ${dots}
+      <circle cx="540" cy="165" r="8" fill="none" stroke="${a}" stroke-width="2"/>
+      <circle cx="540" cy="165" r="5" fill="${a}"/>
+      <line x1="540" y1="157" x2="505" y2="120" stroke="${AX}" stroke-width="1" stroke-dasharray="3 3"/>
+      ${lab(500,112,'most-cited, still declining','end')}
+      <line x1="80" y1="168" x2="550" y2="32" stroke="${AX}" stroke-width="1.5" stroke-dasharray="6 5" opacity=".5"/>
+      ${lab(300,26,'the diagonal everyone assumes')}
+      ${lab(315,198,'AI citation share  →')}
+      <text x="26" y="98" fill="${AX}" font-size="10" font-family="ui-monospace,monospace"
+        transform="rotate(-90 26 98)" text-anchor="middle">organic trajectory →</text>`);
+  }
+  if(kind==='waterfall'){
+    const bars=[['rank',4,'',78],['clicks',61,a,172],['demand',12,'',272],['coverage',23,'',368]];
+    let s=axes(60,20,560,175);
+    bars.forEach(b=>{const h=b[1]*2.1, y=175-h, c=b[2]||'var(--surface-3)';
+      s+=`<rect x="${b[3]}" y="${y}" width="72" height="${h}" rx="4" fill="${c}"
+        stroke="${b[2]?a:LN}" stroke-width="1.5"/>
+        <text x="${b[3]+36}" y="${y-8}" fill="${IN}" font-size="12" font-family="ui-monospace,monospace"
+        text-anchor="middle" font-weight="600">${b[1]}%</text>
+        ${lab(b[3]+36,193,b[0])}`;});
+    s+=`${lab(556,36,'one drop, four causes','end')}`;
+    return g(s);
+  }
+  if(kind==='ceiling'){
+    let s=axes(70,20,560,175);
+    let d='M 70 168';
+    for(let i=0;i<=48;i++){const x=70+i*10.2; const t=i/48;
+      const y=168-118*(1-Math.exp(-3.4*t)); d+=` L ${x.toFixed(1)} ${y.toFixed(1)}`;}
+    s+=`<path d="${d}" fill="none" stroke="${a}" stroke-width="2.5"/>`;
+    s+=`<rect x="330" y="20" width="230" height="155" fill="${a}" opacity=".07"/>
+      <line x1="330" y1="20" x2="330" y2="175" stroke="${a}" stroke-width="1.5" stroke-dasharray="4 4"/>
+      ${lab(445,40,'saturated — no headroom left')}
+      ${lab(445,54,'to measure any change')}
+      <circle cx="470" cy="53" r="0" fill="none"/>
+      ${lab(198,90,'discriminating')}${lab(198,104,'range')}
+      ${lab(315,198,'effort / time  →')}
+      <text x="26" y="98" fill="${AX}" font-size="10" font-family="ui-monospace,monospace"
+        transform="rotate(-90 26 98)" text-anchor="middle">grid share of voice →</text>`;
+    return g(s);
+  }
+  if(kind==='variance'){
+    let s=axes(70,20,560,175);
+    let d='M 78 38';
+    for(let i=1;i<=50;i++){const x=70+i*9.6; const y=38+120/Math.sqrt(i)*0.92;
+      d+=` L ${x.toFixed(1)} ${Math.min(y,168).toFixed(1)}`;}
+    s+=`<path d="${d}" fill="none" stroke="${a}" stroke-width="2.5"/>`;
+    s+=`<line x1="70" y1="62" x2="560" y2="62" stroke="${AX}" stroke-width="1" stroke-dasharray="4 4"/>
+      ${lab(552,56,'±5pp stability band','end')}
+      <circle cx="243" cy="62" r="6" fill="${a}"/>
+      <line x1="243" y1="68" x2="243" y2="175" stroke="${a}" stroke-width="1" stroke-dasharray="3 3"/>
+      ${lab(243,193,'n = ?')}
+      ${lab(120,193,'n = 1')}
+      ${lab(120,50,'what vendors ship','start')}
+      ${lab(330,208,'samples per query  →')}
+      <text x="26" y="98" fill="${AX}" font-size="10" font-family="ui-monospace,monospace"
+        transform="rotate(-90 26 98)" text-anchor="middle">estimate error →</text>`;
+    return g(s);
+  }
+  if(kind==='coverage'){
+    const rows=[['incumbent',11,a],['challenger A',74,'var(--surface-3)'],['challenger B',68,'var(--surface-3)']];
+    let s='';
+    rows.forEach((r,i)=>{const y=38+i*48; const w=r[1]*4.4;
+      s+=`<rect x="150" y="${y}" width="440" height="26" rx="4" fill="var(--surface-3)" opacity=".45"/>
+        <rect x="150" y="${y}" width="${w}" height="26" rx="4" fill="${r[2]}"
+          stroke="${i===0?a:LN}" stroke-width="1.5"/>
+        <text x="138" y="${y+18}" fill="${IN}" font-size="11.5" font-family="ui-monospace,monospace"
+          text-anchor="end">${r[0]}</text>
+        <text x="${150+w+10}" y="${y+18}" fill="${IN}" font-size="12" font-family="ui-monospace,monospace"
+          font-weight="600">${r[1]}%</text>`;});
+    s+=`${lab(370,22,'share of a ~133k/mo entity cluster actually covered')}
+      ${lab(370,200,'strongest domain in the category — bottom bar')}`;
+    return g(s);
+  }
+  if(kind==='provenance'){
+    const st=[['analysis','done fast'],['polish','done fast'],['provenance','arrives late'],['review','decides here']];
+    let s='';
+    st.forEach((b,i)=>{const x=38+i*146; const late=i===2;
+      s+=`<rect x="${x}" y="62" width="120" height="62" rx="8"
+        fill="${late?'transparent':'var(--surface-3)'}"
+        stroke="${late?a:LN}" stroke-width="${late?2:1.5}" stroke-dasharray="${late?'6 4':'0'}"/>
+        <text x="${x+60}" y="88" fill="${IN}" font-size="12.5" font-family="ui-monospace,monospace"
+          text-anchor="middle" font-weight="600">${b[0]}</text>
+        <text x="${x+60}" y="106" fill="${AX}" font-size="10" font-family="ui-monospace,monospace"
+          text-anchor="middle">${b[1]}</text>`;
+      if(i<3) s+=`<line x1="${x+120}" y1="93" x2="${x+146}" y2="93" stroke="${LN}" stroke-width="1.5"/>
+        <polygon points="${x+146},93 ${x+139},89 ${x+139},97" fill="${LN}"/>`;});
+    s+=`<path d="M 330 140 Q 400 172 476 140" fill="none" stroke="${a}" stroke-width="1.5"
+        stroke-dasharray="5 4"/>
+      <polygon points="476,140 468,140 472,148" fill="${a}"/>
+      ${lab(403,190,'the gap the reviewer sees')}
+      ${lab(310,34,'the chain breaks before the decision, not after')}`;
+    return g(s);
+  }
+  return '';
+}
+
+/* ---------------- channel icons ---------------- */
+const ICON={
+  li:'<rect width="18" height="18" rx="3" fill="currentColor" opacity=".14"/><path d="M5 7.4h1.9V14H5zM5.95 4.3a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2zM8.6 7.4h1.82v.9h.03c.25-.46.87-.95 1.79-.95 1.91 0 2.26 1.2 2.26 2.77V14h-1.9v-2.99c0-.71-.01-1.63-1.02-1.63-1.02 0-1.18.78-1.18 1.58V14H8.6z" fill="currentColor"/>',
+  yt:'<rect width="18" height="18" rx="3" fill="currentColor" opacity=".14"/><path d="M14.6 6.6c-.14-.53-.55-.94-1.07-1.08C12.58 5.25 9 5.25 9 5.25s-3.58 0-4.53.27c-.52.14-.93.55-1.07 1.08C3.13 7.56 3.13 9 3.13 9s0 1.44.27 2.4c.14.53.55.94 1.07 1.08.95.27 4.53.27 4.53.27s3.58 0 4.53-.27c.52-.14.93-.55 1.07-1.08.27-.96.27-2.4.27-2.4s0-1.44-.27-2.4zM7.8 10.8V7.2L10.9 9z" fill="currentColor"/>',
+  ig:'<rect width="18" height="18" rx="3" fill="currentColor" opacity=".14"/><rect x="4.4" y="4.4" width="9.2" height="9.2" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="9" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="11.9" cy="6.1" r=".85" fill="currentColor"/>',
+  tt:'<rect width="18" height="18" rx="3" fill="currentColor" opacity=".14"/><path d="M11.1 4.2c.25 1.36 1.05 2.2 2.4 2.32v1.63c-.79.08-1.48-.18-2.28-.66v2.93c0 3.72-4.06 4.88-5.69 2.2-1.05-1.73-.4-4.76 3-4.88v1.72c-.26.04-.54.11-.79.2-.76.26-1.19.74-1.07 1.59.23 1.62 3.2 2.1 2.95-1.07V4.2z" fill="currentColor"/>',
+  nl:'<rect width="18" height="18" rx="3" fill="currentColor" opacity=".14"/><rect x="4" y="5.4" width="10" height="7.2" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.4 6.4L9 9.6l4.6-3.2" fill="none" stroke="currentColor" stroke-width="1.5"/>'
+};
+
+/* ---------------- render ---------------- */
+const STATES=["Backlog","Shortlisted","In progress","Drafted","Published"];
+const board=document.getElementById('board');
+const store=(k,v)=>{try{ if(v===undefined) return localStorage.getItem('rb:'+k);
+  localStorage.setItem('rb:'+k,v);}catch(e){return null;}};
+
+function card(p){
+  const el=document.createElement('article');
+  el.className='card'; el.dataset.id=p.id; el.dataset.tags=p.tags.join(' ');
+  el.style.setProperty('--accent',p.accent);
+  const saved=store('state:'+p.id)||'Backlog';
+  el.dataset.state=saved;
+
+  const badges=p.badges.map(b=>`<span class="badge ${b[1]}">${b[0]}</span>`).join('');
+  const opts=STATES.map(s=>`<option${s===saved?' selected':''}>${s}</option>`).join('');
+  const srcs=p.sources.map(s=>s[1]
+    ? `<a class="src" href="${s[1]}" target="_blank" rel="noopener"><span class="dot"></span>${s[0]}</a>`
+    : `<span class="src int"><span class="dot"></span>${s[0].replace(/^INT · /,'')}</span>`).join('');
+  const chans=p.channels.map(c=>`<div class="chan">
+      <div class="chan-h" style="color:${p.accent}"><svg width="18" height="18" viewBox="0 0 18 18">${ICON[c.icon]}</svg>
+      <b style="color:var(--ink)">${c.n}</b><span>${c.k}</span></div>
+      <div class="chan-b"><ul>${c.items.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`).join('');
+
+  el.innerHTML=`
+  <div class="chead">
+    <div>
+      <div class="rank">${p.rank}</div>
+      <h3 class="ctitle">${p.title} <span style="color:var(--ink-3);font-weight:400">— ${p.sub}</span></h3>
+      <p class="thesis">${p.thesis}</p>
+      <div class="badges">${badges}</div>
+    </div>
+    <div class="cstate">
+      <select class="state" aria-label="Status for ${p.title}">${opts}</select>
+    </div>
+  </div>
+
+  <div class="hook">
+    <p>“${p.hook}”</p>
+    <button class="copy" type="button" data-copy="${p.hook.replace(/"/g,'&quot;')}">copy</button>
+  </div>
+
+  <div class="fig">${fig(p.fig,p.accent)}
+    <div class="figcap">schematic — the shape this study tests, not measured data</div></div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true"  data-p="research">research</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="reader">reader</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="campaign">campaign</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="sources">sources</button>
+  </div>
+
+  <div class="panel" data-panel="research">
+    <div class="grid2">
+      <div class="blk"><h4>Where it came from</h4><p>${p.field}</p></div>
+      <div class="blk"><h4>The question</h4><p><strong>${p.question}</strong></p></div>
+    </div>
+    <div class="blk" style="margin-top:20px"><h4>Method</h4><ul>${p.method.map(m=>`<li>${m}</li>`).join('')}</ul></div>
+  </div>
+
+  <div class="panel" data-panel="reader" hidden>
+    <div class="grid2">
+      <div class="blk"><h4>Perfect reader</h4><p>${p.reader.who}</p>
+        <h4 style="margin-top:16px">Their pain</h4><p>${p.reader.pain}</p></div>
+      <div class="blk"><h4>Secondary audience</h4><p>${p.reader.secondary}</p>
+        <h4 style="margin-top:16px">Why they act</h4><p>${p.reader.why}</p></div>
+    </div>
+    <div class="grid2" style="margin-top:6px">
+      <div class="blk"><h4>The line that travels</h4><p><strong>${p.message.line}</strong></p></div>
+      <div class="blk"><h4>Framing</h4><p>${p.message.frame}</p>
+        <h4 style="margin-top:16px">Do not</h4><p>${p.message.avoid}</p></div>
+    </div>
+  </div>
+
+  <div class="panel" data-panel="campaign" hidden>${chans}</div>
+
+  <div class="panel" data-panel="sources" hidden>
+    <div class="blk"><h4>Sources &amp; assets</h4>
+    <p style="font-size:13px">Linked items are public and citable. Unlinked items are internal
+    fieldwork — they inform study design and are never published as evidence.</p>
+    <div class="srcs">${srcs}</div></div>
+  </div>`;
+  return el;
+}
+
+PAPERS.forEach(p=>board.appendChild(card(p)));
+
+/* library */
+document.getElementById('lib').innerHTML=LIBRARY.map(c=>`<div class="libcol"><h4>${c.h}</h4><ul>${
+  c.items.map(i=>`<li>${i[1]?`<a href="${i[1]}" target="_blank" rel="noopener">${i[0]}</a>`
+   :(i[0]?`<span>${i[0]}</span>`:'')}<span class="note">${i[2]}</span></li>`).join('')}</ul></div>`).join('');
+
+/* ---------------- behaviour ---------------- */
+board.addEventListener('click',e=>{
+  const tab=e.target.closest('.tab');
+  if(tab){const c=tab.closest('.card');
+    c.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',String(t===tab)));
+    c.querySelectorAll('.panel').forEach(pn=>pn.hidden = pn.dataset.panel!==tab.dataset.p);
+    return;}
+  const cp=e.target.closest('.copy');
+  if(cp){navigator.clipboard?.writeText(cp.dataset.copy).then(()=>{
+    const o=cp.textContent; cp.textContent='copied'; setTimeout(()=>cp.textContent=o,1400);});}
+});
+
+board.addEventListener('change',e=>{
+  const s=e.target.closest('.state'); if(!s) return;
+  const c=s.closest('.card'); c.dataset.state=s.value; store('state:'+c.dataset.id,s.value); tally();
+});
+
+let filter='all', query='';
+function apply(){
+  let shown=0;
+  document.querySelectorAll('.card').forEach(c=>{
+    const okF = filter==='all' || c.dataset.tags.split(' ').includes(filter);
+    const okQ = !query || c.textContent.toLowerCase().includes(query);
+    c.hidden = !(okF&&okQ); if(!c.hidden) shown++;
+  });
+  document.getElementById('count').textContent=`${shown} of ${PAPERS.length}`;
+  document.getElementById('empty').hidden = shown>0;
+}
+document.getElementById('chips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  filter=b.dataset.f; apply();
+});
+document.getElementById('q').addEventListener('input',e=>{query=e.target.value.toLowerCase().trim(); apply();});
+
+function tally(){
+  const picked=[...document.querySelectorAll('.card')]
+    .filter(c=>['Shortlisted','In progress','Drafted','Published'].includes(c.dataset.state)).length;
+  document.getElementById('t-picked').textContent=picked;
+}
+tally();
+
+/* theme toggle */
+const tb=document.getElementById('themebtn');
+const savedTheme=store('theme'); if(savedTheme) document.documentElement.setAttribute('data-theme',savedTheme);
+tb.addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const next = cur==='dark' ? 'light' : cur==='light' ? 'dark'
+    : (matchMedia('(prefers-color-scheme: dark)').matches ? 'light':'dark');
+  document.documentElement.setAttribute('data-theme',next); store('theme',next);
+});
+</script>
+</body>
+</html>
