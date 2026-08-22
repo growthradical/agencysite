@@ -51,12 +51,42 @@ for «КафанЧе».
 - **Macedonian dates spelled out in JS** rather than left to `Intl` — not every browser
   build ships the `mk` locale, and the date sits in the hero where a silent fallback to
   English would be obvious.
-- **`Restaurant` JSON-LD** for local search: address, phone, hours, cuisine, socials.
+- **`Restaurant` JSON-LD** for local search: address, phone, hours, cuisine, socials,
+  and `hasMap`. No `geo` block — see *The map* below.
+- **A map in two layers** — a live Google embed over a drawn locator diagram.
 - **No photography.** The illustrations, the folk diamond band and the street sketch are
   inline SVG. When real photos are available they belong in the hero and the evenings
   section — see *Before launch*.
 - Respects `prefers-reduced-motion`, keyboard-focusable throughout, no horizontal scroll
   at 390px.
+
+## The map
+
+The map element in the visit section is two layers. Underneath is a locator diagram —
+inline SVG, street grid, pin — that is always drawn. On top, a Google Maps embed is
+injected at runtime and fades in.
+
+Three things gate the embed, and each one exists because of a way it fails:
+
+- **It is geocoded by address query, not by coordinates.** `?q=KafanCHE, Orce Nikolov
+  139…&output=embed` needs no API key and no hard-coded lat/lng, so the pin cannot drift
+  from the real venue if a coordinate is wrong. Nothing on the page states coordinates —
+  the JSON-LD deliberately carries `hasMap` but no `geo`.
+- **It only loads top-level** (`window.self === window.top`). Google refuses to be framed
+  inside another frame, so in a preview — the shared artifact, a CMS editor — the embed
+  would paint an empty box over the locator. Framed, it is never injected.
+- **It probes reachability first.** A blocked embed still fires `load` and paints an
+  opaque error page. So a tiny image is fetched from Google before the iframe is created;
+  if it fails or takes over 3s — a content blocker, a restrictive network, an offline
+  visitor — the locator simply stays. This was found in testing, not theorised.
+
+The embed is also `loading="lazy"` and held back until the section is near the viewport,
+so no third-party request happens unless a visitor actually scrolls to the map. That
+matters for an EU venue: no Google call, no consent question, for anyone who never
+reaches the map.
+
+To change the location, edit `MAP_QUERY` in the script, the `hasMap` URL in the JSON-LD,
+and the two address links.
 
 ## Editing
 

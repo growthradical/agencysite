@@ -34,6 +34,7 @@
     "addressCountry": "MK"
   },
   "telephone": "+389 77 548 838",
+  "hasMap": "https://share.google/tHElkw0O4lkfqny2Q",
   "servesCuisine": ["Macedonian", "Balkan", "Meze"],
   "priceRange": "800–1000 MKD",
   "openingHoursSpecification": [{
@@ -517,17 +518,71 @@ img,svg{max-width:100%;}
 .chip:hover{color:var(--paprika);border-color:var(--paprika);}
 .chip svg{width:15px;height:15px;flex:0 0 auto;}
 
-/* the little street plan — drawn, not a map tile */
-.plan{
-  position:relative;
+/* ── MAP ──────────────────────────────────────────────────
+   Two layers. The locator diagram is always drawn; the live
+   Google embed is injected on top only when the page is
+   top-level (see the script — a framed preview cannot load it).
+   ───────────────────────────────────────────────────────── */
+.map{
+  margin:0;
   border:1px solid var(--rule);
   background:var(--ground-2);
-  padding:clamp(1.2rem,3vw,1.8rem);
-  display:flex;flex-direction:column;gap:1rem;
+  display:flex;flex-direction:column;
+  overflow:hidden;
 }
-.band--raised .plan{background:var(--ground-3);}
-.plan svg{width:100%;height:auto;display:block;}
-.plan__cap{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--bone-dim);}
+.band--raised .map{background:var(--ground-3);}
+
+.map__frame{
+  position:relative;
+  aspect-ratio:4/3;
+  min-height:280px;
+  overflow:hidden;
+  border-bottom:1px solid var(--rule);
+}
+@media (min-width:900px){ .map__frame{aspect-ratio:5/4;min-height:0;} }
+
+.map__plan{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  display:block;
+}
+.map__frame iframe{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  border:0;
+  opacity:0;
+  transition:opacity .5s ease;
+}
+.map__frame iframe.in{opacity:1;}
+@media (prefers-reduced-motion: reduce){ .map__frame iframe{transition:none;} }
+
+/* the pin sits above both layers so the venue stays findable either way */
+.map__pin{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-100%);
+  z-index:2;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;gap:.3rem;
+}
+.map__pin span{
+  font-family:var(--f-mono);font-size:.62rem;font-weight:700;letter-spacing:.14em;
+  background:var(--paprika);color:#F3E9DB;padding:.2rem .45rem;border-radius:3px;
+  white-space:nowrap;
+}
+.map__pin i{
+  width:13px;height:13px;border-radius:50%;
+  background:var(--paprika);border:2.5px solid var(--ground-2);
+  box-shadow:0 0 0 1px var(--paprika);
+}
+.band--raised .map__pin i{border-color:var(--ground-3);}
+.map__frame:has(iframe.in) .map__pin{display:none;}
+
+.map__bar{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:.9rem 1.2rem;
+  padding:clamp(1rem,2.5vw,1.3rem);
+}
+.map__addr{font-family:var(--f-display);font-weight:800;font-size:var(--step-0);line-height:1.3;}
+.map__sub{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.11em;text-transform:uppercase;color:var(--bone-dim);margin-top:.2rem;}
 
 /* ─────────────────────────────────────────────────────────
    FOOTER
@@ -814,9 +869,9 @@ img,svg{max-width:100%;}
         <div class="fact">
           <p class="fact__label" data-mk="Адреса" data-en="Address">Адреса</p>
           <p class="fact__value">
-            <a href="https://www.google.com/maps/search/?api=1&amp;query=Kafanche%2C%20Orce%20Nikolov%20139%2C%20Skopje" target="_blank" rel="noopener noreferrer" data-mk="ул. Орце Николов 139, 1000 Скопје" data-en="Orce Nikolov 139, 1000 Skopje">ул. Орце Николов 139, 1000 Скопје</a>
+            <a href="https://share.google/tHElkw0O4lkfqny2Q" target="_blank" rel="noopener noreferrer" data-mk="ул. Орце Николов 139, 1000 Скопје" data-en="Orce Nikolov 139, 1000 Skopje">ул. Орце Николов 139, 1000 Скопје</a>
           </p>
-          <p class="fact__sub" data-mk="Центар — пешки од плоштадот." data-en="City centre — walking distance from the square.">Центар — пешки од плоштадот.</p>
+          <p class="fact__sub" data-mk="Дебар Маало, Центар — пешки од плоштадот." data-en="Debar Maalo, Centar — walking distance from the square.">Дебар Маало, Центар — пешки од плоштадот.</p>
         </div>
 
         <div class="fact">
@@ -850,31 +905,40 @@ img,svg{max-width:100%;}
         </div>
       </div>
 
-      <div class="plan rise">
-        <svg viewBox="0 0 400 260" role="img" aria-labelledby="plan-title">
-          <title id="plan-title" data-mk="Скица: Кафанче на ул. Орце Николов, Скопје" data-en="Sketch map: Kafanche on Orce Nikolov street, Skopje">Скица: Кафанче на ул. Орце Николов, Скопје</title>
-          <g stroke="currentColor" fill="none" opacity=".28" stroke-width="1">
-            <path d="M0 96 H400"/>
-            <path d="M0 104 H400"/>
-            <path d="M148 0 V260"/>
-            <path d="M156 0 V260"/>
-            <path d="M0 200 H400"/>
-            <path d="M300 0 V260"/>
-          </g>
-          <g opacity=".16" stroke="currentColor" fill="none" stroke-width="1">
-            <rect x="20" y="124" width="94" height="52"/>
-            <rect x="190" y="124" width="70" height="52"/>
-            <rect x="190" y="26" width="84" height="46"/>
-            <rect x="326" y="124" width="56" height="52"/>
-            <rect x="20" y="26" width="104" height="46"/>
-          </g>
-          <circle cx="176" cy="140" r="26" fill="none" stroke="currentColor" stroke-width="1" opacity=".3"/>
-          <circle cx="176" cy="140" r="8" fill="currentColor" style="color:var(--paprika)"/>
-          <text x="176" y="188" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.6" fill="currentColor" style="color:var(--paprika)">КАФАНЧЕ</text>
-          <text x="8" y="92" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.4" fill="currentColor" opacity=".55">ОРЦЕ НИКОЛОВ</text>
-        </svg>
-        <p class="plan__cap" data-mk="Скица · не е во размер" data-en="Sketch · not to scale">Скица · не е во размер</p>
-      </div>
+      <figure class="map rise" id="map">
+        <div class="map__frame" data-map-frame>
+          <svg class="map__plan" viewBox="0 0 320 320" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="plan-title">
+            <title id="plan-title" data-mk="Локатор: Кафанче на ул. Орце Николов, Дебар Маало, Скопје" data-en="Locator: Kafanche on Orce Nikolov street, Debar Maalo, Skopje">Локатор: Кафанче на ул. Орце Николов, Дебар Маало, Скопје</title>
+            <g stroke="currentColor" fill="none" opacity=".2" stroke-width="9" stroke-linecap="square">
+              <path d="M-10 160 H330"/>
+              <path d="M104 -10 V330"/>
+              <path d="M232 -10 V330"/>
+              <path d="M-10 58 H330"/>
+              <path d="M-10 262 H330"/>
+            </g>
+            <g fill="currentColor" opacity=".07">
+              <rect x="18" y="76" width="70" height="66"/>
+              <rect x="122" y="76" width="92" height="66"/>
+              <rect x="248" y="76" width="60" height="66"/>
+              <rect x="18" y="178" width="70" height="66"/>
+              <rect x="122" y="178" width="92" height="66"/>
+              <rect x="248" y="178" width="60" height="66"/>
+            </g>
+            <g font-family="JetBrains Mono, monospace" font-size="7.5" letter-spacing="1.3" fill="currentColor" opacity=".45">
+              <text x="10" y="153">ОРЦЕ НИКОЛОВ</text>
+              <text x="112" y="26" transform="rotate(90 112 26)">ДЕБАР МААЛО</text>
+            </g>
+          </svg>
+          <p class="map__pin" aria-hidden="true"><span>КАФАНЧЕ</span><i></i></p>
+        </div>
+        <figcaption class="map__bar">
+          <div>
+            <p class="map__addr" data-mk="ул. Орце Николов 139" data-en="Orce Nikolov 139">ул. Орце Николов 139</p>
+            <p class="map__sub" data-mk="Дебар Маало · Центар · 1000 Скопје" data-en="Debar Maalo · Centar · 1000 Skopje">Дебар Маало · Центар · 1000 Скопје</p>
+          </div>
+          <a class="btn btn--ghost" href="https://share.google/tHElkw0O4lkfqny2Q" target="_blank" rel="noopener noreferrer" data-mk="Отвори во Мапи" data-en="Open in Maps">Отвори во Мапи</a>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1029,6 +1093,63 @@ img,svg{max-width:100%;}
       var from = parseInt(slots[i].getAttribute("data-from"), 10);
       var to = parseInt(slots[i].getAttribute("data-to"), 10);
       slots[i].setAttribute("data-now", String(isOpen && t.h >= from && t.h < to));
+    }
+  }
+
+  /* ── Live map ─────────────────────────────────────────────
+     Geocoded by address query rather than by hard-coded
+     coordinates, so the pin cannot drift from the real venue.
+     Only injected when the page is top-level: a framed preview
+     (artifact, CMS editor) is refused by Google's embed and
+     would paint an empty box over the locator diagram. The
+     iframe is also held back until the section is near the
+     viewport, so the page makes no third-party request unless
+     a visitor actually scrolls to the map. */
+  var mapFrame = document.querySelector("[data-map-frame]");
+  var MAP_QUERY = "KafanCHE, Orce Nikolov 139, 1000 Skopje, North Macedonia";
+
+  function loadMap(){
+    if (!mapFrame || mapFrame.querySelector("iframe")) { return; }
+    var frame = document.createElement("iframe");
+    frame.src = "https://www.google.com/maps?q=" + encodeURIComponent(MAP_QUERY) +
+                "&z=16&hl=" + (lang === "en" ? "en" : "mk") + "&output=embed";
+    frame.title = lang === "en" ? "Map of Kafanche, Orce Nikolov 139, Skopje"
+                                : "Мапа на Кафанче, ул. Орце Николов 139, Скопје";
+    frame.loading = "lazy";
+    frame.referrerPolicy = "no-referrer-when-downgrade";
+    frame.setAttribute("allowfullscreen", "");
+    frame.addEventListener("load", function(){ frame.classList.add("in"); });
+    mapFrame.appendChild(frame);
+  }
+
+  /* A blocked embed still fires `load` and paints an opaque error page over
+     the locator, so reachability is probed with a tiny image first. Anything
+     that would break the map — a content blocker, a restrictive network, an
+     offline visitor — fails the probe, and the locator simply stays. */
+  function probeThenLoad(){
+    var probe = new Image();
+    var settled = false;
+    function give(ok){
+      if (settled) { return; }
+      settled = true;
+      clearTimeout(timer);
+      if (ok) { loadMap(); }
+    }
+    var timer = setTimeout(function(){ give(false); }, 3000);
+    probe.onload = function(){ give(true); };
+    probe.onerror = function(){ give(false); };
+    probe.referrerPolicy = "no-referrer";
+    probe.src = "https://www.google.com/favicon.ico";
+  }
+
+  if (mapFrame && window.self === window.top){
+    if ("IntersectionObserver" in window){
+      var mapIO = new IntersectionObserver(function(entries){
+        if (entries[0].isIntersecting){ probeThenLoad(); mapIO.disconnect(); }
+      }, { rootMargin: "300px" });
+      mapIO.observe(mapFrame);
+    } else {
+      probeThenLoad();
     }
   }
 
