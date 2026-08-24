@@ -1,0 +1,741 @@
+<!doctype html>
+<!--
+  КафанЧе — Skopje. One-page site.
+  Palette, motifs and copy are taken from the venue's own Instagram (@kafanche).
+  The street address is deliberately NOT stated: they announced a move and the
+  "Каде сме?" highlight shows a 38A tile, so the map link is the source of
+  truth until the venue confirms. See README.md.
+-->
+<html lang="mk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>КафанЧе</title>
+<meta name="description" content="Едно ново симпатично лабаво кафанЧЕ во Скопје. Сезонски јадења, а целогодишни пиења. Месечно мени, јадење на денот, појадок и посно мени.">
+<meta property="og:title" content="КафанЧе — Скопје">
+<meta property="og:description" content="Едно ново симпатично лабаво кафанЧЕ! Сезонски јадења, а целогодишни пиења :)">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#EE7A45">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23EE7A45'/%3E%3Ctext x='16' y='23' font-family='Verdana,sans-serif' font-size='18' font-weight='700' text-anchor='middle' fill='%23F7F0E4'%3E%D0%9A%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "КафанЧе",
+  "alternateName": "KafanCHE",
+  "description": "Едно ново симпатично лабаво кафанЧЕ. Сезонски јадења, а целогодишни пиења.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Скопје",
+    "addressCountry": "MK"
+  },
+  "telephone": "+389 77 548 838",
+  "hasMap": "https://maps.app.goo.gl/vU3hLvLHYSi8W1nD7",
+  "servesCuisine": ["Macedonian", "Balkan", "Meze"],
+  "sameAs": [
+    "https://www.instagram.com/kafanche",
+    "https://www.tiktok.com/@kafanche",
+    "https://msha.ke/kafanche"
+  ]
+}
+</script>
+<style>
+/* ─────────────────────────────────────────────────────────
+   TOKENS
+   Read off the venue's own feed: coral badge, cream poster
+   stock, cornflower summer-menu blue, navy type, stamp red.
+   Light-first — their world is printed paper, not a dark room.
+   ───────────────────────────────────────────────────────── */
+:root{
+  --paper:#F7F0E4;
+  --paper-2:#FDF8EF;
+  --paper-3:#EFE4D2;
+  --ink:#1E2B47;
+  --ink-dim:#5C6883;
+  --coral:#EE7A45;
+  --sky:#86A9DA;
+  --brick:#C8281C;
+  --wine:#7A1F2E;
+  --rule:rgba(30,43,71,.18);
+  --rule-soft:rgba(30,43,71,.09);
+  --on-coral:#FDF8EF;
+  --check:rgba(238,122,69,.16);
+
+  --f-display:"Unbounded","Trebuchet MS",Helvetica,sans-serif;
+  --f-text:"Onest","Segoe UI",Helvetica,Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+
+  --step--1:clamp(.76rem,.74rem + .1vw,.83rem);
+  --step-0:clamp(1.02rem,.99rem + .17vw,1.12rem);
+  --step-1:clamp(1.18rem,1.1rem + .36vw,1.42rem);
+  --step-2:clamp(1.44rem,1.27rem + .82vw,2.05rem);
+  --step-3:clamp(1.9rem,1.5rem + 1.9vw,3.2rem);
+
+  --gutter:clamp(1.15rem,4vw,3rem);
+  --wrap:1180px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#17203A;
+    --paper-2:#1E2A47;
+    --paper-3:#26334F;
+    --ink:#F7F0E4;
+    --ink-dim:#A7B3CC;
+    --coral:#F58C5B;
+    --sky:#9BBBE6;
+    --brick:#E4573F;
+    --wine:#C97F91;
+    --rule:rgba(247,240,228,.2);
+    --rule-soft:rgba(247,240,228,.1);
+    --on-coral:#17203A;
+    --check:rgba(245,140,91,.14);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#17203A;
+  --paper-2:#1E2A47;
+  --paper-3:#26334F;
+  --ink:#F7F0E4;
+  --ink-dim:#A7B3CC;
+  --coral:#F58C5B;
+  --sky:#9BBBE6;
+  --brick:#E4573F;
+  --wine:#C97F91;
+  --rule:rgba(247,240,228,.2);
+  --rule-soft:rgba(247,240,228,.1);
+  --on-coral:#17203A;
+  --check:rgba(245,140,91,.14);
+}
+
+/* ─────────────────────────────────────────────────────────
+   BASE
+   ───────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-text);
+  font-size:var(--step-0);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:800;line-height:1.02;text-wrap:balance;letter-spacing:-.02em;}
+p{margin:0;}
+ul,ol{margin:0;padding:0;list-style:none;}
+a{color:inherit;}
+img,svg{max-width:100%;}
+
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gutter);}
+
+.eyebrow{
+  font-family:var(--f-mono);font-size:var(--step--1);font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);line-height:1.4;
+}
+.eyebrow--coral{color:var(--coral);}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:10000;
+  background:var(--coral);color:var(--on-coral);
+  padding:.7rem 1.1rem;font-family:var(--f-mono);font-size:var(--step--1);
+}
+.skip:focus{left:.5rem;top:.5rem;}
+
+:where(a,button,summary,[tabindex]):focus-visible{
+  outline:3px solid var(--coral);outline-offset:3px;border-radius:3px;
+}
+
+/* the tablecloth — their most repeated visual after the badge */
+.gingham{
+  background-image:
+    repeating-linear-gradient(0deg, var(--check) 0 13px, transparent 13px 26px),
+    repeating-linear-gradient(90deg, var(--check) 0 13px, transparent 13px 26px);
+}
+
+/* ─────────────────────────────────────────────────────────
+   NAV
+   ───────────────────────────────────────────────────────── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:color-mix(in srgb, var(--paper) 90%, transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule-soft);
+}
+.nav__in{display:flex;align-items:center;gap:1.4rem;min-height:68px;}
+.mark{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex:0 0 auto;}
+.badge{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--coral);color:var(--on-coral);
+  display:grid;place-items:center;flex:0 0 auto;
+  font-family:var(--f-display);font-weight:900;font-size:1rem;letter-spacing:-.04em;
+}
+.mark__word{font-family:var(--f-display);font-weight:800;font-size:1.1rem;letter-spacing:-.03em;}
+.nav__links{
+  display:none;gap:1.5rem;margin-left:auto;
+  font-family:var(--f-mono);font-size:var(--step--1);
+  letter-spacing:.12em;text-transform:uppercase;
+}
+.nav__links a{text-decoration:none;color:var(--ink-dim);transition:color .18s;}
+.nav__links a:hover{color:var(--coral);}
+.nav__tools{display:flex;align-items:center;gap:.5rem;margin-left:auto;}
+.nav__links + .nav__tools{margin-left:1.5rem;}
+@media (min-width:960px){ .nav__links{display:flex;} }
+
+.lang{display:inline-flex;border:1.5px solid var(--rule);border-radius:999px;overflow:hidden;}
+.lang button{
+  appearance:none;background:none;border:0;cursor:pointer;
+  font-family:var(--f-mono);font-size:.68rem;font-weight:700;letter-spacing:.1em;
+  padding:.36rem .6rem;color:var(--ink-dim);transition:background .18s,color .18s;
+}
+.lang button[aria-pressed="true"]{background:var(--coral);color:var(--on-coral);}
+
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--f-mono);font-size:var(--step--1);font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;text-decoration:none;
+  padding:.72rem 1.15rem;border-radius:999px;
+  border:2px solid var(--coral);background:var(--coral);color:var(--on-coral);
+  transition:transform .18s,filter .18s;white-space:nowrap;
+}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+.btn--ghost{background:none;color:var(--ink);border-color:var(--rule);}
+.btn--ghost:hover{border-color:var(--coral);color:var(--coral);filter:none;}
+.btn--sm{padding:.5rem .85rem;font-size:.7rem;}
+@media (max-width:620px){ .nav .btn--sm{display:none;} }
+
+/* ─────────────────────────────────────────────────────────
+   HERO
+   ───────────────────────────────────────────────────────── */
+.hero{position:relative;padding-block:clamp(2.6rem,7vw,5rem) clamp(2.4rem,6vw,4rem);overflow:hidden;}
+.hero__in{position:relative;z-index:1;display:grid;gap:clamp(1.8rem,4vw,3rem);}
+@media (min-width:940px){ .hero__in{grid-template-columns:1.35fr .65fr;align-items:center;} }
+
+/* the stacked lockup they use on their own posters */
+.lockup{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(3.4rem,15vw,9.5rem);
+  line-height:.84;letter-spacing:-.055em;
+  margin-bottom:clamp(1.2rem,3vw,1.8rem);
+}
+.lockup span{display:block;}
+.lockup .l2{color:var(--coral);padding-left:.09em;}
+
+.hero__tag{
+  font-size:var(--step-2);font-weight:600;line-height:1.24;
+  max-width:22ch;margin-bottom:.7rem;text-wrap:balance;
+}
+.hero__sub{color:var(--ink-dim);max-width:44ch;margin-bottom:1.8rem;font-size:var(--step-1);}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.7rem;}
+
+/* the coral badge, big */
+.hero__badge{display:grid;place-items:center;}
+.hero__badge svg{width:min(78%,300px);height:auto;}
+
+/* ─────────────────────────────────────────────────────────
+   TICKER
+   ───────────────────────────────────────────────────────── */
+.rail{
+  border-block:2px solid var(--ink);
+  background:var(--coral);color:var(--on-coral);
+  overflow:hidden;padding-block:.65rem;
+}
+.rail__track{display:flex;width:max-content;animation:slide 40s linear infinite;}
+.rail__track:hover{animation-play-state:paused;}
+.rail__set{
+  display:flex;gap:2rem;padding-right:2rem;flex:0 0 auto;
+  font-family:var(--f-mono);font-size:var(--step--1);font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+}
+.rail__set span::after{content:"✳";margin-left:2rem;}
+@keyframes slide{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion: reduce){ .rail{overflow-x:auto;} .rail__track{animation:none;} }
+
+/* ─────────────────────────────────────────────────────────
+   BANDS
+   ───────────────────────────────────────────────────────── */
+.band{padding-block:clamp(3.2rem,8vw,6rem);}
+.band--tint{background:var(--paper-3);}
+.band--check{background-color:var(--paper-2);}
+.band__head{display:flex;flex-direction:column;gap:.85rem;margin-bottom:clamp(1.8rem,4.5vw,3rem);}
+.band__title{font-size:var(--step-3);}
+.band__note{color:var(--ink-dim);max-width:56ch;}
+
+/* ─────────────────────────────────────────────────────────
+   MENU CARDS — their real rhythm: monthly board, dish of the
+   day, breakfast, and the Orthodox fasting menu.
+   ───────────────────────────────────────────────────────── */
+.cards{display:grid;gap:clamp(1.1rem,2.5vw,1.6rem);}
+@media (min-width:700px){ .cards{grid-template-columns:repeat(2,1fr);} }
+@media (min-width:1020px){ .cards{grid-template-columns:repeat(4,1fr);} }
+
+.card{
+  background:var(--paper-2);
+  border:2px solid var(--ink);
+  border-radius:14px;
+  padding:clamp(1.2rem,2.5vw,1.5rem);
+  display:flex;flex-direction:column;gap:.7rem;
+  position:relative;
+}
+.card__no{
+  font-family:var(--f-mono);font-size:.68rem;font-weight:700;letter-spacing:.14em;
+  color:var(--on-coral);background:var(--coral);
+  padding:.2rem .5rem;border-radius:999px;align-self:flex-start;
+}
+.card--sky .card__no{background:var(--sky);}
+.card--brick .card__no{background:var(--brick);color:#FDF8EF;}
+.card--wine .card__no{background:var(--wine);color:#FDF8EF;}
+.card__name{font-family:var(--f-display);font-weight:800;font-size:var(--step-1);letter-spacing:-.02em;line-height:1.15;}
+.card__text{color:var(--ink-dim);font-size:.97rem;line-height:1.6;}
+
+/* ─────────────────────────────────────────────────────────
+   EVENINGS
+   ───────────────────────────────────────────────────────── */
+.evenings{display:grid;gap:clamp(1.1rem,2.5vw,1.6rem);}
+@media (min-width:760px){ .evenings{grid-template-columns:repeat(3,1fr);} }
+
+.ticket{
+  border:2px dashed var(--ink);
+  border-radius:12px;
+  background:var(--paper-2);
+  padding:clamp(1.2rem,2.5vw,1.6rem);
+  display:flex;flex-direction:column;gap:.6rem;
+}
+.ticket__kicker{font-family:var(--f-mono);font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--coral);}
+.ticket__name{font-size:var(--step-2);}
+.ticket__text{color:var(--ink-dim);font-size:.97rem;line-height:1.6;}
+
+/* ─────────────────────────────────────────────────────────
+   YARD
+   ───────────────────────────────────────────────────────── */
+.yard{display:grid;gap:clamp(1.6rem,4vw,3rem);align-items:center;}
+@media (min-width:880px){ .yard{grid-template-columns:1fr 1fr;} }
+.yard__text{display:flex;flex-direction:column;gap:1rem;}
+.yard__text p{color:var(--ink-dim);}
+.yard__text p:first-of-type{color:var(--ink);font-size:var(--step-1);line-height:1.5;}
+.yard__art{border:2px solid var(--ink);border-radius:14px;overflow:hidden;aspect-ratio:4/3;}
+.yard__art svg{width:100%;height:100%;display:block;}
+
+/* ─────────────────────────────────────────────────────────
+   VISIT
+   ───────────────────────────────────────────────────────── */
+.visit{display:grid;gap:clamp(1.8rem,4vw,3rem);}
+@media (min-width:900px){ .visit{grid-template-columns:1fr 1fr;align-items:start;} }
+.facts{display:flex;flex-direction:column;gap:1.5rem;}
+.fact{display:flex;flex-direction:column;gap:.25rem;}
+.fact__label{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);}
+.fact__value{font-family:var(--f-display);font-weight:700;font-size:var(--step-1);line-height:1.3;letter-spacing:-.02em;}
+.fact__value a{text-decoration:none;box-shadow:inset 0 -.12em 0 var(--coral);}
+.fact__value a:hover{color:var(--coral);}
+.fact__sub{color:var(--ink-dim);font-size:.95rem;}
+
+.socials{display:flex;flex-wrap:wrap;gap:.55rem;}
+.chip{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-family:var(--f-mono);font-size:.72rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;
+  padding:.55rem .9rem;border:2px solid var(--rule);border-radius:999px;
+  color:var(--ink-dim);transition:color .18s,border-color .18s;
+}
+.chip:hover{color:var(--coral);border-color:var(--coral);}
+.chip svg{width:15px;height:15px;flex:0 0 auto;}
+
+/* the house-number tile from their own "Каде сме?" highlight */
+.tile{display:flex;flex-direction:column;gap:1rem;align-items:flex-start;}
+.tile svg{width:min(100%,190px);height:auto;}
+.tile__cap{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);max-width:34ch;line-height:1.7;}
+
+/* ─────────────────────────────────────────────────────────
+   MAP
+   ───────────────────────────────────────────────────────── */
+.map{margin:0;border:2px solid var(--ink);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;background:var(--paper-2);}
+.map__frame{position:relative;aspect-ratio:4/3;min-height:260px;overflow:hidden;border-bottom:2px solid var(--ink);}
+@media (min-width:900px){ .map__frame{aspect-ratio:5/4;min-height:0;} }
+.map__plan{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.map__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity .5s ease;}
+.map__frame iframe.in{opacity:1;}
+@media (prefers-reduced-motion: reduce){ .map__frame iframe{transition:none;} }
+.map__pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);z-index:2;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:.3rem;}
+.map__pin span{font-family:var(--f-mono);font-size:.62rem;font-weight:700;letter-spacing:.13em;background:var(--coral);color:var(--on-coral);padding:.2rem .45rem;border-radius:4px;white-space:nowrap;}
+.map__pin i{width:13px;height:13px;border-radius:50%;background:var(--coral);border:3px solid var(--paper-2);box-shadow:0 0 0 2px var(--coral);}
+.map__frame:has(iframe.in) .map__pin{display:none;}
+.map__bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.85rem 1.2rem;padding:clamp(1rem,2.4vw,1.3rem);}
+.map__addr{font-family:var(--f-display);font-weight:800;font-size:var(--step-0);line-height:1.3;letter-spacing:-.02em;}
+.map__sub{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);margin-top:.25rem;}
+
+/* ─────────────────────────────────────────────────────────
+   FOOTER
+   ───────────────────────────────────────────────────────── */
+.foot{padding-block:clamp(2.2rem,5vw,3.4rem);border-top:2px solid var(--ink);}
+.foot__in{display:flex;flex-wrap:wrap;gap:1.1rem 2rem;align-items:center;justify-content:space-between;}
+.foot__note{font-family:var(--f-mono);font-size:.71rem;letter-spacing:.08em;color:var(--ink-dim);line-height:1.7;max-width:42ch;}
+
+/* ─────────────────────────────────────────────────────────
+   REVEAL
+   ───────────────────────────────────────────────────────── */
+.rise{opacity:0;transform:translateY(16px);}
+.rise.in{opacity:1;transform:none;transition:opacity .65s ease,transform .65s cubic-bezier(.22,.61,.36,1);}
+@media (prefers-reduced-motion: reduce){ .rise{opacity:1;transform:none;} .rise.in{transition:none;} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-mk="Кон содржината" data-en="Skip to content">Кон содржината</a>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="mark" href="#top" aria-label="КафанЧе">
+      <span class="badge" aria-hidden="true">К</span>
+      <span class="mark__word">КафанЧе</span>
+    </a>
+    <nav class="nav__links" aria-label="Главна навигација">
+      <a href="#meni" data-mk="Мени" data-en="Menu">Мени</a>
+      <a href="#veceri" data-mk="Вечери" data-en="Evenings">Вечери</a>
+      <a href="#dvor" data-mk="Во двор" data-en="The yard">Во двор</a>
+      <a href="#kade" data-mk="Каде сме" data-en="Find us">Каде сме</a>
+    </nav>
+    <div class="nav__tools">
+      <div class="lang" role="group" aria-label="Јазик / Language">
+        <button type="button" data-lang="mk" aria-pressed="true">МК</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn--sm" href="tel:+38977548838" data-mk="077 548 838" data-en="077 548 838">077 548 838</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero gingham" id="top">
+  <div class="wrap hero__in">
+    <div>
+      <h1 class="lockup"><span>Кафан</span><span class="l2">Че</span></h1>
+      <p class="hero__tag" data-mk="Едно ново симпатично лабаво кафанЧЕ!" data-en="A new, sweet, easy-going little kafana.">Едно ново симпатично лабаво кафанЧЕ!</p>
+      <p class="hero__sub" data-mk="Сезонски јадења, а целогодишни пиења :)" data-en="Seasonal food, and year-round drinks :)">Сезонски јадења, а целогодишни пиења :)</p>
+      <div class="hero__cta">
+        <a class="btn" href="tel:+38977548838" data-mk="Бројче · 077 548 838" data-en="Call · 077 548 838">Бројче · 077 548 838</a>
+        <a class="btn btn--ghost" href="#kade" data-mk="Каде сме?" data-en="Where are we?">Каде сме?</a>
+      </div>
+    </div>
+
+    <div class="hero__badge" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="96" fill="var(--coral)"/>
+        <circle cx="100" cy="100" r="96" fill="none" stroke="var(--ink)" stroke-width="3"/>
+        <text x="100" y="127" text-anchor="middle" font-family="Unbounded, Trebuchet MS, sans-serif" font-weight="900" font-size="72" letter-spacing="-3" fill="var(--on-coral)">КЧ</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="rail" aria-hidden="true">
+  <div class="rail__track">
+    <div class="rail__set">
+      <span>Сезонски јадења</span><span>Целогодишни пиења</span><span>Месечно мени</span><span>Јадење на денот</span><span>Појадок</span><span>Посно мени</span><span>Грчка вечер</span><span>Во двор</span>
+    </div>
+    <div class="rail__set">
+      <span>Сезонски јадења</span><span>Целогодишни пиења</span><span>Месечно мени</span><span>Јадење на денот</span><span>Појадок</span><span>Посно мени</span><span>Грчка вечер</span><span>Во двор</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── MENU ────────────────────────────────────────────── -->
+<section class="band" id="meni">
+  <div class="wrap">
+    <div class="band__head rise">
+      <p class="eyebrow eyebrow--coral" data-mk="Мени" data-en="Menu">Мени</p>
+      <h2 class="band__title" data-mk="Менито се менува. Секој месец, и секој ден." data-en="The menu moves. Every month, and every day.">Менито се менува. Секој месец, и секој ден.</h2>
+      <p class="band__note" data-mk="Готвиме со тоа што сезоната го дала, па ништо не стои долго на таблата. Актуелното мени секогаш прво оди на Инстаграм." data-en="We cook what the season gives, so nothing stays on the board for long. The current menu always goes to Instagram first.">Готвиме со тоа што сезоната го дала, па ништо не стои долго на таблата. Актуелното мени секогаш прво оди на Инстаграм.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card rise">
+        <span class="card__no" data-mk="Месечно" data-en="Monthly">Месечно</span>
+        <h3 class="card__name" data-mk="Месечно мени" data-en="Monthly menu">Месечно мени</h3>
+        <p class="card__text" data-mk="Ново мени на почетокот од секој месец — јануари, февруари, март, и така натаму, сè до летното." data-en="A new menu at the top of every month — January, February, March, and on through the summer one.">Ново мени на почетокот од секој месец — јануари, февруари, март, и така натаму, сè до летното.</p>
+      </div>
+
+      <div class="card card--sky rise">
+        <span class="card__no" data-mk="Денес" data-en="Today">Денес</span>
+        <h3 class="card__name" data-mk="Јадење на денот" data-en="Dish of the day">Јадење на денот</h3>
+        <p class="card__text" data-mk="Едно јадење, готвено за тој ден. Кога ќе се потроши, се потрошило — затоа вреди да се дојде порано." data-en="One dish, cooked for that day. When it is gone, it is gone — which is a good reason to come early.">Едно јадење, готвено за тој ден. Кога ќе се потроши, се потрошило — затоа вреди да се дојде порано.</p>
+      </div>
+
+      <div class="card card--brick rise">
+        <span class="card__no" data-mk="Наутро" data-en="Mornings">Наутро</span>
+        <h3 class="card__name" data-mk="Појадок мени" data-en="Breakfast menu">Појадок мени</h3>
+        <p class="card__text" data-mk="Појадок за луѓе што не брзаат. Најтивкиот дел од денот кај нас, и најдобриот за долго кафе." data-en="Breakfast for people who are not in a hurry. The quietest part of our day, and the best one for a long coffee.">Појадок за луѓе што не брзаат. Најтивкиот дел од денот кај нас, и најдобриот за долго кафе.</p>
+      </div>
+
+      <div class="card card--wine rise">
+        <span class="card__no" data-mk="Пости" data-en="Fasting">Пости</span>
+        <h3 class="card__name" data-mk="Посно мени" data-en="Lenten menu">Посно мени</h3>
+        <p class="card__text" data-mk="Во посните периоди има посебно мени — целото исто толку сериозно готвено како и останатото." data-en="During fasting periods there is a separate menu — cooked every bit as seriously as the rest.">Во посните периоди има посебно мени — целото исто толку сериозно готвено како и останатото.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENINGS ────────────────────────────────────────── -->
+<section class="band band--tint" id="veceri">
+  <div class="wrap">
+    <div class="band__head rise">
+      <p class="eyebrow eyebrow--coral" data-mk="Вечери" data-en="Evenings">Вечери</p>
+      <h2 class="band__title" data-mk="Она што не се пишува во мени" data-en="The part that never makes the menu">Она што не се пишува во мени</h2>
+      <p class="band__note" data-mk="Тематски вечери, гостински кујни и празници што бараат посебна маса. Датумите одат на Инстаграм, а местата се малку." data-en="Themed nights, guest kitchens, and feast days that deserve their own table. Dates go to Instagram, and there are not many seats.">Тематски вечери, гостински кујни и празници што бараат посебна маса. Датумите одат на Инстаграм, а местата се малку.</p>
+    </div>
+
+    <div class="evenings">
+      <div class="ticket rise">
+        <p class="ticket__kicker" data-mk="Тематска вечер" data-en="Themed night">Тематска вечер</p>
+        <h3 class="ticket__name" data-mk="Грчка вечер" data-en="Greek night">Грчка вечер</h3>
+        <p class="ticket__text" data-mk="Една вечер, едно мени, една кујна што не е наша. Се повторува кога ќе ни се посака — и секогаш се резервира однапред." data-en="One evening, one menu, one kitchen that is not ours. It comes back when we feel like it — and it always books out in advance.">Една вечер, едно мени, една кујна што не е наша. Се повторува кога ќе ни се посака — и секогаш се резервира однапред.</p>
+      </div>
+
+      <div class="ticket rise">
+        <p class="ticket__kicker" data-mk="Гости" data-en="Guests">Гости</p>
+        <h3 class="ticket__name" data-mk="Takeover" data-en="Takeover">Takeover</h3>
+        <p class="ticket__text" data-mk="Им ја предаваме кујната на луѓе што сакаме да ги јадеме. Тие готват, ние служиме, вие седите." data-en="We hand the kitchen to people whose cooking we want to eat. They cook, we serve, you sit.">Им ја предаваме кујната на луѓе што сакаме да ги јадеме. Тие готват, ние служиме, вие седите.</p>
+      </div>
+
+      <div class="ticket rise">
+        <p class="ticket__kicker" data-mk="Празници" data-en="Feast days">Празници</p>
+        <h3 class="ticket__name" data-mk="Празнична агенда" data-en="The feast-day list">Празнична агенда</h3>
+        <p class="ticket__text" data-mk="Св. Трифун, Нова Година, сè што бара наздравување. Агендата излегува пред секој празничен период." data-en="St Trifun, New Year, anything that calls for a toast. The list goes out before each run of holidays.">Св. Трифун, Нова Година, сè што бара наздравување. Агендата излегува пред секој празничен период.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── YARD ────────────────────────────────────────────── -->
+<section class="band" id="dvor">
+  <div class="wrap yard">
+    <div class="yard__text rise">
+      <p class="eyebrow eyebrow--coral" data-mk="Во двор" data-en="The yard">Во двор</p>
+      <h2 class="band__title" data-mk="Најдоброто место е надвор" data-en="The best table is outside">Најдоброто место е надвор</h2>
+      <p data-mk="Кафанчето има двор, и дворот е поентата. Карирани чаршафи, сенка, и маси на кои се седи подолго отколку што било планирано." data-en="The kafanche has a yard, and the yard is the whole point. Checked cloths, shade, and tables people sit at far longer than they planned.">Кафанчето има двор, и дворот е поентата. Карирани чаршафи, сенка, и маси на кои се седи подолго отколку што било планирано.</p>
+      <p data-mk="Летото мени се пишува за дворот — полесни работи, повеќе мезе, и пиења што издржуваат попладне." data-en="The summer menu is written for the yard — lighter things, more meze, and drinks that survive an afternoon.">Летото мени се пишува за дворот — полесни работи, повеќе мезе, и пиења што издржуваат попладне.</p>
+    </div>
+
+    <div class="yard__art rise gingham" aria-hidden="true">
+      <svg viewBox="0 0 400 300">
+        <g stroke="var(--ink)" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="200" cy="176" rx="96" ry="30"/>
+          <path d="M200 176v78"/>
+          <path d="M164 254h72"/>
+          <path d="M104 176c0-12 8-20 18-20M296 176c0-12-8-20-18-20"/>
+        </g>
+        <g fill="var(--coral)" stroke="var(--ink)" stroke-width="3">
+          <circle cx="166" cy="160" r="17"/>
+          <circle cx="204" cy="152" r="21"/>
+          <circle cx="240" cy="162" r="15"/>
+        </g>
+        <g stroke="var(--ink)" fill="none" stroke-width="3" stroke-linecap="round">
+          <path d="M166 143v-8M204 131v-9M240 147v-7"/>
+        </g>
+        <g stroke="var(--ink)" fill="var(--sky)" stroke-width="3">
+          <path d="M96 128h30l-6 34h-18z"/>
+          <path d="M282 122h28l-5 40h-18z"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── VISIT ───────────────────────────────────────────── -->
+<section class="band band--tint" id="kade">
+  <div class="wrap">
+    <div class="band__head rise">
+      <p class="eyebrow eyebrow--coral" data-mk="Каде сме" data-en="Find us">Каде сме</p>
+      <h2 class="band__title" data-mk="Каде сме?" data-en="Where are we?">Каде сме?</h2>
+    </div>
+
+    <div class="visit">
+      <div class="facts rise">
+        <div class="fact tile">
+          <svg viewBox="0 0 200 140" role="img" aria-labelledby="tile-t">
+            <title id="tile-t" data-mk="Плочка со број 38А" data-en="House-number tile reading 38A">Плочка со број 38А</title>
+            <rect x="3" y="3" width="194" height="134" rx="12" fill="#FDF8EF" stroke="var(--ink)" stroke-width="3"/>
+            <rect x="14" y="14" width="172" height="112" rx="7" fill="none" stroke="#2E4A8F" stroke-width="2.5"/>
+            <text x="100" y="97" text-anchor="middle" font-family="Unbounded, Trebuchet MS, sans-serif" font-weight="800" font-size="62" fill="#2E4A8F">38А</text>
+          </svg>
+          <p class="tile__cap" data-mk="Бројот на вратата. Точната улица е на мапата подолу — најсигурно е да се тргне по неа." data-en="The number on the door. The exact street is on the map below — that is the one to follow.">Бројот на вратата. Точната улица е на мапата подолу — најсигурно е да се тргне по неа.</p>
+        </div>
+
+        <div class="fact">
+          <p class="fact__label" data-mk="Бројче" data-en="Our number">Бројче</p>
+          <p class="fact__value"><a href="tel:+38977548838">077 548 838</a></p>
+          <p class="fact__sub" data-mk="Малку маси. За вечер и за настани, јави се однапред." data-en="Few tables. For evenings and events, call ahead.">Малку маси. За вечер и за настани, јави се однапред.</p>
+        </div>
+
+        <div class="fact">
+          <p class="fact__label" data-mk="Работно време" data-en="Hours">Работно време</p>
+          <p class="fact__value" data-mk="Провери на Инстаграм" data-en="Check Instagram">Провери на Инстаграм</p>
+          <p class="fact__sub" data-mk="Времињата се менуваат со сезоната и со настаните — таму се објавуваат прво." data-en="Times shift with the season and with events — they are posted there first.">Времињата се менуваат со сезоната и со настаните — таму се објавуваат прво.</p>
+        </div>
+
+        <div class="fact">
+          <p class="fact__label" data-mk="Следи не" data-en="Follow">Следи не</p>
+          <div class="socials">
+            <a class="chip" href="https://www.instagram.com/kafanche" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+              Instagram
+            </a>
+            <a class="chip" href="https://www.tiktok.com/@kafanche" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 6.5A5 5 0 0 0 19 10"/></svg>
+              TikTok
+            </a>
+            <a class="chip" href="https://msha.ke/kafanche" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+              <span data-mk="Сите линкови" data-en="All links">Сите линкови</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <figure class="map rise" id="map">
+        <div class="map__frame" data-map-frame>
+          <svg class="map__plan" viewBox="0 0 320 320" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="plan-t">
+            <title id="plan-t" data-mk="Локатор за КафанЧе во Скопје" data-en="Locator for Kafanche in Skopje">Локатор за КафанЧе во Скопје</title>
+            <g stroke="var(--ink)" fill="none" opacity=".22" stroke-width="10" stroke-linecap="square">
+              <path d="M-10 160 H330"/><path d="M104 -10 V330"/><path d="M232 -10 V330"/>
+              <path d="M-10 58 H330"/><path d="M-10 262 H330"/>
+            </g>
+          </svg>
+          <p class="map__pin" aria-hidden="true"><span>КАФАНЧЕ</span><i></i></p>
+        </div>
+        <figcaption class="map__bar">
+          <div>
+            <p class="map__addr" data-mk="Скопје, Северна Македонија" data-en="Skopje, North Macedonia">Скопје, Северна Македонија</p>
+            <p class="map__sub" data-mk="Отвори ја мапата за точната локација" data-en="Open the map for the exact spot">Отвори ја мапата за точната локација</p>
+          </div>
+          <a class="btn" href="https://maps.app.goo.gl/vU3hLvLHYSi8W1nD7" target="_blank" rel="noopener noreferrer" data-mk="Отвори во Мапи" data-en="Open in Maps">Отвори во Мапи</a>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="mark" href="#top" aria-label="КафанЧе">
+      <span class="badge" aria-hidden="true">К</span>
+      <span class="mark__word">КафанЧе</span>
+    </a>
+    <p class="foot__note" data-mk="© 2026 КафанЧе · Скопје. Сезонски јадења, а целогодишни пиења." data-en="© 2026 Kafanche · Skopje. Seasonal food, and year-round drinks.">© 2026 КафанЧе · Скопје. Сезонски јадења, а целогодишни пиења.</p>
+    <a class="btn" href="tel:+38977548838" data-mk="Јави се" data-en="Call us">Јави се</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ── Language ─────────────────────────────────────────── */
+  var lang = "mk";
+  try { lang = localStorage.getItem("kafanche-lang") || "mk"; } catch (e) { lang = "mk"; }
+  if (lang !== "en") { lang = "mk"; }
+
+  function applyLang(next){
+    lang = next;
+    document.documentElement.setAttribute("lang", next === "en" ? "en" : "mk");
+    var nodes = document.querySelectorAll("[data-mk][data-en]");
+    for (var i = 0; i < nodes.length; i++){
+      var v = nodes[i].getAttribute(next === "en" ? "data-en" : "data-mk");
+      if (v !== null) { nodes[i].textContent = v; }
+    }
+    var buttons = document.querySelectorAll(".lang button");
+    for (var j = 0; j < buttons.length; j++){
+      buttons[j].setAttribute("aria-pressed", String(buttons[j].getAttribute("data-lang") === next));
+    }
+    try { localStorage.setItem("kafanche-lang", next); } catch (e) {}
+  }
+
+  var langButtons = document.querySelectorAll(".lang button");
+  for (var b = 0; b < langButtons.length; b++){
+    langButtons[b].addEventListener("click", function(){
+      applyLang(this.getAttribute("data-lang"));
+    });
+  }
+
+  /* ── Live map ─────────────────────────────────────────────
+     Geocoded from the venue's own Google Maps pin rather than a
+     street address, because they announced a move and no
+     directory listing can be trusted yet.
+     Only injected when the page is top-level — Google refuses to
+     be framed, and a framed preview would paint an empty box over
+     the locator. Reachability is probed first: a blocked embed
+     still fires `load` and paints an opaque error page, so a
+     content blocker or restrictive network leaves the locator. */
+  var mapFrame = document.querySelector("[data-map-frame]");
+  var MAP_QUERY = "KafanCHE Skopje";
+
+  function loadMap(){
+    if (!mapFrame || mapFrame.querySelector("iframe")) { return; }
+    var frame = document.createElement("iframe");
+    frame.src = "https://www.google.com/maps?q=" + encodeURIComponent(MAP_QUERY) +
+                "&z=16&hl=" + (lang === "en" ? "en" : "mk") + "&output=embed";
+    frame.title = lang === "en" ? "Map of Kafanche, Skopje" : "Мапа на КафанЧе, Скопје";
+    frame.loading = "lazy";
+    frame.referrerPolicy = "no-referrer-when-downgrade";
+    frame.setAttribute("allowfullscreen", "");
+    frame.addEventListener("load", function(){ frame.classList.add("in"); });
+    mapFrame.appendChild(frame);
+  }
+
+  function probeThenLoad(){
+    var probe = new Image();
+    var settled = false;
+    function give(ok){
+      if (settled) { return; }
+      settled = true;
+      clearTimeout(timer);
+      if (ok) { loadMap(); }
+    }
+    var timer = setTimeout(function(){ give(false); }, 3000);
+    probe.onload = function(){ give(true); };
+    probe.onerror = function(){ give(false); };
+    probe.referrerPolicy = "no-referrer";
+    probe.src = "https://www.google.com/favicon.ico";
+  }
+
+  if (mapFrame && window.self === window.top){
+    if ("IntersectionObserver" in window){
+      var mapIO = new IntersectionObserver(function(entries){
+        if (entries[0].isIntersecting){ probeThenLoad(); mapIO.disconnect(); }
+      }, { rootMargin: "300px" });
+      mapIO.observe(mapFrame);
+    } else {
+      probeThenLoad();
+    }
+  }
+
+  /* ── Reveal on scroll ─────────────────────────────────── */
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var risers = document.querySelectorAll(".rise");
+
+  if (reduce || !("IntersectionObserver" in window)){
+    for (var r = 0; r < risers.length; r++){ risers[r].classList.add("in"); }
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    for (var s = 0; s < risers.length; s++){ io.observe(risers[s]); }
+  }
+
+  applyLang(lang);
+})();
+</script>
+</body>
+</html>
