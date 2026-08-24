@@ -1,92 +1,99 @@
 # КафанЧе — one-page site
 
-A single-page website for **КафанЧе (KafanCHE)**, a small kafana at Orce Nikolov 139 in
-central Skopje. One self-contained `index.html` — no build step, no dependencies, no
-tracking. Drop it on any static host.
+A single-page website for **КафанЧе** — «едно ново симпатично лабаво кафанЧЕ» in Skopje.
+One self-contained `index.html`: no build step, no dependencies, no tracking.
 
 **Live:** https://growthradical.github.io/agencysite/kafanche/
 
 ---
 
-## The idea
+## Where the brand came from
 
-A *kafana* is the old Balkan tavern: you eat slowly, drink slower, and stay longer than
-planned. *Kafanche* is the diminutive — the small, young one. The whole design sits on
-that tension between old room and young kitchen.
+Everything visual and most of the copy is taken from the venue's own Instagram
+([@kafanche](https://www.instagram.com/kafanche)) — the coral badge, the cream poster
+stock, the cornflower blue of the summer-menu poster, the navy type, and the gingham
+tablecloth that runs through half their grid. The tagline and the phone label («Бројче»)
+are their own words, lifted verbatim from their bio.
 
-Two decisions drive the page:
-
-**The structure is one day, not a feature list.** Kafanche is open 08:00–00:00 and the
-menu is written each morning from whatever the market had. So the spine of the page is
-`Утро → Попладне → Вечер → Доцна`, and the page reads the clock in `Europe/Skopje` and
-highlights the band you are actually in right now, with an open/closed state in the
-hero. Ordering the sections `01 / 02 / 03` would have been decoration; the day is real
-information.
-
-**The menu is a frame, not a fixed list.** Because the board genuinely rotates, the menu
-section describes categories and points at Instagram for today's board rather than
-publishing prices that go stale. See *Before launch* below.
+This is a real identity applied, not an invented one. The one thing still missing is the
+actual logo file — see *Before launch*.
 
 ## Design system
 
 | | |
 |---|---|
-| **Ground** | `#180F12` wine-black (dark) · `#DCDFD1` enamel plaster (light) |
-| **Text** | `#F3E9DB` bone · `#1E1418` ink |
-| **Accent** | `#E24A2B` paprika (ajvar) |
-| **Support** | `#A9BF74` pistachio · `#C4923F` brass |
-| **Display** | Alegreya Sans 900 — signage, set uppercase and tight |
-| **Text** | Alegreya — the tavern's voice, italic for statements |
-| **Data** | JetBrains Mono — hours, phone, the board |
+| **Ground** | `#F7F0E4` cream (light) · `#17203A` navy (dark) |
+| **Primary** | `#EE7A45` coral — the badge colour |
+| **Secondary** | `#86A9DA` cornflower · `#C8281C` stamp red · `#7A1F2E` burgundy |
+| **Type** | `#1E2B47` navy ink |
+| **Display** | Unbounded 800/900 — geometric constructed Cyrillic, closest to their lettering |
+| **Text** | Onest |
+| **Data** | JetBrains Mono — the typed-list feel of their menu posters |
 
-Dark-first: a kafana is a night room, so `:root` carries the dark palette and the light
-theme is the override. All three typefaces carry full Cyrillic, which is non-negotiable
-for «КафанЧе».
+Light-first: their world is printed paper, not a dark room. The dark theme moves to a
+navy ground and lifts the coral for contrast. All three typefaces carry Cyrillic, which
+«КафанЧе» requires.
+
+The gingham is a two-axis `repeating-linear-gradient` on `.gingham`, so it inherits the
+theme and costs nothing to load.
+
+## Structure
+
+The page follows the venue's real posting rhythm rather than a generic restaurant
+template. Their feed is organised around a monthly menu, a dish of the day, a breakfast
+menu and an Orthodox fasting menu — so those are the four menu cards. Themed evenings
+(Грчка вечер, takeovers, feast days) get their own band, and the yard gets one, because
+their summer menu is written for it.
 
 ## What's in the build
 
-- **Bilingual MK/EN** — defaults to Macedonian, toggle in the nav, choice remembered in
-  `localStorage`. Every string lives in `data-mk` / `data-en` attributes on the element.
-- **Live open/closed state** computed in `Europe/Skopje`, not the visitor's timezone.
-- **Macedonian dates spelled out in JS** rather than left to `Intl` — not every browser
-  build ships the `mk` locale, and the date sits in the hero where a silent fallback to
-  English would be obvious.
-- **`Restaurant` JSON-LD** for local search: address, phone, hours, cuisine, socials,
-  and `hasMap`. No `geo` block — see *The map* below.
-- **A map in two layers** — a live Google embed over a drawn locator diagram.
-- **No photography.** The illustrations, the folk diamond band and the street sketch are
-  inline SVG. When real photos are available they belong in the hero and the evenings
-  section — see *Before launch*.
+- **Bilingual MK/EN** — Macedonian default, toggle in the nav, choice kept in
+  `localStorage`. Every string lives in `data-mk` / `data-en` on the element.
+- **`Restaurant` JSON-LD** — name, phone, locality, `hasMap`, socials. Deliberately **no
+  `streetAddress` and no opening hours**; see below.
+- **A map in two layers** — a drawn locator, with a Google embed injected over it. It is
+  geocoded from the venue's own Maps pin, only injected top-level (Google refuses to be
+  framed, so a framed preview would paint an empty box over the locator), and only after
+  a reachability probe succeeds — a blocked embed still fires `load` and paints an opaque
+  error page. Lazy, and deferred until the section nears the viewport, so no third-party
+  request fires unless a visitor actually scrolls to the map.
+- **No photography.** Every graphic — badge, house-number tile, yard scene, locator — is
+  inline SVG.
 - Respects `prefers-reduced-motion`, keyboard-focusable throughout, no horizontal scroll
   at 390px.
 
-## The map
+## The address problem — read this first
 
-The map element in the visit section is two layers. Underneath is a locator diagram —
-inline SVG, street grid, pin — that is always drawn. On top, a Google Maps embed is
-injected at runtime and fades in.
+**The site deliberately does not state a street address.** Two things from their own feed
+say the previously-published one is stale:
 
-Three things gate the embed, and each one exists because of a way it fails:
+- a post reading «СЕ СЕЛИМЕ … НОВА ЛОКАЦИЈА» (*we are moving … new location*)
+- the «Каде сме?» highlight cover is a **38A** house-number tile, which matches neither
+  of the two conflicting street numbers in public directories
 
-- **It is geocoded by address query, not by coordinates.** `?q=KafanCHE, Orce Nikolov
-  139…&output=embed` needs no API key and no hard-coded lat/lng, so the pin cannot drift
-  from the real venue if a coordinate is wrong. Nothing on the page states coordinates —
-  the JSON-LD deliberately carries `hasMap` but no `geo`.
-- **It only loads top-level** (`window.self === window.top`). Google refuses to be framed
-  inside another frame, so in a preview — the shared artifact, a CMS editor — the embed
-  would paint an empty box over the locator. Framed, it is never injected.
-- **It probes reachability first.** A blocked embed still fires `load` and paints an
-  opaque error page. So a tiny image is fetched from Google before the iframe is created;
-  if it fails or takes over 3s — a content blocker, a restrictive network, an offline
-  visitor — the locator simply stays. This was found in testing, not theorised.
+So the page shows the 38A tile, points at the venue's own Google Maps pin as the source
+of truth, and says nothing it cannot stand behind. Opening hours are handled the same
+way — the page says «провери на Инстаграм» rather than publishing times that could send
+someone to a closed door.
 
-The embed is also `loading="lazy"` and held back until the section is near the viewport,
-so no third-party request happens unless a visitor actually scrolls to the map. That
-matters for an EU venue: no Google call, no consent question, for anyone who never
-reaches the map.
+Both are one-line fixes once the venue confirms. The hours block is in the visit section;
+the map query is `MAP_QUERY` in the script.
 
-To change the location, edit `MAP_QUERY` in the script, the `hasMap` URL in the JSON-LD,
-and the two address links.
+## Before launch
+
+- [ ] **Street address** — confirm with the venue, then add it to the visit section and
+      to `streetAddress` in the JSON-LD.
+- [ ] **Opening hours** — confirm, then replace the «провери на Инстаграм» line and add
+      an `openingHoursSpecification` block.
+- [ ] **The real logo** — the coral badge here is a typographic stand-in («КЧ» set in
+      Unbounded). Their actual mark is a custom ligature; drop in the SVG and replace
+      both `.badge` in the nav/footer and the hero `svg`.
+- [ ] **Photography** — the feed has plenty. The hero and the yard section are where it
+      belongs.
+- [ ] **Menu detail** — the four cards describe the menu *system*, not dishes. If they
+      want dishes and prices on the site rather than on Instagram, they go here.
+
+Nothing on the page invents a review, rating, award, price, coordinate, or address.
 
 ## Editing
 
@@ -94,33 +101,10 @@ Everything is in `index.html`.
 
 - **Copy** — each translated element carries `data-mk` and `data-en`. Edit both; the
   visible text should match `data-mk` since Macedonian is the default.
-- **Menu** — the four cards under `<section id="meni">`. Each row is
-  `row__name` / `row__lead` (the dotted leader) / `row__note`.
-- **Hours** — `OPEN_HOUR` and `CLOSE_HOUR` at the top of the script, the `data-from` /
-  `data-to` attributes on each `.slot`, the visit section, and the JSON-LD block.
-- **Colour and type** — the `:root` token block. The light theme repeats the same token
+- **Colour and type** — the `:root` token block. The dark theme repeats the same token
   names in two places (a `prefers-color-scheme` query and a `[data-theme]` rule); change
   both.
 
-## Before launch
-
-The site is built; these items need the venue's sign-off, since they came from public
-directories rather than from Kafanche:
-
-- [ ] **Address** — `Orce Nikolov 139, 1000 Skopje`, per two directory listings. One
-      other listing gives a different street, so confirm before this goes live.
-- [ ] **Hours** — published as `every day 08:00–00:00`. Sources only firmly cover
-      Tue–Fri, and one lists a 01:00 close. Confirm the real week, including the closing
-      day if there is one, then update the four places listed under *Editing*.
-- [ ] **Phone** — `+389 77 548 838`, consistent across listings.
-- [ ] **Menu rows** — currently descriptive categories, deliberately unpriced. Replace
-      with the real board, or leave as-is and let Instagram carry the daily detail.
-- [ ] **Photography** — swap in real interior and food shots.
-- [ ] **Wolt link** — points at the existing delivery listing; verify it is current.
-
-Nothing on the page invents a review, a rating, an award, or a price beyond the
-`800–1000 MKD` per-person range that appears in the public listings.
-
 ## License
 
-Code is free to reuse. The КафанЧе name, wordmark and copy belong to the venue.
+Code is free to reuse. The КафанЧе name, marks and copy belong to the venue.
