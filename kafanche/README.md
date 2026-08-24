@@ -1,110 +1,101 @@
-# КафанЧе — one-page site
+# КафанЧе — website
 
-A single-page website for **КафанЧе** — «едно ново симпатично лабаво кафанЧЕ» in Skopje.
-One self-contained `index.html`: no build step, no dependencies, no tracking.
+A single-page site for **КафанЧе** — «едно ново симпатично лабаво кафанЧЕ» in Debar
+Maalo, Skopje. One self-contained `index.html` plus a folder of photographs: no build
+step, no dependencies, no tracking.
 
 **Live:** https://growthradical.github.io/agencysite/kafanche/
 
 ---
 
-## Where the brand came from
+## The design
 
-Everything visual and most of the copy is taken from the venue's own Instagram
-([@kafanche](https://www.instagram.com/kafanche)) — the coral badge, the cream poster
-stock, the cornflower blue of the summer-menu poster, the navy type, and the gingham
-tablecloth that runs through half their grid. The tagline and the phone label («Бројче»)
-are their own words, lifted verbatim from their bio.
+**Ex-Yu retro, modern minimalist.** The reference is not a mood board — it is the
+venue's own printed menu card: cream stock, cornflower display caps, orange-red dish
+headings, typed descriptions, a punched ticket edge, a circular date stamp and a rubber
+stamp reading *КАФАНЧЕ · СКОПЈЕ · 2023 · ЛАДНО ПИВО*. The site is that card, scaled to a
+page, laid over the olive gingham of their tablecloths.
 
-This is a real identity applied, not an invented one. The one thing still missing is the
-actual logo file — see *Before launch*.
-
-## Design system
+Restraint does the rest: hairline rules instead of heavy borders, one accent colour,
+generous space, and photography carrying the weight. The retro devices — ticket
+perforation, rubber stamp, typed menu lists — are the one place boldness is spent.
 
 | | |
 |---|---|
-| **Ground** | `#F7F0E4` cream (light) · `#17203A` navy (dark) |
-| **Primary** | `#EE7A45` coral — the badge colour |
-| **Secondary** | `#86A9DA` cornflower · `#C8281C` stamp red · `#7A1F2E` burgundy |
-| **Type** | `#1E2B47` navy ink |
-| **Display** | Unbounded 800/900 — geometric constructed Cyrillic, closest to their lettering |
-| **Text** | Onest |
-| **Data** | JetBrains Mono — the typed-list feel of their menu posters |
+| **Stock** | `#F2ECDE` cream (light) · `#1B1A17` (dark) |
+| **Accent** | `#E0552F` orange-red — their menu headings and stamps |
+| **Secondary** | `#8FB3DD` cornflower — their display caps |
+| **Cloth** | `#878A57` olive — the gingham, taken from their photographs |
+| **Display** | Unbounded 800/900 |
+| **Text** | Onest 300/400 |
+| **Menu + labels** | JetBrains Mono — the typed feel of their printed card |
 
-Light-first: their world is printed paper, not a dark room. The dark theme moves to a
-navy ground and lifts the coral for contrast. All three typefaces carry Cyrillic, which
-«КафанЧе» requires.
+Light-first; the dark theme moves to a warm near-black. All three typefaces carry
+Cyrillic, which «КафанЧе» requires.
 
-The gingham is a two-axis `repeating-linear-gradient` on `.gingham`, so it inherits the
-theme and costs nothing to load.
+## Content
 
-## Structure
+Everything on the page comes from the venue: the tagline and the «Бројче» phone label
+from their bio, the dishes from their printed **ЛЕТНО МЕНИ (08/06)**, the four standing
+menus (monthly, dish of the day, breakfast, Lenten) from their posting rhythm, and the
+map pin from their own Google listing.
 
-The page follows the venue's real posting rhythm rather than a generic restaurant
-template. Their feed is organised around a monthly menu, a dish of the day, a breakfast
-menu and an Orthodox fasting menu — so those are the four menu cards. Themed evenings
-(Грчка вечер, takeovers, feast days) get their own band, and the yard gets one, because
-their summer menu is written for it.
+The summer menu is labelled with its date on purpose — it is shown as an example of what
+one of their boards looks like, not as the current one, which lives on Instagram.
 
-## What's in the build
+## Photography
+
+Six slots, all wired and all empty until the files land. Drop them into
+[`assets/`](assets/) using the filenames in [`assets/README.md`](assets/README.md).
+Every slot falls back to an olive gingham panel, so a missing photo never renders as a
+broken image — but the page is designed around the photographs and will not look
+finished without them.
+
+## Location
+
+Pinned by the venue's own Google Maps embed — place id `0x13541564c2a84a27`, at
+**42.0007324, 21.4268435**, which puts it in Debar Maalo, Centar. Those coordinates are
+in the JSON-LD as a `geo` block.
+
+**No street address is stated**, deliberately. Their feed carries a «СЕ СЕЛИМЕ … НОВА
+ЛОКАЦИЈА» post and the «Каде сме?» highlight is a 38A house tile, which matches neither
+street number in the public directories. The map pin is the source of truth until the
+venue confirms. Opening hours are handled the same way — «провери на Инстаграм» rather
+than times that could send someone to a closed door.
+
+## Build notes
 
 - **Bilingual MK/EN** — Macedonian default, toggle in the nav, choice kept in
   `localStorage`. Every string lives in `data-mk` / `data-en` on the element.
-- **`Restaurant` JSON-LD** — name, phone, locality, `hasMap`, socials. Deliberately **no
-  `streetAddress` and no opening hours**; see below.
-- **A map in two layers** — a drawn locator, with a Google embed injected over it. It is
-  geocoded from the venue's own Maps pin, only injected top-level (Google refuses to be
-  framed, so a framed preview would paint an empty box over the locator), and only after
-  a reachability probe succeeds — a blocked embed still fires `load` and paints an opaque
-  error page. Lazy, and deferred until the section nears the viewport, so no third-party
-  request fires unless a visitor actually scrolls to the map.
-- **No photography.** Every graphic — badge, house-number tile, yard scene, locator — is
-  inline SVG.
+- **`Restaurant` JSON-LD** — name, phone, locality, `geo`, `hasMap`, socials. No
+  `streetAddress`, no `openingHoursSpecification`; see above.
+- **The map** is injected at runtime, not hard-coded into the markup, because it needs
+  three conditions to be worth showing: the page must be top-level (Google refuses to be
+  framed, and a framed preview would paint an empty box over the locator diagram),
+  Google must be reachable (a blocked embed still fires `load` and paints an opaque error
+  page — so a tiny image probes first), and the section must be near the viewport. That
+  last one means no third-party request fires for a visitor who never scrolls to the map,
+  which matters for an EU venue.
 - Respects `prefers-reduced-motion`, keyboard-focusable throughout, no horizontal scroll
   at 390px.
 
-## The address problem — read this first
+## Still needed from the venue
 
-**The site deliberately does not state a street address.** Two things from their own feed
-say the previously-published one is stale:
-
-- a post reading «СЕ СЕЛИМЕ … НОВА ЛОКАЦИЈА» (*we are moving … new location*)
-- the «Каде сме?» highlight cover is a **38A** house-number tile, which matches neither
-  of the two conflicting street numbers in public directories
-
-So the page shows the 38A tile, points at the venue's own Google Maps pin as the source
-of truth, and says nothing it cannot stand behind. Opening hours are handled the same
-way — the page says «провери на Инстаграм» rather than publishing times that could send
-someone to a closed door.
-
-Both are one-line fixes once the venue confirms. The hours block is in the visit section;
-the map query is `MAP_QUERY` in the script.
-
-## Before launch
-
-- [ ] **Street address** — confirm with the venue, then add it to the visit section and
-      to `streetAddress` in the JSON-LD.
-- [ ] **Opening hours** — confirm, then replace the «провери на Инстаграм» line and add
-      an `openingHoursSpecification` block.
-- [ ] **The real logo** — the coral badge here is a typographic stand-in («КЧ» set in
-      Unbounded). Their actual mark is a custom ligature; drop in the SVG and replace
-      both `.badge` in the nav/footer and the hero `svg`.
-- [ ] **Photography** — the feed has plenty. The hero and the yard section are where it
-      belongs.
-- [ ] **Menu detail** — the four cards describe the menu *system*, not dishes. If they
-      want dishes and prices on the site rather than on Instagram, they go here.
-
-Nothing on the page invents a review, rating, award, price, coordinate, or address.
+- [ ] **Photographs** — see `assets/README.md`
+- [ ] **The real logo** — the badge here is a typographic stand-in; theirs is a custom
+      ligature. Replace `.badge` in the nav and footer.
+- [ ] **Street address** — then add it to the visit section and to `streetAddress`
+- [ ] **Opening hours** — then replace the «провери на Инстаграм» line and add
+      `openingHoursSpecification`
+- [ ] **Current menu** — the board on the page is the summer one, dated 08/06
 
 ## Editing
 
-Everything is in `index.html`.
-
-- **Copy** — each translated element carries `data-mk` and `data-en`. Edit both; the
-  visible text should match `data-mk` since Macedonian is the default.
-- **Colour and type** — the `:root` token block. The dark theme repeats the same token
-  names in two places (a `prefers-color-scheme` query and a `[data-theme]` rule); change
-  both.
+Everything is in `index.html`. Copy lives in `data-mk` / `data-en` attribute pairs on
+each element — edit both. Colour and type live in the `:root` token block; the dark
+theme repeats the same token names in two places (a `prefers-color-scheme` query and a
+`[data-theme]` rule), so change both.
 
 ## License
 
-Code is free to reuse. The КафанЧе name, marks and copy belong to the venue.
+Code is free to reuse. The КафанЧе name, marks, photographs and copy belong to the venue.
