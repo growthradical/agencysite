@@ -45,18 +45,19 @@ one of their boards looks like, not as the current one, which lives on Instagram
 
 ## Photography
 
-Six slots, all wired. Drop the files into [`assets/`](assets/) using the filenames in
-[`assets/README.md`](assets/README.md) — the page picks them up with no other change.
+Six slots, all filled — see [`assets/README.md`](assets/README.md) for what sits in each
+one. The photographs are the venue's own, cropped from their posts: the spritz glasses
+and peach salad on the checked cloth, the printed ЛЕТНО МЕНИ card, the book-page wall
+and gilt mirror, a laid table against the bare wall, and the strawberry salad.
 
-Until then, each slot carries a **typographic panel** drawn from the venue's own printed
-material rather than a "missing image" box: the dish name and description from the summer
-board, the *КАФАНЧЕ · СКОПЈЕ · 2023* rubber stamp, the `08/06` date stamp, the wordmark,
-and «ладно пиво». On olive gingham, the grid reads as a poster wall — which is close
-enough to how their feed actually looks that it stands on its own. A photograph simply
-replaces its panel.
+They are cropped from screenshots rather than from originals, so they top out around
+1100px on the long edge and the interior shot — a video still — is soft. Files from the
+venue would sharpen the grid without changing a single crop.
 
-The photographs are still the point, though. This holds the page together; it does not
-finish it.
+If a file ever goes missing, its slot falls back to a **typographic panel** drawn from
+the venue's printed material rather than a "missing image" box: the dish name and
+description from the summer board, the *КАФАНЧЕ · СКОПЈЕ · 2023* rubber stamp, the
+`08/06` date stamp, the wordmark, and «ладно пиво».
 
 ## Location
 
@@ -88,7 +89,8 @@ than times that could send someone to a closed door.
 
 ## Still needed from the venue
 
-- [ ] **Photographs** — see `assets/README.md`
+- [x] **Photographs** — in place; higher-resolution originals still welcome, see
+      `assets/README.md`
 - [ ] **The real logo** — the badge here is a typographic stand-in; theirs is a custom
       ligature. Replace `.badge` in the nav and footer.
 - [ ] **Street address** — then add it to the visit section and to `streetAddress`
