@@ -188,15 +188,38 @@ img{max-width:100%;display:block;}
 /* ─────────────────────────────────────────────────────────
    IMAGE SLOTS — every shot falls back to gingham
    ───────────────────────────────────────────────────────── */
+/* Until a photograph exists, each slot carries a typographic panel drawn from
+   the venue's own printed material, so the grid reads as a designed poster
+   wall rather than as a row of holes. A photograph simply replaces it. */
 .shot{position:relative;margin:0;overflow:hidden;background-color:var(--paper-3);}
 .shot img{width:100%;height:100%;object-fit:cover;}
 .shot[data-missing="true"] img{display:none;}
-.shot__fallback{display:none;position:absolute;inset:0;place-items:center;}
+.shot__fallback{display:none;position:absolute;inset:0;place-items:center;padding:clamp(1rem,3vw,2rem);}
 .shot[data-missing="true"] .shot__fallback{display:grid;}
-.shot__fallback span{
-  font-family:var(--f-mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-dim);background:color-mix(in srgb, var(--paper) 82%, transparent);
-  padding:.4rem .7rem;border-radius:999px;
+
+.poster{
+  display:flex;flex-direction:column;align-items:center;gap:.55rem;
+  text-align:center;max-width:26ch;
+}
+.poster__mark{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(1.2rem,3.4vw,2.1rem);line-height:1.05;letter-spacing:-.03em;
+  color:var(--red);text-wrap:balance;
+}
+.poster__mark em{font-style:normal;color:var(--ink);}
+.poster__sub{
+  font-family:var(--f-mono);font-size:.72rem;line-height:1.6;
+  letter-spacing:.06em;color:var(--ink-dim);
+}
+.poster__rule{width:38px;height:2px;background:var(--blue);}
+.poster__stamp{width:min(58%,150px);height:auto;color:var(--red);opacity:.9;}
+
+/* the date stamp from their menu card */
+.poster__date{
+  display:grid;place-items:center;
+  width:clamp(74px,17vw,104px);aspect-ratio:1;border-radius:50%;
+  border:2px solid var(--red);color:var(--red);
+  font-family:var(--f-mono);font-size:clamp(.85rem,2.2vw,1.1rem);font-weight:700;letter-spacing:.06em;
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -378,7 +401,13 @@ img{max-width:100%;display:block;}
 <section class="hero" id="top">
   <figure class="shot hero__shot gingham">
     <img src="assets/hero.jpg" alt="Две чаши шприц и салата на карирана чаршафка во дворот на КафанЧе" width="1600" height="1000" fetchpriority="high">
-    <span class="shot__fallback"><span data-mk="Фотографија наскоро" data-en="Photograph coming">Фотографија наскоро</span></span>
+    <div class="shot__fallback">
+      <div class="poster">
+        <p class="poster__mark"><em>Сезонски јадења,</em><br>а целогодишни пиења</p>
+        <span class="poster__rule"></span>
+        <p class="poster__sub">СКОПЈЕ · ДЕБАР МААЛО · 077 548 838</p>
+      </div>
+    </div>
   </figure>
 
   <div class="hero__card">
@@ -483,23 +512,55 @@ img{max-width:100%;display:block;}
     <div class="gallery rise">
       <figure class="shot g-a gingham">
         <img src="assets/salad-peach.jpg" alt="Салата со домат, праска, босилек и сирење во метална чинија" loading="lazy" width="1200" height="900">
-        <span class="shot__fallback"><span data-mk="Фото наскоро" data-en="Photo coming">Фото наскоро</span></span>
+        <div class="shot__fallback">
+          <div class="poster">
+            <p class="poster__mark">Баба Јагода</p>
+            <p class="poster__sub" data-mk="јабучар, јагоди, босилек, балсамико дресинг, овчо сирење" data-en="beefsteak tomato, strawberries, basil, balsamic dressing, sheep’s cheese">јабучар, јагоди, босилек, балсамико дресинг, овчо сирење</p>
+          </div>
+        </div>
       </figure>
       <figure class="shot g-b gingham">
         <img src="assets/interior.jpg" alt="Внатрешност на КафанЧе: ѕид покриен со страници од книги и позлатен огледало" loading="lazy" width="900" height="675">
-        <span class="shot__fallback"><span data-mk="Фото наскоро" data-en="Photo coming">Фото наскоро</span></span>
+        <div class="shot__fallback">
+          <div class="poster">
+            <svg class="poster__stamp" viewBox="0 0 200 200" aria-hidden="true">
+              <defs><path id="ring2" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+              <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="3"/>
+              <circle cx="100" cy="100" r="58" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text font-family="JetBrains Mono, monospace" font-size="17" font-weight="700" letter-spacing="3.4" fill="currentColor"><textPath href="#ring2" startOffset="25%" text-anchor="middle">КАФАНЧЕ · СКОПЈЕ</textPath></text>
+              <text font-family="JetBrains Mono, monospace" font-size="15" font-weight="700" letter-spacing="3" fill="currentColor"><textPath href="#ring2" startOffset="75%" text-anchor="middle">ЛАДНО ПИВО</textPath></text>
+              <text x="100" y="108" text-anchor="middle" font-family="Unbounded, sans-serif" font-size="30" font-weight="900" fill="currentColor">2023</text>
+            </svg>
+          </div>
+        </div>
       </figure>
       <figure class="shot g-c gingham">
         <img src="assets/spritz.jpg" alt="Две чаши шприц на карирана чаршафка" loading="lazy" width="800" height="800">
-        <span class="shot__fallback"><span data-mk="Фото наскоро" data-en="Photo coming">Фото наскоро</span></span>
+        <div class="shot__fallback">
+          <div class="poster">
+            <p class="poster__mark">Ладно<br>пиво</p>
+            <span class="poster__rule"></span>
+            <p class="poster__sub" data-mk="и целогодишни пиења" data-en="and year-round drinks">и целогодишни пиења</p>
+          </div>
+        </div>
       </figure>
       <figure class="shot g-d gingham">
         <img src="assets/menu-card.jpg" alt="Печатената картичка со летното мени на КафанЧе" loading="lazy" width="800" height="800">
-        <span class="shot__fallback"><span data-mk="Фото наскоро" data-en="Photo coming">Фото наскоро</span></span>
+        <div class="shot__fallback">
+          <div class="poster">
+            <span class="poster__date">08/06</span>
+            <p class="poster__sub" data-mk="Летно мени · 14h" data-en="Summer menu · 14h">Летно мени · 14h</p>
+          </div>
+        </div>
       </figure>
       <figure class="shot g-e gingham">
         <img src="assets/salad-strawberry.jpg" alt="Салата со домат, јагоди и сирење, со чаша вино" loading="lazy" width="800" height="800">
-        <span class="shot__fallback"><span data-mk="Фото наскоро" data-en="Photo coming">Фото наскоро</span></span>
+        <div class="shot__fallback">
+          <div class="poster">
+            <p class="poster__mark"><em>Кафан</em>Че</p>
+            <p class="poster__sub" data-mk="симпатично лабаво" data-en="sweet and easy-going">симпатично лабаво</p>
+          </div>
+        </div>
       </figure>
     </div>
     <p class="cap rise" data-mk="Фотографии © КафанЧе" data-en="Photographs © Kafanche">Фотографии © КафанЧе</p>

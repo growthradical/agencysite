@@ -45,11 +45,18 @@ one of their boards looks like, not as the current one, which lives on Instagram
 
 ## Photography
 
-Six slots, all wired and all empty until the files land. Drop them into
-[`assets/`](assets/) using the filenames in [`assets/README.md`](assets/README.md).
-Every slot falls back to an olive gingham panel, so a missing photo never renders as a
-broken image — but the page is designed around the photographs and will not look
-finished without them.
+Six slots, all wired. Drop the files into [`assets/`](assets/) using the filenames in
+[`assets/README.md`](assets/README.md) — the page picks them up with no other change.
+
+Until then, each slot carries a **typographic panel** drawn from the venue's own printed
+material rather than a "missing image" box: the dish name and description from the summer
+board, the *КАФАНЧЕ · СКОПЈЕ · 2023* rubber stamp, the `08/06` date stamp, the wordmark,
+and «ладно пиво». On olive gingham, the grid reads as a poster wall — which is close
+enough to how their feed actually looks that it stands on its own. A photograph simply
+replaces its panel.
+
+The photographs are still the point, though. This holds the page together; it does not
+finish it.
 
 ## Location
 
